@@ -1,0 +1,72 @@
+﻿/*site.css*/
+     body {
+            font-family: sans-serif;
+            font-size: 14px;
+            /*get rid of all indiviual margins*/
+         margin: 0;
+        }
+     
+     label {
+         font-weight: bold;
+         display: block;    
+     }
+
+
+     input[type=text], input[type=password], textarea {
+         width: 150px;
+     }
+
+     #main {
+         background-color: #e9e9e9;
+         padding: 4px;
+         /* remove extra space*/
+         margin: 0;
+     }
+
+     #footer {
+         background-color: #222;
+         color: #eee;
+         /*Give it more space so its not so crowded*/
+         padding: 8px 5px; /* Left and rght padding*/
+         /*Push footer to the bottom using fixed and bottom*/
+         position: fixed;
+         bottom: 0;
+         width: 100%;
+     }
+
+     .headshot {
+         max-width: 50px;
+         border: 1px solid #222;
+          /*space between the border and the picture*/
+         padding: 3px;
+     }
+
+     .menu {
+         font-size: 12px;
+     }
+
+     .menu li {
+         list-style-type: none;
+        
+     }
+
+     .menu li.active {
+         font-weight: bold;
+     }
+
+     /*Display the sidebar on the left side*/
+     #sidebar {
+         background: #2a2c36;
+         color: #eee;
+         position: fixed; /*Fixed tell it that we want it in a fixed position MARRIED with left:0*/
+         height: 100%; /* means its going use the whole vertical space of the page up to 250px on the left hand side*/
+         width: 250px;
+         overflow: hidden;
+         left:  0;
+         /*Get rid of spacing inbetween*/
+         margin: 0;
+     }
+
+     #wrapper {
+         margin: 0 0 0 250px; /*pushes us over to the left hand side*/
+     }
