@@ -47,7 +47,12 @@
 
      .menu li {
          list-style-type: none;
+         
         
+     }
+
+     .menu a {
+         color: #eee;
      }
 
      .menu li.active {
@@ -66,6 +71,7 @@
          /*Get rid of spacing inbetween*/
          margin: 0;
      }
+
 
      #wrapper {
          margin: 0 0 0 250px; /*pushes us over to the left hand side*/
