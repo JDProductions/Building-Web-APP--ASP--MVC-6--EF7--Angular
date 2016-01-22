@@ -1,0 +1,40 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ApxCaller - @ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet"href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/bootswatch/spacelab/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+
+        <ul class="menu">
+            <li class="active"><a asp-controller="App" asp-action="Index">Home</a></li>
+            <li><a asp-controller="App" asp-action="Activate">Activate</a></li>
+            <li><a asp-controller="App" asp-action="Deactivate">Deactivate</a></li>
+        </ul>
+
+            <div>
+                @RenderBody()
+            </div>
+
+
+        <div id="footer">
+            &copy; 2015 James DuBois
+        </div>
+
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
+
+
+    @RenderSection("Scripts", false)
+
+</body>
+
+</html>
