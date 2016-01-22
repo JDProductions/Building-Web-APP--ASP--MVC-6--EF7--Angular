@@ -24,6 +24,22 @@
     });
     */
 
+    /* show and hide sidebar by click of button*/
+    var $sidebarAndWrapper = $("#sidebar, #wrapper"); // wrap set
+
+
+        $("#sidebarToggle").on("click", function() {
+        /*Add a class if doesnt a class or remove a class*/
+            $sidebarAndWrapper.toggleClass("hide-sidebar");
+
+            if ($sidebarAndWrapper.hasClass("hide-sidebar")) {
+                /*this = sidebar toggle button*/
+                $(this).text("Show Sidebar");
+            }
+            else {
+                $(this).text("Hide Sidebar");
+            }
+    });
 })();
 
 
