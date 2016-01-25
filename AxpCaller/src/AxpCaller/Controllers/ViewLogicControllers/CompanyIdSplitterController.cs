@@ -13,10 +13,23 @@ namespace AxpCaller.Controllers.ViewLogicControllers
             List<string> companyIDList = new List<string>();
             if (aModel.CompanyID != null)
             {
-                companyIDList = aModel.CompanyID.Split(',', ' ', '\n', '\r').ToList();
+                // Checks for new line and if file has a new line then replace \n\r and add a comma and split list items to a list
+                if (aModel.CompanyID.Contains("\n"))
+                {
+                    companyIDList = aModel.CompanyID.Replace("\r\n", ",").Split(',').ToList();
+                }
+                else
+                {
+
+                    companyIDList = aModel.CompanyID.Split(',').ToList();
+                    var test = "";
+                }
+
+
                 foreach (var item in companyIDList)
                 {
                     Console.WriteLine(item.ToString());
+                    Console.WriteLine(companyIDList[0]);
                 }
             }
 

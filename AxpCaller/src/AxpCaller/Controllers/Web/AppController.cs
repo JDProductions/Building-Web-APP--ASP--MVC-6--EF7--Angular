@@ -28,6 +28,12 @@ namespace AxpCaller.Controllers.Web
 
         }
 
+        public IActionResult UploadFile()
+        {
+            var test = "";
+            return View();
+        }
+
     }
 
 }
