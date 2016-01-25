@@ -12,7 +12,7 @@
 
 <div>
 
-    <form method="post" class="form-group" id="Activate">
+    @*<form method="post" class="form-group" id="Activate" enctype="multipart/form-data">*@
         <div asp-validation-summary="ValidationSummary.ModelOnly"></div>
         <div>
             <label asp-for="CompanyID">CompanyID</label>
@@ -27,13 +27,11 @@
             </div>
         }
 
-        <div>
+        @using (Html.BeginForm("UploadFile", "App", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
             <input type="file" name="file" />
-            <a href='@Url.Action("UploadFile", "App")' class="btn btn-default">Upload</a>
-
-
-
-        </div>
+            <input type="submit" value="Submit" />
+        }
 
         <div>
             <label>AXP Template</label>
@@ -41,8 +39,6 @@
                 <textarea cols="100" rows="10"></textarea>
             </div>
         </div>
-
-
-    </form>
+    @*</form>*@
 
 </div>

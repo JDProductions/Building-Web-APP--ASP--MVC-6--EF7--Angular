@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using AxpCaller.Controllers.ViewLogicControllers;
 using AxpCaller.ViewModels;
 using Microsoft.AspNet.Mvc;
-using System;
-using System.Linq;
-using AxpCaller.Controllers.ViewLogicControllers;
+using System.Collections.Generic;
+using System.Web;
 
 namespace AxpCaller.Controllers.Web
 {
@@ -28,9 +27,13 @@ namespace AxpCaller.Controllers.Web
 
         }
 
+        [HttpPost]
         public IActionResult UploadFile()
         {
-            var test = "";
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(Request.Form.Files[0].OpenReadStream()))
+            {
+                var content = reader.ReadToEnd();
+            }
             return View();
         }
 
