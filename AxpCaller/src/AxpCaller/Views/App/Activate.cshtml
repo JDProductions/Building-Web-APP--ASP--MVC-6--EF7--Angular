@@ -17,7 +17,7 @@
         <div>
             <label asp-for="CompanyID">CompanyID</label>
         </div>
-        <textarea cols="100" rows="10" asp-for="CompanyID"></textarea>
+        <textarea cols="100" rows="10" > @ViewBag.CompanyIDTextArea</textarea>
         <span asp-for="CompanyID"></span>
 
         @using (Html.BeginForm("Activate", "AppController"))

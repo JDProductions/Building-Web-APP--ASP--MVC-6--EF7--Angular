@@ -25,7 +25,7 @@ namespace AxpCaller.Controllers.Web
             //ViewBag.CompanyID = companyIdList;
 
             ViewBag.AxpTemplateArea = fileText;
-            ViewBag.CompanyID = fileText;
+            ViewBag.CompanyIDTextArea = "Test String";
 
             return View();
 
@@ -35,13 +35,16 @@ namespace AxpCaller.Controllers.Web
 
         }
 
+        [HttpPost]
         public IActionResult UploadCompanyID(ActivateViewModel aModel, string fileText)
         {
             string textAreaCompanyID = Request.Form["CompanyID"];
-            
+            ViewBag.CompanyIDTextArea = fileText;
 
-            return RedirectToAction("Activate", "App", new { fileText = fileText });
+
+            return RedirectToAction("Activate", "App");
         }
+
 
         [HttpPost]
         public IActionResult UploadFile(ActivateViewModel aModel2)
