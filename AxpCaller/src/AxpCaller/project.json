@@ -10,7 +10,8 @@
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
     "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-rc1-final",
-    "Elmah.Mvc": "2.1.2"
+    "Elmah.Mvc": "2.1.2",
+    "Newtonsoft.Json": "8.0.2"
   },
 
   "commands": {

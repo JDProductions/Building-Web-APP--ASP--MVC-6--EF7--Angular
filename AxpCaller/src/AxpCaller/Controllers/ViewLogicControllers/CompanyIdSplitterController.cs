@@ -30,6 +30,7 @@ namespace AxpCaller.Controllers.ViewLogicControllers
                 {
                     Console.WriteLine(item.ToString());
                     Console.WriteLine(companyIDList[0]);
+;
                 }
             }
 

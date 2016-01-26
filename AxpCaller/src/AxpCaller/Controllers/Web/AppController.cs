@@ -1,8 +1,10 @@
 ﻿using AxpCaller.Controllers.ViewLogicControllers;
 using AxpCaller.ViewModels;
 using Microsoft.AspNet.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace AxpCaller.Controllers.Web
 {
@@ -28,13 +30,19 @@ namespace AxpCaller.Controllers.Web
         }
 
         [HttpPost]
-        public IActionResult UploadFile()
+        public IActionResult UploadFile(ActivateViewModel aModel)
         {
             using (System.IO.StreamReader reader = new System.IO.StreamReader(Request.Form.Files[0].OpenReadStream()))
             {
+                
+               string textArea = Request.Form["AxpTemplate"];
                 var content = reader.ReadToEnd();
+                
+
             }
-            return View();
+
+     
+            return RedirectToAction("Activate", "App");
         }
 
     }

@@ -12,33 +12,35 @@
 
 <div>
 
-    @*<form method="post" class="form-group" id="Activate" enctype="multipart/form-data">*@
-        <div asp-validation-summary="ValidationSummary.ModelOnly"></div>
+    <form method="post" class="form-group" id="Activate" enctype="multipart/form-data">
+    <div asp-validation-summary="ValidationSummary.ModelOnly"></div>
+    <div>
+        <label asp-for="CompanyID">CompanyID</label>
+    </div>
+    <textarea cols="100" rows="10" asp-for="CompanyID"></textarea>
+    <span asp-for="CompanyID"></span>
+
+    @using (Html.BeginForm("Activate", "AppController"))
+    {
         <div>
-            <label asp-for="CompanyID">CompanyID</label>
+            <button type="submit" class="btn btn-default">Activate</button>
         </div>
-        <textarea cols="100" rows="10" asp-for="CompanyID"></textarea>
-        <span asp-for="CompanyID"></span>
+    }
 
-        @using (Html.BeginForm("Activate", "AppController"))
-        {
-            <div>
-                <button type="submit" class="btn btn-default">Activate</button>
-            </div>
-        }
-
-        @using (Html.BeginForm("UploadFile", "App", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <input type="file" name="file" />
+    @using (Html.BeginForm("UploadFile", "App", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="file" />
             <input type="submit" value="Submit" />
-        }
+    }
 
         <div>
             <label>AXP Template</label>
             <div>
-                <textarea cols="100" rows="10"></textarea>
+
+                <textarea cols="100" rows="10" asp-for="AxpTemplate"></textarea>
             </div>
         </div>
-    @*</form>*@
+        </form>
+
 
 </div>

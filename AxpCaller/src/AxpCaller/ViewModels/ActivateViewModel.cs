@@ -8,6 +8,7 @@ namespace AxpCaller.ViewModels
         [Required]
         public string CompanyID { get; set; }
 
+        public string AxpTemplate { get; set; }
     }
 
 }
