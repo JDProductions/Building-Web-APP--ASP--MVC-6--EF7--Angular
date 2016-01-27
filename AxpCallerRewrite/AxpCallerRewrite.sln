@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B8C4D9CF-228D-42E0-B80E-9585DD40B547}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5104DD6C-3B3E-4F10-9591-93B4BEFD68A4}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AxpCallerRewrite", "src\AxpCallerRewrite\AxpCallerRewrite.xproj", "{57DDD502-C7E8-4D7B-B11B-76741D430236}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57DDD502-C7E8-4D7B-B11B-76741D430236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57DDD502-C7E8-4D7B-B11B-76741D430236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57DDD502-C7E8-4D7B-B11B-76741D430236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57DDD502-C7E8-4D7B-B11B-76741D430236}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{57DDD502-C7E8-4D7B-B11B-76741D430236} = {B8C4D9CF-228D-42E0-B80E-9585DD40B547}
+	EndGlobalSection
+EndGlobal

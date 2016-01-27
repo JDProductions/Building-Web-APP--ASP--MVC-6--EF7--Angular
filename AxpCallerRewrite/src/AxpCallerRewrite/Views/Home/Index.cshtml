@@ -1,0 +1,63 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+</head>
+
+<body>
+    <div class="container">
+        <form role="form" action="/Home/GetChosenEnvLevel" method="get">
+            <div class="row">
+                <div class="form-group"><label>Environment:</label></div>
+                <div class="col-xs-5 selectContainer">
+                    <div class="form-group">
+                        <select class="form-control" id="EnvironmentLevel" name="EnvironmentLevel">
+                            <option selected="selected" value="0">Development</option>
+                            <option value="1">QA</option>
+                            <option value="2">NewQA</option>
+                            <option value="3">Production</option>
+                        </select>
+                        <input type="submit" value="Submit" />
+                        <input type="text" class="form-control" id="labelEnvironment" readonly @ViewBag.labelEnvironment>
+
+</div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>Company Ids:</label>
+                    <textarea class="form-control" rows="5" id="textAreaCompanyIDs"></textarea>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>Axp Template</label>
+                    <textarea class="form-control" rows="5" id="textAreaAXPTemplate"></textarea>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <!-- /.container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
