@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AxpCallerRewrite.Interfaces;
+using AxpCallerRewrite.Models;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Http;
@@ -11,9 +13,18 @@ namespace AxpCallerRewrite.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IConfigHelper _configHelper;
+
+        public HomeController(IConfigHelper configHelper)
+        {
+            _configHelper = configHelper;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            ViewBag.Environments = _configHelper.GetEnvironments();
+            var model = new HomeViewModel { Environment = "DEV" };
+            return View(model);
         }
 
         public IActionResult CategoryChosen(int environmentLevel)
@@ -49,7 +60,7 @@ namespace AxpCallerRewrite.Controllers
                 case 2:
                     string linkNewQA = "http://devapp1/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork";
                     break;
-               // Production
+                // Production
                 case 3:
                     string linkProduction = "http://devapp1/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork";
                     break;

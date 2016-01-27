@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace AxpCallerRewrite.Models
 {
-    public class EnvironmentModel
+    public class HomeViewModel
     {
-        public string Name { get; set; }
-
-        public string EnvironmentLevel { get; set; }
+        public string Environment { get; set; }
     }
 }

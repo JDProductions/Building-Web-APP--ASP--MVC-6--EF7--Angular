@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AxpCallerRewrite.Concrete;
+using AxpCallerRewrite.Interfaces;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -36,6 +38,8 @@ namespace AxpCallerRewrite
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+
+            services.AddSingleton<IConfigHelper, ConfigHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

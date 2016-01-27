@@ -1,4 +1,6 @@
-﻿
+﻿@model AxpCallerRewrite.Models.HomeViewModel
+@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,16 +27,9 @@
                 <div class="form-group"><label>Environment:</label></div>
                 <div class="col-xs-5 selectContainer">
                     <div class="form-group">
-                        <select class="form-control" id="EnvironmentLevel" name="EnvironmentLevel">
-                            <option selected="selected" value="0">Development</option>
-                            <option value="1">QA</option>
-                            <option value="2">NewQA</option>
-                            <option value="3">Production</option>
-                        </select>
-                        <input type="submit" value="Submit" />
+                        <select asp-for="Environment" asp-items="ViewBag.Environments" class="form-control" id="EnvironmentLevel" name="EnvironmentLevel"></select>
                         <input type="text" class="form-control" id="labelEnvironment" readonly @ViewBag.labelEnvironment>
-
-</div>
+                    </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label>Company Ids:</label>
@@ -59,5 +54,17 @@
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#EnvironmentLevel').on('change', function () {
+                var environmentLevel = $('option:selected', this).val(),
+                    label = $('#labelEnvironment');
+
+                label.val(environmentLevel);
+            });
+        });
+    </script>
+
 </body>
 </html>
