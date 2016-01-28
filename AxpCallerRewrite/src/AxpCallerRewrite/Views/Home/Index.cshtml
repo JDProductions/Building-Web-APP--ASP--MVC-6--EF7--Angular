@@ -17,54 +17,60 @@
     <!-- Bootstrap core CSS -->
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
+
     <!-- Custom styles for this template -->
+    <link type="text/css" href="~/css/site.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container">
-        <form role="form" action="/Home/GetChosenEnvLevel" method="get">
-            <div class="row">
-                <div class="form-group"><label>Environment:</label></div>
-                <div class="col-xs-5 selectContainer">
-                    <div class="form-group">
-                        <select asp-for="Environment" asp-items="ViewBag.Environments" class="form-control" id="EnvironmentLevel" name="EnvironmentLevel"></select>
-                        <input type="text" class="form-control" id="labelEnvironment" readonly @ViewBag.labelEnvironment>
-                    </div>
+<div class="container">
+    <form  id="fileForm" role="form" action="/Home/GetChosenEnvLevel" method="POST" enctype="multipart/form-data">
+        <div class="row">
+            <div class="form-group"><label>Environment:</label>
+            </div>
+            <div class="col-xs-5 selectContainer">
+                <div class="form-group">
+                    <select asp-for="Environment" asp-items="ViewBag.Environments" class="form-control" id="EnvironmentLevel" name="EnvironmentLevel"></select>
+                    <input type="text" class="form-control" id="labelEnvironment" readonly @ViewBag.labelEnvironment>
                 </div>
-                <div class="form-group col-md-12">
-                    <label>Company Ids:</label>
-                    <textarea class="form-control" rows="5" id="textAreaCompanyIDs"></textarea>
+            </div>
+            <div class="form-group col-md-12">
+                <label>Company Ids:</label>
+                <div id="filedrag"><textarea class="form-control" rows="5" id="textAreaCompanyIDs" placeholder="Drop Files Here"></textarea>
                 </div>
-                <div class="form-group col-md-12">
-                    <label>Axp Template</label>
-                    <textarea class="form-control" rows="5" id="textAreaAXPTemplate"></textarea>
-
-                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label>Axp Template</label>
+                <textarea class="form-control" rows="5" id="textAreaAXPTemplate"></textarea>
 
             </div>
-        </form>
+
+        </div>
+
+    </form>
+    <div id="messages">
+        <p>Status Messages</p>
     </div>
 
-    <!-- /.container -->
+</div>
+
+
+<div class="container">
+
+</div>
+
+<!-- /.container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript "src="~/js/site.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
-    <script type="text/javascript">
-        $(function () {
-            $('#EnvironmentLevel').on('change', function () {
-                var environmentLevel = $('option:selected', this).val(),
-                    label = $('#labelEnvironment');
 
-                label.val(environmentLevel);
-            });
-        });
-    </script>
 
 </body>
 </html>

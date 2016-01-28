@@ -19,47 +19,30 @@
         <div>
             <label asp-for="CompanyID">CompanyID</label>
         </div>
-        <textarea cols="100" rows="10" > @ViewBag.CompanyIDTextArea</textarea>
+        <textarea cols="100" rows="10" asp-for="CompanyID"></textarea>
         <span asp-for="CompanyID"></span>
 
         @using (Html.BeginForm("Activate", "AppController"))
         {
-            
+            <div>
                 <button type="submit" class="btn btn-default">Activate</button>
-            
-
+            </div>
         }
 
-        @using (Html.BeginForm("UploadCompanyID", "App"))
+        @using (Html.BeginForm("UploadFile", "App", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            <div>
-                <input type="file" name="file" asp-for="CompanyID" />
-                <button type="submit" class="btn btn-default">Upload IDS</button>
-            </div>
-
+            <input type="file" name="file" />
+            <input type="submit" value="Submit" />
         }
 
         <div>
-            @using (Html.BeginForm("UploadFile", "App", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-
-                <input type="file" name="file" asp-for="AxpTemplate" />
-                <input type="submit" value="Submit" />
-            }
-
+            <label>AXP Template</label>
             <div>
-                <label>AXP Template</label>
-                <div>
 
-                    <textarea cols="100" rows="10">@ViewBag.AxpTemplateArea</textarea>
-                    <span asp-for="AxpTemplate"></span>
-                </div>
+                <textarea cols="100" rows="10" asp-for="AxpTemplate"></textarea>
             </div>
         </div>
     </form>
-
-
-
 
 
 </div>

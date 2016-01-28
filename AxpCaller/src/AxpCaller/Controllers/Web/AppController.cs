@@ -26,7 +26,7 @@ namespace AxpCaller.Controllers.Web
             //ViewBag.CompanyID = companyIdList;
 
             ViewBag.AxpTemplateArea = fileText;
-            ViewBag.CompanyIDTextArea = "Test String";
+            
             
 
             return View();

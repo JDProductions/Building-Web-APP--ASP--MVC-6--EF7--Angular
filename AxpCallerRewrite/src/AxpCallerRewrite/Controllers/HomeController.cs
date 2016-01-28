@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AxpCallerRewrite.Interfaces;
@@ -68,6 +69,13 @@ namespace AxpCallerRewrite.Controllers
 
             return environmentLevel;
         }
+
+        public void ParseData(string file)
+        {
+            //JsonConvert.DeserializeObject<File>(file)
+            
+        }
+
 
         public ActionResult SelectCategory()
         {
