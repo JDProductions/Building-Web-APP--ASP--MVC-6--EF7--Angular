@@ -70,11 +70,8 @@ namespace AxpCallerRewrite.Controllers
             return environmentLevel;
         }
 
-        public void ParseData(string file)
-        {
-            //JsonConvert.DeserializeObject<File>(file)
-            
-        }
+
+
 
 
         public ActionResult SelectCategory()
