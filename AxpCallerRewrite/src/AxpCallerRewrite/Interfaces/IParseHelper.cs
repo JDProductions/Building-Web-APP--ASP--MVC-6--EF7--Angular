@@ -8,6 +8,6 @@ namespace AxpCallerRewrite.Interfaces
 {
     interface IParseHelper
     {
-        string ParseData();
+        string ParseData(string value);
     }
 }

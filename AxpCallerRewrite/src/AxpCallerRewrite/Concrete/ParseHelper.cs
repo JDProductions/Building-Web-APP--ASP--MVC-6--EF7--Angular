@@ -8,9 +8,9 @@ namespace AxpCallerRewrite.Concrete
 {
     public class ParseHelper : IParseHelper
     {
-        public string ParseData()
+        public string ParseData(String files)
         {
-            throw new NotImplementedException();
+            return files;
         }
 
 
