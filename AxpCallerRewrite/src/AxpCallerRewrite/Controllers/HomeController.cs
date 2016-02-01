@@ -45,6 +45,7 @@ namespace AxpCallerRewrite.Controllers
                 var model = new FileInputModel();
                 ParseHelper parser = new ParseHelper();
                 var companyIDList = parser.SplitCompanyIDs(input.Companies);
+             
                 //var axpTemplate = parser.SplitCompanyIDs(input.Axp);
                 var test = "";
                 
@@ -54,7 +55,7 @@ namespace AxpCallerRewrite.Controllers
 
             }
 
-            return Json(new { companyIds = input.Companies, template = input.Axp });
+            return Json(new { companyIds = input.Companies, template = input.Axp, environment = input.Environment });
                 
         }
 
@@ -64,44 +65,6 @@ namespace AxpCallerRewrite.Controllers
             //string Development = HttpRequestMe
             return View("Index");
         }
-
-        // bound button click to this method
-        // 
-        public int GetChosenEnvLevel(int environmentLevel)
-        {
-            //ViewBag.messageString = environmentLevel;
-            //string Development = HttpRequestMe
-            // check environment level, make new string to return link
-
-            JsonSerializer serializer = new JsonSerializer();
-
-            switch (environmentLevel)
-            {
-                // Development
-                case 0:
-                    // create string for textbox
-                    string linkText = "http://devapp1/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork";
-                    ViewBag.labelEnvironment = linkText;
-                    break;
-                // Qa
-                case 1:
-                    string linkQA = "http://devapp1/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork";
-                    break;
-                // New QA
-                case 2:
-                    string linkNewQA = "http://devapp1/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork";
-                    break;
-                // Production
-                case 3:
-                    string linkProduction = "http://devapp1/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork";
-                    break;
-            }
-
-            return environmentLevel;
-        }
-
-
-
 
 
         public ActionResult SelectCategory()

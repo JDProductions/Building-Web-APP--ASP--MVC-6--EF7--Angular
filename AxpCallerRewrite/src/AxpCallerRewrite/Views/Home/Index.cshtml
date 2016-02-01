@@ -30,7 +30,24 @@
             </div>
             <div class="col-xs-5 selectContainer">
                 <div class="form-group">
-                    <select asp-for="Environment" asp-items="ViewBag.Environments" class="form-control" id="EnvironmentLevel" name="EnvironmentLevel"></select>
+                    @*<select asp-for="Environment" asp-items="ViewBag.Environments" class="form-control" id="EnvironmentLevel" name="EnvironmentLevel"></select>*@
+                    <fieldset>
+                        <select id="EnvironmentLevel" name="MovieType">
+
+                            <option value="Dev" selected="selected">http://dev/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork</option>
+
+                            <option value="QA">http://QA/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork</option>
+
+                            <option value="NewQA">http://newQA/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork</option>
+
+                            <option value="Prod">http://prod/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork</option>
+
+                            
+
+                        </select>
+
+
+                    </fieldset>
                     <input type="text" class="form-control" id="labelEnvironment" readonly @ViewBag.labelEnvironment>
                 </div>
             </div>

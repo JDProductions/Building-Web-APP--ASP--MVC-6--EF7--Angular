@@ -34,7 +34,7 @@ namespace AxpCallerRewrite.Concrete
                 },
                 new EnvironmentModel
                 {
-                    Name = "PROD",
+                    Name = "Prod",
                     EnvironmentLevel =
                         "http://prod/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork"
                 }

@@ -18,6 +18,9 @@ $(function () {
 
         $('#textAreaCompanyIDs').val(response.companyIds);
         $('#textAreaAXPTemplate').val(response.template);
+        $('#EnvironmentLevel').val(response.environment);
+        $('#labelEnvironment').val(response.environment);
+
         alert(response.template);
 
 
