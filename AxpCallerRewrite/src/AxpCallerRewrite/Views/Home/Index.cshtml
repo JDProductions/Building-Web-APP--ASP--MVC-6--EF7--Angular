@@ -23,10 +23,10 @@
 </head>
 
 <body>
-<div class="container">
-    <form  id="fileForm" role="form" action="/Home/GetChosenEnvLevel" method="POST" enctype="multipart/form-data">
+    <div class="container">
         <div class="row">
-            <div class="form-group"><label>Environment:</label>
+            <div class="form-group">
+                <label>Environment:</label>
             </div>
             <div class="col-xs-5 selectContainer">
                 <div class="form-group">
@@ -36,8 +36,14 @@
             </div>
             <div class="form-group col-md-12">
                 <label>Company Ids:</label>
-                <div id="filedrag"><textarea class="form-control" rows="5" id="textAreaCompanyIDs" placeholder="Drop Files Here"></textarea>
-                </div>
+                <textarea class="form-control" rows="5" id="textAreaCompanyIDs"></textarea>
+
+                <form id="fileUploadForm" method="post" enctype="multipart/form-data" target="uploadTarget"
+                      action="@Url.Action("ProcessFile", "Home")">
+                    <input type="file" name="fileToRead"/>
+                    <button id="uploadButton">Process</button>
+                </form>
+                <iframe id="uploadTarget" name="uploadTarget" style="display: none"></iframe>
             </div>
             <div class="form-group col-md-12">
                 <label>Axp Template</label>
@@ -47,24 +53,23 @@
 
         </div>
 
-    </form>
-    <div id="messages">
-        <p>Status Messages</p>
+        <div id="messages">
+            <p id="pMessage">Status Messages</p>
+        </div>
+
     </div>
 
-</div>
 
+    <div class="container">
 
-<div class="container">
+    </div>
 
-</div>
-
-<!-- /.container -->
+    <!-- /.container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript "src="~/js/site.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript " src="~/js/site.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

@@ -8,10 +8,36 @@ $(function () {
         label.val(environmentLevel);
     });
 
-    
+    $('#uploadButton').on('click', function (e) {
+        e.preventDefault();
+        $('#fileUploadForm').submit();
+    });
+
+    $('#uploadTarget').on('load', function () {
+        var response = JSON.parse($(this).contents().find('body pre').text());
+
+        $('#textAreaCompanyIDs').val(response.companyIds);
+        $('#textAreaAXPTemplate').val(response.template);
+        alert(response.template);
+
+
+    });
+
+    //$('#fileUploadForm').submit(function () {
+    //    var fileUploadForm = $(this);
+    //    $.ajax({
+    //        url: fileUploadForm.attr('action'),
+    //        type: "POST",
+    //        data: fileUploadForm.serialize(),
+    //        success: function (data) {
+    //            alert('here');
+    //        }
+    //    }).done(function(data) {
+    //        alert(data);
+    //    });
+    //    return false;
+    //});
 });
-
-
 
 
 // Begin DRAG AND DROP
@@ -62,12 +88,14 @@ function Init() {
     }
 
     // file selection
+    debugger;
     function FileSelectHandler(e) {
 
         // cancel event and hover styling
         FileDragHover(e);
 
         // fetch FileList object
+        debugger;
         var files = e.target.files || e.dataTransfer.files;
 
         // process all File objects
@@ -85,17 +113,46 @@ function Init() {
         //    success: alert('Youhou'),
         //    error: alert('not good')
         //});
+
+        var $whatsDropped = $('#filedrag');
+        $whatsDropped.dragDrop(true);
+      
+
         debugger;
-        // Submit File JQUERY
-        $("#fileForm").submit(function(event) {
-            alert("Handler for .submit() called.");
+        $.ajax({
+            type: "POST",
+            url: "ParseHelper/ParseData", // the method we are calling
+            contentType: "application/json; charset=utf-8",
+            data: {filename: file.name, fileType: file.type, fileSize: file.size},
+            dataType: "json",
+            success: function (result) {
+                alert('Yay! It worked!');
+                // Or if you are returning something
+                alert('I returned... ' + result.WhateverIsReturning);                    
+            },
+            error: function (result) { 
+                alert('Oh no :(');
+            }
         });
+
 
         function ParseFile(file) {
 
-            $("#fileForm").submit(function (event) {
-                alert("Handler for .submit() called.");
-                event.preventDefault();
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: "HomeController/Index", // the method we are calling
+                contentType: "application/json; charset=utf-8",
+                data: { fileName: file.name, fileType: file.type, fileSize: file.size},
+                dataType: "json",
+                success: function(result) {
+                    alert('Yay! It worked!');
+                    // Or if you are returning something
+                    alert('I returned... ' + result.WhateverIsReturning);
+                },
+                error: function(result) {
+                    alert('Oh no :(');
+                }
             });
 
             Output(

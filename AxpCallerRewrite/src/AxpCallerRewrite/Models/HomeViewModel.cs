@@ -11,6 +11,9 @@ namespace AxpCallerRewrite.Models
     {
         public string Environment { get; set; }
 
+        public string CompanyID { get; set; }
+
+        public string AxpTempalte { get; set; }
         // File Object
         //public File file { get; set; }
 

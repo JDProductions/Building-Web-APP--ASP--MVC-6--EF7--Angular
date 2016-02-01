@@ -40,7 +40,7 @@ namespace AxpCallerRewrite
             services.AddMvc();
 
             services.AddSingleton<IConfigHelper, ConfigHelper>();
-            services.AddSingleton<IParseHelper, ParseHelper>();
+            //services.AddSingleton<IParseHelper, ParseHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

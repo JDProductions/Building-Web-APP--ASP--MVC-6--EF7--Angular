@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "compilationOptions": {
     "emitEntryPoint": true
@@ -28,7 +28,11 @@
   },
 
   "frameworks": {
-    "dnx451": { },
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Web": "4.0.0.0"
+      }
+    },
     "dnxcore50": { }
   },
 

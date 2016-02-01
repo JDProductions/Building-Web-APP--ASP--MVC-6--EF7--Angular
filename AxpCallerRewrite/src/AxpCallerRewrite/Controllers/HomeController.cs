@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using AxpCallerRewrite.Concrete;
 using AxpCallerRewrite.Interfaces;
 using AxpCallerRewrite.Models;
 using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.AspNet.Http;
 using Newtonsoft.Json;
-
 namespace AxpCallerRewrite.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly IConfigHelper _configHelper;
@@ -21,11 +17,45 @@ namespace AxpCallerRewrite.Controllers
             _configHelper = configHelper;
         }
 
-        public IActionResult Index()
+
+        public IActionResult Index(string fileName, string fileType, int fileSize)
         {
             ViewBag.Environments = _configHelper.GetEnvironments();
             var model = new HomeViewModel { Environment = "DEV" };
-            return View(model);
+            Console.Write(fileName);
+            return View();
+        }
+
+        public IActionResult ProcessFile()
+        {
+            var input = new FileInputModel();
+            
+
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(Request.Form.Files[0].OpenReadStream()))
+            {
+                string textArea = Request.Form["fileUploadForm"];
+                var content = reader.ReadToEnd();
+                List<string> CompanyIdList = new List<string>();
+                CompanyIdList.Add(content);
+
+                // Deserialzation
+                // Taking string of Json, taking out key value maps and binding it to a model we defined
+                input = JsonConvert.DeserializeObject<FileInputModel>(content);
+
+                var model = new FileInputModel();
+                ParseHelper parser = new ParseHelper();
+                var companyIDList = parser.SplitCompanyIDs(input.Companies);
+                //var axpTemplate = parser.SplitCompanyIDs(input.Axp);
+                var test = "";
+                
+
+                // Seperate template from company ids by using a model or 
+
+
+            }
+
+            return Json(new { companyIds = input.Companies, template = input.Axp });
+                
         }
 
         public IActionResult CategoryChosen(int environmentLevel)

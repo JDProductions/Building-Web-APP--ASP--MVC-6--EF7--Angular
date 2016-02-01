@@ -18209,7 +18209,9 @@
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-rc1-final",
       "Microsoft.Extensions.DependencyInjection >= 1.0.0-rc1-final"
     ],
-    "DNX,Version=v4.5.1": [],
+    "DNX,Version=v4.5.1": [
+      "fx/System.Web >= 4.0.0"
+    ],
     "DNXCore,Version=v5.0": []
   }
 }
