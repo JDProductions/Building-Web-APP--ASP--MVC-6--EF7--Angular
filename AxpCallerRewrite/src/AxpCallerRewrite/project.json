@@ -31,6 +31,9 @@
     "dnx451": {
       "frameworkAssemblies": {
         "System.Web": "4.0.0.0"
+      },
+      "dependencies": {
+        "Microsoft.Net.Http": "2.2.22"
       }
     },
     "dnxcore50": { }

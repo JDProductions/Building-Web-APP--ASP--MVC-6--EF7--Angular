@@ -21,25 +21,28 @@ $(function () {
         $('#EnvironmentLevel').val(response.environment);
         $('#labelEnvironment').val(response.environment);
 
-        alert(response.template);
 
 
     });
 
-    //$('#fileUploadForm').submit(function () {
-    //    var fileUploadForm = $(this);
-    //    $.ajax({
-    //        url: fileUploadForm.attr('action'),
-    //        type: "POST",
-    //        data: fileUploadForm.serialize(),
-    //        success: function (data) {
-    //            alert('here');
-    //        }
-    //    }).done(function(data) {
-    //        alert(data);
-    //    });
-    //    return false;
-    //});
+    $('#sendAxpTemplate').on('click', function () {
+        var sendButton = $(this);
+        alert('here');
+        $.ajax({
+            url: sendButton.data('target'),
+            type: "POST",
+            data: {
+                companyIds: $('#textAreaCompanyIDs').val(),
+                axpTemplate: $('#textAreaAXPTemplate').val()
+            },
+            success: function (data) {
+                alert('here');
+            }
+        }).done(function(data) {
+            alert(data);
+        });
+        return false;
+    });
 });
 
 

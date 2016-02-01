@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using AxpCallerRewrite.Concrete;
 using AxpCallerRewrite.Interfaces;
 using AxpCallerRewrite.Models;
@@ -29,34 +30,31 @@ namespace AxpCallerRewrite.Controllers
         public IActionResult ProcessFile()
         {
             var input = new FileInputModel();
-            
+
 
             using (System.IO.StreamReader reader = new System.IO.StreamReader(Request.Form.Files[0].OpenReadStream()))
             {
-                string textArea = Request.Form["fileUploadForm"];
                 var content = reader.ReadToEnd();
-                List<string> CompanyIdList = new List<string>();
-                CompanyIdList.Add(content);
 
                 // Deserialzation
                 // Taking string of Json, taking out key value maps and binding it to a model we defined
                 input = JsonConvert.DeserializeObject<FileInputModel>(content);
 
-                var model = new FileInputModel();
-                ParseHelper parser = new ParseHelper();
-                var companyIDList = parser.SplitCompanyIDs(input.Companies);
-             
-                //var axpTemplate = parser.SplitCompanyIDs(input.Axp);
-                var test = "";
-                
-
-                // Seperate template from company ids by using a model or 
-
-
+                return Json(new { companyIds = input.Companies, template = input.Axp, environment = input.Environment });
             }
+        }
 
-            return Json(new { companyIds = input.Companies, template = input.Axp, environment = input.Environment });
-                
+        public IActionResult SendAxpTemplate(string companyIds, string axpTemplate)
+        {
+            var input = new FileInputModel();
+            // Send Axp Template
+            SendTemplate template = new SendTemplate();
+            ParseHelper parser = new ParseHelper();
+            parser.SplitCompanyIDs(companyIds);
+
+            template.SendAxpTemplate(parser.SplitCompanyIDs(companyIds), axpTemplate);
+            var test = "";
+            return Json(new { success = true });
         }
 
         public IActionResult CategoryChosen(int environmentLevel)
@@ -66,25 +64,6 @@ namespace AxpCallerRewrite.Controllers
             return View("Index");
         }
 
-
-        public ActionResult SelectCategory()
-        {
-
-            //List<SelectListItem> items = new List<SelectListItem>();
-
-            //items.Add(new SelectListItem { Text = "Development", Value = "0" });
-
-            //items.Add(new SelectListItem { Text = "QA", Value = "1" });
-
-            //items.Add(new SelectListItem { Text = "New QA", Value = "2", Selected = true });
-
-            //items.Add(new SelectListItem { Text = "Production", Value = "3" });
-
-            //ViewBag.MovieType = items;
-
-            return View();
-
-        }
 
         public IActionResult About()
         {

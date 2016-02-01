@@ -32,7 +32,7 @@
                 <div class="form-group">
                     @*<select asp-for="Environment" asp-items="ViewBag.Environments" class="form-control" id="EnvironmentLevel" name="EnvironmentLevel"></select>*@
                     <fieldset>
-                        <select id="EnvironmentLevel" name="MovieType">
+                        <select class="form-control" id="EnvironmentLevel">
 
                             <option value="Dev" selected="selected">http://dev/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork</option>
 
@@ -41,9 +41,6 @@
                             <option value="NewQA">http://newQA/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork</option>
 
                             <option value="Prod">http://prod/OEConnection.Application.SubscriptionController.Web/ContollerService.svc/DoWork</option>
-
-                            
-
                         </select>
 
 
@@ -57,25 +54,18 @@
 
                 <form id="fileUploadForm" method="post" enctype="multipart/form-data" target="uploadTarget"
                       action="@Url.Action("ProcessFile", "Home")">
-                    <input type="file" name="fileToRead"/>
-                    <button id="uploadButton">Process</button>
+                    <input type="file" name="fileToRead" />
+                    <button id="uploadButton">Upload</button>
                 </form>
                 <iframe id="uploadTarget" name="uploadTarget" style="display: none"></iframe>
             </div>
             <div class="form-group col-md-12">
                 <label>Axp Template</label>
                 <textarea class="form-control" rows="5" id="textAreaAXPTemplate"></textarea>
-
+                <button id="sendAxpTemplate" class="btn btn-primary" data-target="@Url.Action("SendAxpTemplate", "Home")">Send AXP Template</button>
             </div>
-
         </div>
-
-        <div id="messages">
-            <p id="pMessage">Status Messages</p>
-        </div>
-
     </div>
-
 
     <div class="container">
 
