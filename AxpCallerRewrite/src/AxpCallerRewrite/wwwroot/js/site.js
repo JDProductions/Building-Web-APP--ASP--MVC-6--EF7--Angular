@@ -33,7 +33,8 @@ $(function () {
             type: "POST",
             data: {
                 companyIds: $('#textAreaCompanyIDs').val(),
-                axpTemplate: $('#textAreaAXPTemplate').val()
+                axpTemplate: $('#textAreaAXPTemplate').val(),
+                environmentLevel: $('#EnvironmentLevel').val()
             },
             success: function (data) {
                 alert('here');

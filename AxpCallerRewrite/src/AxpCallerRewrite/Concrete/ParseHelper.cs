@@ -21,7 +21,7 @@ namespace AxpCallerRewrite.Concrete
 
                 if (value.Contains("\n"))
                 {
-                    CompanyIDList = value.Replace("\r\n", ",").Split(',').ToList();
+                    CompanyIDList = value.Replace("\r", ",").Replace("\n", ",").Split(',').ToList();
                 }
                 else
                 {

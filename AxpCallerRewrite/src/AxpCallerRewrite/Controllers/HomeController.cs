@@ -16,6 +16,7 @@ namespace AxpCallerRewrite.Controllers
         public HomeController(IConfigHelper configHelper)
         {
             _configHelper = configHelper;
+            
         }
 
 
@@ -39,20 +40,20 @@ namespace AxpCallerRewrite.Controllers
                 // Deserialzation
                 // Taking string of Json, taking out key value maps and binding it to a model we defined
                 input = JsonConvert.DeserializeObject<FileInputModel>(content);
-
+                var test = "";
                 return Json(new { companyIds = input.Companies, template = input.Axp, environment = input.Environment });
             }
         }
 
-        public IActionResult SendAxpTemplate(string companyIds, string axpTemplate)
+        public IActionResult SendAxpTemplate(string companyIds, string axpTemplate, string environmentLevel)
         {
             var input = new FileInputModel();
             // Send Axp Template
             SendTemplate template = new SendTemplate();
             ParseHelper parser = new ParseHelper();
-            parser.SplitCompanyIDs(companyIds);
+            var CompanyIDTest  = parser.SplitCompanyIDs(companyIds);
 
-            template.SendAxpTemplate(parser.SplitCompanyIDs(companyIds), axpTemplate);
+            template.SendAxpTemplate(CompanyIDTest, axpTemplate, environmentLevel);
             var test = "";
             return Json(new { success = true });
         }

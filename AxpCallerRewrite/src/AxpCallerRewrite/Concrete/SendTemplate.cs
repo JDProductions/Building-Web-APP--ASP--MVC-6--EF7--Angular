@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
+using AxpCallerRewrite.Models;
+using Newtonsoft.Json;
+using Microsoft.AspNet.Mvc;
 
 namespace AxpCallerRewrite.Concrete
 {
     public class SendTemplate
     {
-        public void SendAxpTemplate(List<string> companyIDs, string template)
+        Uri baseUri = new Uri("http://www.test.com/");
+
+        public void SendAxpTemplate(List<string> companyIDs, string template, string environment)
         {
             var responses = new StringBuilder();
+            var input = new FileInputModel();
 
-            ParseHelper parse = new ParseHelper();
-            
-            
 
             for (var i = 0; i < companyIDs.Count(); i++) // Might need to change count because its counting strings
             {
@@ -23,8 +29,52 @@ namespace AxpCallerRewrite.Concrete
                 if (string.IsNullOrEmpty(item))
                     continue;
 
-                HttpClient client = new HttpClient();
+                CallController(environment,template);
+                var test = "";
+
+
+
+
             }
+            
+
+      
         }
+        // How does it fill thhis parameter
+        private string CallController(string environment, string axpTemplate)
+        {
+            string response = null;
+            // Creating the Request
+
+                using (var client = new HttpClient())
+                    {
+                        switch (environment)
+                       {       
+                            case "Prod":
+                            break;
+
+                           case "Dev":
+                        baseUri = new Uri("http://www.dev.com/");
+                        client.BaseAddress = baseUri;
+                            break;
+
+                            case "QA":
+                                baseUri = new Uri("http://www.QA.com/");
+                                   client.BaseAddress = baseUri;
+                            break;
+                            case "NewQA":
+                                baseUri = new Uri("http://www.NewQA.com/");
+                                client.BaseAddress = baseUri;
+                            break;
+
+                    }   
+
+            }
+
+           
+
+            return environment;
+        }
+
     }
 }
