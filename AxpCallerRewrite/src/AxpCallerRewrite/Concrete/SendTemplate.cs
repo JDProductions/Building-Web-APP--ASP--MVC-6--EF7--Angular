@@ -57,7 +57,7 @@ namespace AxpCallerRewrite.Concrete
                            case "Dev":
                                try
                                {
-                                   baseUri = new Uri("http://www.dev.com/");
+                                   baseUri = new Uri("http://devapp1/OEConnection.Application.SubscriptionController.Web/ControllerServices.svc.DoWork");
                                    client.BaseAddress = baseUri;
                                    client.DefaultRequestHeaders.Accept.Add(
                                        new MediaTypeWithQualityHeaderValue("application/xml"));
