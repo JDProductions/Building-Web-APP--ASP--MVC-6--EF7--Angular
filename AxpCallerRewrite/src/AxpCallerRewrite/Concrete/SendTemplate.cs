@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AxpCallerRewrite.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.ModelBinding.Validation;
 
 namespace AxpCallerRewrite.Concrete
 {
@@ -16,7 +17,7 @@ namespace AxpCallerRewrite.Concrete
     {
         Uri baseUri = new Uri("http://www.test.com/");
 
-        public void SendAxpTemplate(List<string> companyIDs, string template, string environment)
+        public async void SendAxpTemplate(List<string> companyIDs, string template, string environment)
         {
             var responses = new StringBuilder();
             var input = new FileInputModel();
@@ -29,7 +30,7 @@ namespace AxpCallerRewrite.Concrete
                 if (string.IsNullOrEmpty(item))
                     continue;
 
-                CallController(environment,template);
+                await CallController(environment,template);
                 var test = "";
 
 
@@ -41,9 +42,9 @@ namespace AxpCallerRewrite.Concrete
       
         }
         // How does it fill thhis parameter
-        private string CallController(string environment, string axpTemplate)
+        private async Task<string> CallController(string environment, string axpTemplate)
         {
-            string response = null;
+            var test = "";
             // Creating the Request
 
                 using (var client = new HttpClient())
@@ -54,9 +55,26 @@ namespace AxpCallerRewrite.Concrete
                             break;
 
                            case "Dev":
-                        baseUri = new Uri("http://www.dev.com/");
-                        client.BaseAddress = baseUri;
-                            break;
+                               try
+                               {
+                                   baseUri = new Uri("http://www.dev.com/");
+                                   client.BaseAddress = baseUri;
+                                   client.DefaultRequestHeaders.Accept.Add(
+                                       new MediaTypeWithQualityHeaderValue("application/xml"));
+
+                                    var request = new HttpRequestMessage(HttpMethod.Post, baseUri);
+                                    request.Content = new StringContent("text/xml");
+                                    var response = await client.SendAsync(request);
+
+                            return await response.Content.ReadAsStringAsync();
+                               }
+                               catch (Exception e)
+                               {
+                                   Console.Write(e.Message);
+                               }
+                               // Http Post
+
+                        break;
 
                             case "QA":
                                 baseUri = new Uri("http://www.QA.com/");
@@ -71,7 +89,7 @@ namespace AxpCallerRewrite.Concrete
 
             }
 
-           
+
 
             return environment;
         }
