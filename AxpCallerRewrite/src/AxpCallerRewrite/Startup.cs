@@ -39,7 +39,7 @@ namespace AxpCallerRewrite
 
             services.AddMvc();
 
-            services.AddSingleton<IConfigHelper, ConfigHelper>();
+            //services.AddSingleton<IConfigHelper, ConfigHelper>();
             //services.AddSingleton<IParseHelper, ParseHelper>();
         }
 

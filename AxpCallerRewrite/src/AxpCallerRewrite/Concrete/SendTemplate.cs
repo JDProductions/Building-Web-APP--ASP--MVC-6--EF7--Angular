@@ -29,7 +29,7 @@ namespace AxpCallerRewrite.Concrete
                 var item = companyIDs[i];
                 if (string.IsNullOrEmpty(item))
                     continue;
-
+                
                 await CallController(environment,template);
                 var test = "";
 
@@ -37,9 +37,10 @@ namespace AxpCallerRewrite.Concrete
 
 
             }
-            
+            await CallController(environment, template);
 
-      
+
+
         }
         // How does it fill thhis parameter
         private async Task<string> CallController(string environment, string axpTemplate)
@@ -57,7 +58,7 @@ namespace AxpCallerRewrite.Concrete
                            case "Dev":
                                try
                                {
-                                   baseUri = new Uri("http://devapp1/OEConnection.Application.SubscriptionController.Web/ControllerServices.svc.DoWork");
+                                   baseUri = new Uri("http://devapp1/OEConnection.Application.SubscriptionController.Web/ControllerService.svc/DoWork");
                                    client.BaseAddress = baseUri;
                                    client.DefaultRequestHeaders.Accept.Add(
                                        new MediaTypeWithQualityHeaderValue("application/xml"));
@@ -65,14 +66,15 @@ namespace AxpCallerRewrite.Concrete
                                     var request = new HttpRequestMessage(HttpMethod.Post, baseUri);
                                     request.Content = new StringContent("text/xml");
                                     var response = await client.SendAsync(request);
+                                   var testResponse = "";
 
                             return await response.Content.ReadAsStringAsync();
                                }
-                               catch (Exception e)
+                               catch (HttpRequestException e)
                                {
                                    Console.Write(e.Message);
                                }
-                               // Http Post
+                               var test1 = "";
 
                         break;
 

@@ -891,7 +891,7 @@
           "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
         }
       },
-      "Microsoft.Bcl/1.1.9": {
+      "Microsoft.Bcl/1.1.10": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.Build": "1.0.14"
@@ -1476,10 +1476,10 @@
           "lib/net451/Microsoft.Extensions.WebEncoders.Core.dll": {}
         }
       },
-      "Microsoft.Net.Http/2.2.22": {
+      "Microsoft.Net.Http/2.2.29": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Bcl": "1.1.9",
+          "Microsoft.Bcl": "1.1.10",
           "Microsoft.Bcl.Build": "1.0.14"
         },
         "frameworkAssemblies": [
@@ -5071,7 +5071,7 @@
           "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
         }
       },
-      "Microsoft.Bcl/1.1.9": {
+      "Microsoft.Bcl/1.1.10": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.Build": "1.0.14"
@@ -5656,10 +5656,10 @@
           "lib/net451/Microsoft.Extensions.WebEncoders.Core.dll": {}
         }
       },
-      "Microsoft.Net.Http/2.2.22": {
+      "Microsoft.Net.Http/2.2.29": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Bcl": "1.1.9",
+          "Microsoft.Bcl": "1.1.10",
           "Microsoft.Bcl.Build": "1.0.14"
         },
         "frameworkAssemblies": [
@@ -6824,7 +6824,7 @@
           "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
         }
       },
-      "Microsoft.Bcl/1.1.9": {
+      "Microsoft.Bcl/1.1.10": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.Build": "1.0.14"
@@ -7409,10 +7409,10 @@
           "lib/net451/Microsoft.Extensions.WebEncoders.Core.dll": {}
         }
       },
-      "Microsoft.Net.Http/2.2.22": {
+      "Microsoft.Net.Http/2.2.29": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Bcl": "1.1.9",
+          "Microsoft.Bcl": "1.1.10",
           "Microsoft.Bcl.Build": "1.0.14"
         },
         "frameworkAssemblies": [
@@ -13838,23 +13838,10 @@
         "Microsoft.AspNet.WebUtilities.nuspec"
       ]
     },
-    "Microsoft.Bcl/1.1.9": {
+    "Microsoft.Bcl/1.1.10": {
       "type": "package",
-      "sha512": "USQ55innJy8K+tAXvVa1O8dUTp2s7pmJ5cJj6Tl02HtGc2xBDj0P2QH5620HbGXIWKWYhydoeQF8Rm/JRDBGhw==",
+      "sha512": "+tTqoh/M1pyL8El3qLy30EcwnAtyvFoDZJtdG9Cbg/WdFbh4N8kyrq198XHuEL7lnJbeD0DRO8jcX5IIOh05cQ==",
       "files": [
-        "content/monoandroid/_._",
-        "content/monotouch/_._",
-        "content/net45/_._",
-        "content/portable-net45+win8+wp8+wpa81/_._",
-        "content/portable-net45+win8+wpa81/_._",
-        "content/portable-net451+win81/_._",
-        "content/portable-net451+win81+wpa81/_._",
-        "content/portable-win81+wp81+wpa81/_._",
-        "content/sl4/_._",
-        "content/sl5/_._",
-        "content/win8/_._",
-        "content/wp8/_._",
-        "content/wpa81/_._",
         "lib/monoandroid/_._",
         "lib/monotouch/_._",
         "lib/net40/ensureRedirect.xml",
@@ -13934,9 +13921,10 @@
         "lib/win8/_._",
         "lib/wp8/_._",
         "lib/wpa81/_._",
+        "lib/Xamarin.iOS10/_._",
         "License-Stable.rtf",
-        "Microsoft.Bcl.1.1.9.nupkg",
-        "Microsoft.Bcl.1.1.9.nupkg.sha512",
+        "Microsoft.Bcl.1.1.10.nupkg",
+        "Microsoft.Bcl.1.1.10.nupkg.sha512",
         "Microsoft.Bcl.nuspec"
       ]
     },
@@ -14509,10 +14497,10 @@
         "Microsoft.Extensions.WebEncoders.Core.nuspec"
       ]
     },
-    "Microsoft.Net.Http/2.2.22": {
+    "Microsoft.Net.Http/2.2.29": {
       "type": "package",
       "serviceable": true,
-      "sha512": "bqVLJ2UimlAEs2bn3y28lB1pmFRxuysv9pFyB0A86WEMYGYTfDyfjAGjm0fiaSRjlMNU1jVnp8Mxt8qe4OmpXQ==",
+      "sha512": "fc4CPEewJ30Xgal+fSq1lYIBt582A7eKlAL7O4HXiYAiTp2VTnA4osSvk7T2n8aS4xTCPVJusQk3yKLT0XSpkg==",
       "files": [
         "lib/monoandroid/System.Net.Http.Extensions.dll",
         "lib/monoandroid/System.Net.Http.Extensions.XML",
@@ -14567,9 +14555,13 @@
         "lib/wpa81/System.Net.Http.Extensions.XML",
         "lib/wpa81/System.Net.Http.Primitives.dll",
         "lib/wpa81/System.Net.Http.Primitives.xml",
+        "lib/Xamarin.iOS10/System.Net.Http.Extensions.dll",
+        "lib/Xamarin.iOS10/System.Net.Http.Extensions.XML",
+        "lib/Xamarin.iOS10/System.Net.Http.Primitives.dll",
+        "lib/Xamarin.iOS10/System.Net.Http.Primitives.xml",
         "License-Stable.rtf",
-        "Microsoft.Net.Http.2.2.22.nupkg",
-        "Microsoft.Net.Http.2.2.22.nupkg.sha512",
+        "Microsoft.Net.Http.2.2.29.nupkg",
+        "Microsoft.Net.Http.2.2.29.nupkg.sha512",
         "Microsoft.Net.Http.nuspec"
       ]
     },
@@ -18493,11 +18485,10 @@
       "Microsoft.Extensions.Logging >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Logging.Console >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Logging.Debug >= 1.0.0-rc1-final",
-      "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-rc1-final",
-      "Microsoft.Extensions.DependencyInjection >= 1.0.0-rc1-final"
+      "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-rc1-final"
     ],
     "DNX,Version=v4.5.1": [
-      "Microsoft.Net.Http >= 2.2.22",
+      "Microsoft.Net.Http >= 2.2.29",
       "fx/System.Web >= 4.0.0"
     ],
     "DNXCore,Version=v5.0": []

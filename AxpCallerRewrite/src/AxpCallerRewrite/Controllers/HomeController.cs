@@ -11,18 +11,18 @@ namespace AxpCallerRewrite.Controllers
 
     public class HomeController : Controller
     {
-        private readonly IConfigHelper _configHelper;
+        
 
-        public HomeController(IConfigHelper configHelper)
+        public HomeController()
         {
-            _configHelper = configHelper;
+            //_configHelper = configHelper;
             
         }
 
 
         public IActionResult Index(string fileName, string fileType, int fileSize)
         {
-            ViewBag.Environments = _configHelper.GetEnvironments();
+           
             var model = new HomeViewModel { Environment = "DEV" };
             Console.Write(fileName);
             return View();
@@ -38,10 +38,20 @@ namespace AxpCallerRewrite.Controllers
                 var content = reader.ReadToEnd();
 
                 // Deserialzation
+               
                 // Taking string of Json, taking out key value maps and binding it to a model we defined
-                input = JsonConvert.DeserializeObject<FileInputModel>(content);
-                var test = "";
-                return Json(new { companyIds = input.Companies, template = input.Axp, environment = input.Environment });
+                try
+                {
+                    input = JsonConvert.DeserializeObject<FileInputModel>(content);
+                    var test = "";
+                    
+                }
+                catch (Exception e)
+                {
+                    Console.Write(e.Message);
+                }
+                return
+                        Json(new { companyIds = input.Companies, template = input.Axp, environment = input.Environment });
             }
         }
 
@@ -52,6 +62,7 @@ namespace AxpCallerRewrite.Controllers
             SendTemplate template = new SendTemplate();
             ParseHelper parser = new ParseHelper();
             var CompanyIDTest  = parser.SplitCompanyIDs(companyIds);
+            
 
             template.SendAxpTemplate(CompanyIDTest, axpTemplate, environmentLevel);
             var test = "";
