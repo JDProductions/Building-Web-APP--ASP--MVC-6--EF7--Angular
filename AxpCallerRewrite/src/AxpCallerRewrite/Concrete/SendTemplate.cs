@@ -34,24 +34,26 @@ namespace AxpCallerRewrite.Concrete
                 // send the template with new data to post????
                 Console.Write(responses);
                 var test = "";
-                await CallController(environment,template);
+                await CallController(environment,template, responses);
                 var test2 = "";
                 
             }
 
+            // Handle if no ids were entered in. Should just send the template still. and Call the Controller.
+
             //companyIDs.Select(str=> str.Replace(("[COMPANYID]", List<string> companyIDs));
-            await CallController(environment, template);
+            //await CallController(environment, template);
             
 
 
 
         }
         // How does it fill thhis parameter
-        private async Task<string> CallController(string environment, string axpTemplate)
+        private async Task<string> CallController(string environment, string axpTemplate, StringBuilder r)
         {
-            
+            var testdsfs = "";
             var xmlContent = axpTemplate;
-            var httpContent = new StringContent(xmlContent, Encoding.UTF8, "application/xml");
+            var httpContent = new StringContent(r.ToString(), Encoding.UTF8, "application/xml");
             // Creating the Request
 
                 using (var client = new HttpClient())
