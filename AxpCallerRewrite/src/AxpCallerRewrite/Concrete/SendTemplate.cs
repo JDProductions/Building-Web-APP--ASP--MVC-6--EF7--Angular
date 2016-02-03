@@ -19,25 +19,29 @@ namespace AxpCallerRewrite.Concrete
 
         public async void SendAxpTemplate(List<string> companyIDs, string template, string environment)
         {
-            var responses = new StringBuilder();
+            
             var input = new FileInputModel();
+            var responses = new StringBuilder();
 
 
             for (var i = 0; i < companyIDs.Count(); i++) // Might need to change count because its counting strings
             {
                 Console.Write(string.Format("Processing company {0} of {1}", i, companyIDs.Count()));
-                var item = companyIDs[i];
-                if (string.IsNullOrEmpty(item))
-                    continue;
+                responses.AppendLine(template.Replace("[COMPANYID]", companyIDs[i]));
+                responses.Clear();
+                responses.AppendLine(template.Replace("[COMPANYID]", companyIDs[i]));
                 
-                await CallController(environment,template);
+                // send the template with new data to post????
+                Console.Write(responses);
                 var test = "";
-
-
-
-
+                await CallController(environment,template);
+                var test2 = "";
+                
             }
+
+            //companyIDs.Select(str=> str.Replace(("[COMPANYID]", List<string> companyIDs));
             await CallController(environment, template);
+            
 
 
 
@@ -45,7 +49,9 @@ namespace AxpCallerRewrite.Concrete
         // How does it fill thhis parameter
         private async Task<string> CallController(string environment, string axpTemplate)
         {
-            var test = "";
+            
+            var xmlContent = axpTemplate;
+            var httpContent = new StringContent(xmlContent, Encoding.UTF8, "application/xml");
             // Creating the Request
 
                 using (var client = new HttpClient())
@@ -62,13 +68,19 @@ namespace AxpCallerRewrite.Concrete
                                    client.BaseAddress = baseUri;
                                    client.DefaultRequestHeaders.Accept.Add(
                                        new MediaTypeWithQualityHeaderValue("application/xml"));
+                                   var httpResponseMessage = await client.PostAsync(baseUri, httpContent);
+                                    
+                                   if (httpResponseMessage.StatusCode == HttpStatusCode.OK)
+                                   {
+                                       var messageContents = await httpResponseMessage.Content.ReadAsStringAsync();
+                                Console.WriteLine(messageContents);
+                                Console.Write(httpResponseMessage.IsSuccessStatusCode);
+                                       var testing = "";
+                                   }
 
-                                    var request = new HttpRequestMessage(HttpMethod.Post, baseUri);
-                                    request.Content = new StringContent("text/xml");
-                                    var response = await client.SendAsync(request);
-                                   var testResponse = "";
+                                  
 
-                            return await response.Content.ReadAsStringAsync();
+
                                }
                                catch (HttpRequestException e)
                                {
