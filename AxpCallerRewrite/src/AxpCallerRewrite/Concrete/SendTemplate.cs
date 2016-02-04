@@ -38,12 +38,15 @@ namespace AxpCallerRewrite.Concrete
                 var test2 = "";
                 
             }
+                await CallController(environment, template, responses);
+            var testfdsf = "";
+
 
             // Handle if no ids were entered in. Should just send the template still. and Call the Controller.
 
             //companyIDs.Select(str=> str.Replace(("[COMPANYID]", List<string> companyIDs));
             //await CallController(environment, template);
-            
+
 
 
 
@@ -51,9 +54,15 @@ namespace AxpCallerRewrite.Concrete
         // How does it fill thhis parameter
         private async Task<string> CallController(string environment, string axpTemplate, StringBuilder r)
         {
+            var httpContent = new StringContent(r.ToString(), Encoding.UTF8, "application/xml");
+            if (r.Length == 0)
+            {
+               httpContent = new StringContent(axpTemplate, Encoding.UTF8, "application/xml");
+            }
             var testdsfs = "";
             var xmlContent = axpTemplate;
-            var httpContent = new StringContent(r.ToString(), Encoding.UTF8, "application/xml");
+            
+
             // Creating the Request
 
                 using (var client = new HttpClient())
@@ -79,6 +88,8 @@ namespace AxpCallerRewrite.Concrete
                                 Console.Write(httpResponseMessage.IsSuccessStatusCode);
                                        var testing = "";
                                    }
+
+                               
 
                                   
 
