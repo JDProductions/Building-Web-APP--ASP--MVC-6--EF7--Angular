@@ -23,13 +23,34 @@
 </head>
 
 <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand"><img src="~/images/OEC-logo-white.png"/></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-controller="Home" asp-action="Index">MyAccount</a></li>
+                    <li><a asp-controller="Home" asp-action="About">SignUp</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="form-group">
-                <label>Environment:</label>
+
             </div>
             <div class="col-xs-5 selectContainer">
                 <div class="form-group">
+                    <label>Environment:</label>
                     @*<select asp-for="Environment" asp-items="ViewBag.Environments" class="form-control" id="EnvironmentLevel" name="EnvironmentLevel"></select>*@
                     <fieldset>
                         <select class="form-control" id="EnvironmentLevel" name="environment">
@@ -67,11 +88,79 @@
         </div>
     </div>
 
-    <div class="container">
+<div class="container">
 
+    <nav class="pdsa-sn-wrapper">
+        <ul>
+            <li class="pdsa-sn-brand">
+                <a href="#">
+                    <h4>Documentation</h4>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <h4>CES API Overview</h4>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <h4>OAuth</h4>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <h4>API Rate Limits</h4>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <h4>API Objects</h4>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <h4>Public Api</h4>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <h4>EMS Data Batch Process</h4>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <h4>Error Codes and Responses</h4>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+</div>
+
+    <div class="navbar navbar-fixed-bottom">
+        <footer>
+            <p>&copy; 2016 - James DuBois</p>
+        </footer>
+        <ul>
+            <li>
+                <a href="#">
+                    Terms and Conditions
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    Careers
+                </a>
+            </li>
+        </ul>
     </div>
 
-    <!-- /.container -->
+<!-- /.container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

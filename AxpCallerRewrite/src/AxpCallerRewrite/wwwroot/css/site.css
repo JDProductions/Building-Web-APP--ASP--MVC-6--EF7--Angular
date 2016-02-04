@@ -1,16 +1,118 @@
-﻿#filedrag {
-  
-	font-weight: bold;
-	text-align: center;
-	color: #555;
-	border: 2px dashed #555;
-	border-radius: 2px;
-	cursor: default;
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
-#filedrag.hover
-{
-	color: #f00;
-	border-color: #f00;
-	border-style: solid;
-	box-shadow: inset 0 3px 4px #888;
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 7%;
+    padding-right: 15px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+
+/* Carousel */
+.carousel-caption {
+    z-index: 10 !important;
+}
+
+    .carousel-caption p {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+@media (min-width: 768px) {
+    .carousel-caption {
+        z-index: 10 !important;
+    }
+}
+
+/*
+    TOP NAVIGATION HEADER
+*/
+
+.navbar-header {
+    background-color: #002942;
+}
+.navbar {
+    background-color: #002942;
+}
+
+.navbar-brand {
+       
+    position: absolute;
+    width: 100%;
+    padding-right: 20px;
+    left: 0;
+    text-align: center;
+    margin: auto;
+
+}
+
+.navbar-nav {
+    float: right !important;
+    padding-left: 200px;
+}
+
+.navbar-nav li a {
+    color: white !important;
+}
+
+
+/*
+    BOTTOM NAVIGATION - FOOTER
+
+*/
+    .navbar-fixed-bottom {
+        
+    }
+
+    .navbar-fixed-bottom p {
+         color: white !important;
+    }
+
+    .navbar-fixed-bottom li {
+    float: right !important;
+    padding-left: 50px;
+    padding-right: 10px;
+
+    
+    }
+
+    .navbar-fixed-bottom li a {
+        color: white !important;
+    }
+
+/*
+    END BOTTOM NAVIGATION - FOOTER
+*/
+
+/*
+    Left Side Navigation
+*/
+.pdsa-sn-wrapper {
+    position: absolute;
+    top: 3.6em;
+    left: 0em;
+    width: 20em;
+    height: 100%;
+    background-color: #002942;
+
+}
+
+.pdsa-sn-wrapper ul {
+    width: 11em;
+    list-style: none;
+    margin-top: 2em;
+    margin-left: 1em;
+    padding: 0em;
+}
+
+.pdsa-sn-wrapper a {
+    color: #67d80e;
+    display: inline-block;
+     white-space: nowrap;
+     font-family: "Arial", Times, serif;
+    
 }

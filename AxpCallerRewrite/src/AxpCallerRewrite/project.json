@@ -48,5 +48,6 @@
   ],
   "scripts": {
     "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ]
-  }
+  },
+  "userSecretsId": "aspnet5-AxpCallerRewrite-20160204082424"
 }
