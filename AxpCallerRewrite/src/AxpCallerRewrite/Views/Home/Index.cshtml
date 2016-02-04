@@ -36,7 +36,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Home" asp-action="Index">MyAccount</a></li>
+                    <li><a asp-controller="Home" asp-action="About">MyAccount</a></li>
                     <li><a asp-controller="Home" asp-action="About">SignUp</a></li>
                 </ul>
             </div>
@@ -48,7 +48,7 @@
             <div class="form-group">
 
             </div>
-            <div class="col-xs-5 selectContainer">
+            <div class="col-md-5 selectContainer">
                 <div class="form-group">
                     <label>Environment:</label>
                     @*<select asp-for="Environment" asp-items="ViewBag.Environments" class="form-control" id="EnvironmentLevel" name="EnvironmentLevel"></select>*@
@@ -88,59 +88,60 @@
         </div>
     </div>
 
-<div class="container">
+    <div class="container">
+        <div class="row">
+            <nav class="pdsa-sn-wrapper col-md-12" >
+                <ul>
+                    <li class="pdsa-sn-brand">
+                        <a href="#">
+                            <h4>Documentation</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h4>CES API Overview</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h4>OAuth</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h4>API Rate Limits</h4>
+                        </a>
+                    </li>
 
-    <nav class="pdsa-sn-wrapper">
-        <ul>
-            <li class="pdsa-sn-brand">
-                <a href="#">
-                    <h4>Documentation</h4>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <h4>CES API Overview</h4>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <h4>OAuth</h4>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <h4>API Rate Limits</h4>
-                </a>
-            </li>
+                    <li>
+                        <a href="#">
+                            <h4>API Objects</h4>
+                        </a>
+                    </li>
 
-            <li>
-                <a href="#">
-                    <h4>API Objects</h4>
-                </a>
-            </li>
+                    <li>
+                        <a href="#">
+                            <h4>Public Api</h4>
+                        </a>
+                    </li>
 
-            <li>
-                <a href="#">
-                    <h4>Public Api</h4>
-                </a>
-            </li>
+                    <li>
+                        <a href="#">
+                            <h4>EMS Data Batch Process</h4>
+                        </a>
+                    </li>
 
-            <li>
-                <a href="#">
-                    <h4>EMS Data Batch Process</h4>
-                </a>
-            </li>
+                    <li>
+                        <a href="#">
+                            <h4>Error Codes and Responses</h4>
+                        </a>
+                    </li>
 
-            <li>
-                <a href="#">
-                    <h4>Error Codes and Responses</h4>
-                </a>
-            </li>
+                </ul>
+            </nav>
 
-        </ul>
-    </nav>
-
-</div>
+        </div>
+    </div>
 
     <div class="navbar navbar-fixed-bottom">
         <footer>
