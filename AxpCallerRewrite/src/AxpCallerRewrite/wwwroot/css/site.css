@@ -1,13 +1,18 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+   
+    padding-top: 3%;
+    padding-bottom: 2%;
+}
+.body-wrapper {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 7%;
-    padding-right: 15px;
+    padding-right: 3%;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
@@ -43,7 +48,7 @@
        
     position: absolute;
     width: 100%;
-    padding-right: 20px;
+    padding-right: 5%;
     left: 0;
     text-align: center;
     margin: auto;
@@ -52,7 +57,7 @@
 
 .navbar-nav {
     float: right !important;
-    padding-left: 200px;
+
 }
 
 .navbar-nav li a {
@@ -74,8 +79,8 @@
 
     .navbar-fixed-bottom li {
     float: right !important;
-    padding-left: 50px;
-    padding-right: 10px;
+    padding-left: 5%;
+    padding-right: 2%;
 
     
     }
@@ -105,8 +110,8 @@
     width: 11em;
     list-style: none;
     margin-top: 2em;
-    margin-left: 1em;
-    padding: 0em;
+    margin-left: -8%;
+
 }
 
 .pdsa-sn-wrapper a {
@@ -115,4 +120,67 @@
      white-space: nowrap;
      font-family: "Arial", Times, serif;
     
+}
+
+
+
+/*Media Queries*/
+/* Large desktop */
+
+
+@media (min-width: 320px) and (max-width: 979px) {
+    
+    body {
+    padding-top: 20%;
+    padding-bottom: 2%;
+}
+    
+    .body-content {
+        margin-left: -5%;
+    }
+    
+    .pdsa-sn-wrapper {
+        left: -100%;
+    }
+    
+    .navbar-nav li a {
+    color: white !important;
+        padding-right: -40% !important;
+
+}
+
+}
+
+@media (min-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ }
+@media (min-width:481px) {}
+
+/*Tablets*/
+@media (min-width:641px) {
+         body {
+    padding-top: 5%;
+    padding-bottom: 2%;
+}
+    
+    .body-content {
+        margin-left: 20%;
+    }
+}
+@media (min-width:961px) { }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1200px) { /* hi-res laptops and desktops */ 
+    body {
+    padding-top: 5%;
+    padding-bottom: 2%;
+}
+    
+    .body-content {
+        margin-left: 13%;
+    }
+    
+    
+    .navbar-nav li a {
+    color: white !important;
+        padding-right: -40% !important;
+
+}
 }

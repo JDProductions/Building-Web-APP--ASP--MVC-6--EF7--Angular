@@ -5,14 +5,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+
+    <title>Axp Caller</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,32 +24,34 @@
 </head>
 
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-controller="Home" asp-action="Index" class="navbar-brand"><img src="~/images/OEC-logo-white.png"/></a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-controller="Home" asp-action="About">MyAccount</a></li>
-                    <li><a asp-controller="Home" asp-action="About">SignUp</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
-    <div class="container">
+<div class="container">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="row">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a asp-controller="Home" asp-action="Index" class="navbar-brand"><img src="~/images/OEC-logo-white.png" /></a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a asp-controller="Home" asp-action="About">MyAccount</a></li>
+                            <li><a asp-controller="Home" asp-action="About">SignUp</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+
+                <div class="form-group">
+
+                </div>
         <div class="row">
-            <div class="form-group">
-
-            </div>
-            <div class="col-md-5 selectContainer">
+            <div class="col-md-12 selectContainer">
                 <div class="form-group">
                     <label>Environment:</label>
                     @*<select asp-for="Environment" asp-items="ViewBag.Environments" class="form-control" id="EnvironmentLevel" name="EnvironmentLevel"></select>*@
@@ -69,6 +72,8 @@
                     <input type="text" class="form-control" id="labelEnvironment" readonly @ViewBag.labelEnvironment>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="form-group col-md-12">
                 <label>Company Ids:</label>
                 <textarea class="form-control" rows="5" id="textAreaCompanyIDs"></textarea>
@@ -80,88 +85,89 @@
                 </form>
                 <iframe id="uploadTarget" name="uploadTarget" style="display: none"></iframe>
             </div>
+        </div>
+        <div class="row">
             <div class="form-group col-md-12">
                 <label>Axp Template</label>
                 <textarea class="form-control" rows="5" id="textAreaAXPTemplate"></textarea>
                 <button id="sendAxpTemplate" class="btn btn-primary" data-target="@Url.Action("SendAxpTemplate", "Home")">Send AXP Template</button>
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <div class="row">
-            <nav class="pdsa-sn-wrapper col-md-12" >
-                <ul>
-                    <li class="pdsa-sn-brand">
-                        <a href="#">
-                            <h4>Documentation</h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h4>CES API Overview</h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h4>OAuth</h4>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h4>API Rate Limits</h4>
-                        </a>
-                    </li>
+        @* LEFT SIDE NAVIGATION *@
+            <div class="row">
+                <nav class="pdsa-sn-wrapper col-md-12">
+                    <ul>
+                        <li class="pdsa-sn-brand">
+                            <a href="#">
+                                <h4>Documentation</h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <h4>CES API Overview</h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <h4>OAuth</h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <h4>API Rate Limits</h4>
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="#">
-                            <h4>API Objects</h4>
-                        </a>
-                    </li>
+                        <li>
+                            <a href="#">
+                                <h4>API Objects</h4>
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="#">
-                            <h4>Public Api</h4>
-                        </a>
-                    </li>
+                        <li>
+                            <a href="#">
+                                <h4>Public Api</h4>
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="#">
-                            <h4>EMS Data Batch Process</h4>
-                        </a>
-                    </li>
+                        <li>
+                            <a href="#">
+                                <h4>EMS Data Batch Process</h4>
+                            </a>
+                        </li>
 
-                    <li>
-                        <a href="#">
-                            <h4>Error Codes and Responses</h4>
-                        </a>
-                    </li>
+                        <li>
+                            <a href="#">
+                                <h4>Error Codes and Responses</h4>
+                            </a>
+                        </li>
 
-                </ul>
-            </nav>
+                    </ul>
+                </nav>
+            </div>
 
+        @* FOOTER NAVIGATION *@
+        <div class="navbar navbar-fixed-bottom">
+            <footer>
+                <p>&copy; 2016 - James DuBois</p>
+            </footer>
+            <ul>
+                <li>
+                    <a href="#">
+                        Terms and Conditions
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Careers
+                    </a>
+                </li>
+            </ul>
         </div>
-    </div>
+        </div>
 
-    <div class="navbar navbar-fixed-bottom">
-        <footer>
-            <p>&copy; 2016 - James DuBois</p>
-        </footer>
-        <ul>
-            <li>
-                <a href="#">
-                    Terms and Conditions
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    Careers
-                </a>
-            </li>
-        </ul>
-    </div>
-
-<!-- /.container -->
+    <!-- /.container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
