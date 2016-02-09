@@ -91,6 +91,11 @@ namespace AxpCallerRewrite.Controllers
             return View();
         }
 
+        public IActionResult AxpRevamp()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();

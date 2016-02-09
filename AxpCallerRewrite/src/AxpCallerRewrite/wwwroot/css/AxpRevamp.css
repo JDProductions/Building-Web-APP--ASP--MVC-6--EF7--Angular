@@ -1,0 +1,17 @@
+﻿#textAreaCreateCompany {
+    resize: none;
+}
+
+  .modal-header,  .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-header h4 {
+      font-size: 30px;
+      color: white !important;
+  }
+  textarea {
+      resize: none;
+  }
