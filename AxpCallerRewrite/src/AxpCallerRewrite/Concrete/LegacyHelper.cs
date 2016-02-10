@@ -9,9 +9,7 @@ namespace AxpCallerRewrite.Concrete
     // Dont think this is right but you know, well you know - need to bind repository to Helper.
     public class LegacyHelper : ILegacyHelper
     {
-        public void GetCompanyType()
-        {
+        // We will parse data or get it into the correct format.
 
-        }
     }
 }
