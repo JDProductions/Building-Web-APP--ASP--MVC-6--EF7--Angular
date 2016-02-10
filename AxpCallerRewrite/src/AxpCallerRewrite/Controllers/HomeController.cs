@@ -11,13 +11,14 @@ namespace AxpCallerRewrite.Controllers
 
     public class HomeController : Controller
     {
-        
+        private readonly ILegacyHelper _legacyHelper;
 
-        public HomeController()
+        public HomeController(ILegacyHelper legacyHelper) // home controller depnds on legacyhelper now, injecting legacyhelper into your controller
         {
             // DEPENDENCY INJECTION
             //_configHelper = configHelper;
-            
+            _legacyHelper = legacyHelper;
+
         }
 
 
@@ -94,6 +95,7 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult AxpRevamp()
         {
+           // _legacyRepository.GetCompanyTypes();
             return View();
         }
 

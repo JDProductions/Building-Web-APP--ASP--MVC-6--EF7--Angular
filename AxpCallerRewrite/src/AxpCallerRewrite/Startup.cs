@@ -39,6 +39,8 @@ namespace AxpCallerRewrite
 
             services.AddMvc();
 
+            services.AddTransient<ILegacyRepository, LegacyRepository>();
+            services.AddTransient<ILegacyHelper, LegacyHelper>();
             //services.AddSingleton<IConfigHelper, ConfigHelper>();
             //services.AddSingleton<IParseHelper, ParseHelper>();
         }
