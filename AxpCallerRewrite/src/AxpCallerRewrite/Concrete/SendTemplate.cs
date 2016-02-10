@@ -7,9 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using AxpCallerRewrite.Models;
-using Newtonsoft.Json;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.ModelBinding.Validation;
+
 
 namespace AxpCallerRewrite.Concrete
 {
@@ -54,7 +52,7 @@ namespace AxpCallerRewrite.Concrete
                httpContent = new StringContent(axpTemplate, Encoding.UTF8, "application/xml");
             }
             var testdsfs = "";
-            var xmlContent = axpTemplate;
+            
             
 
             // Creating the Request
