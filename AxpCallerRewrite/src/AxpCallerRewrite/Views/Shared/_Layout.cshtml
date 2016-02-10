@@ -8,8 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <environment names="Development">
+    <script src="~/js/site.js" asp-append-version="true"></script><environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -42,12 +41,13 @@
         </div>
     </div>
 
+    @* LEFT SIDE NAVIGATION *@
 <div class="row">
     <nav class="pdsa-sn-wrapper col-md-12">
         <ul>
             <li class="pdsa-sn-brand">
                 <a href="#">
-                    <h4>Test</h4>
+                    <h4>Documentation</h4>
                 </a>
             </li>
             <li>
@@ -94,31 +94,53 @@
     </nav>
 </div>
 
-<div class="container body-content">
-    @RenderBody()
-    <hr/>
+    @* FOOTER NAVIGATION *@
+    <div class="navbar navbar-fixed-bottom">
+        <footer>
+            <p>&copy; 2016 - James DuBois</p>
+        </footer>
+        <ul>
+            <li>
+                <a href="#">
+                    Terms and Conditions
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    Careers
+                </a>
+            </li>
+        </ul>
+    </div>
 
-</div>
+<div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <environment names="Development">
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-</environment>
-<environment names="Staging,Production">
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
-            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-            asp-fallback-test="window.jQuery">
-        
-    </script>
-    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
-            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-        
-    </script>
-    <script src="~/js/site.min.js" asp-append-version="true"></script>
-</environment>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
 
-@RenderSection("scripts", required: false)
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>

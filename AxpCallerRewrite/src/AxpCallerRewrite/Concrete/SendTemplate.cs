@@ -24,7 +24,7 @@ namespace AxpCallerRewrite.Concrete
             var responses = new StringBuilder();
 
 
-            for (var i = 0; i < companyIDs.Count(); i++) // Might need to change count because its counting strings
+            for (var i = 0; i < companyIDs.Count(); i++) // Might need to change count because its counting strings and it may be skipping a company ID
             {
                 Console.Write(string.Format("Processing company {0} of {1}", i, companyIDs.Count()));
                 responses.AppendLine(template.Replace("[COMPANYID]", companyIDs[i]));
@@ -42,16 +42,10 @@ namespace AxpCallerRewrite.Concrete
             var testfdsf = "";
 
 
-            // Handle if no ids were entered in. Should just send the template still. and Call the Controller.
-
-            //companyIDs.Select(str=> str.Replace(("[COMPANYID]", List<string> companyIDs));
-            //await CallController(environment, template);
-
 
 
 
         }
-        // How does it fill thhis parameter
         private async Task<string> CallController(string environment, string axpTemplate, StringBuilder r)
         {
             var httpContent = new StringContent(r.ToString(), Encoding.UTF8, "application/xml");
@@ -88,11 +82,6 @@ namespace AxpCallerRewrite.Concrete
                                 Console.Write(httpResponseMessage.IsSuccessStatusCode);
                                        var testing = "";
                                    }
-
-                               
-
-                                  
-
 
                                }
                                catch (HttpRequestException e)
