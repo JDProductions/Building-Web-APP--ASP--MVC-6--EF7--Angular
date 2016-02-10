@@ -11,6 +11,7 @@ using AxpCallerRewrite.Models;
 
 namespace AxpCallerRewrite.Concrete
 {
+    // This is describing how Github works i guess?
     public class SendTemplate
     {
         Uri baseUri = new Uri("http://www.test.com/");
