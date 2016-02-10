@@ -1,16 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AxpCallerRewrite.Interfaces;
 
 namespace AxpCallerRewrite.Concrete
 {
     public class LegacyRepository : ILegacyRepository
     {
+        public void GetActivateFeature()
+        {
+            throw new NotImplementedException();
+        }
+
         public void GetCompanyTypes()
         {
-            return;
+        }
+
+        public void GetDeactivateFeature()
+        {
+            throw new NotImplementedException();
         }
 
         public void GetOecProducts()
