@@ -1,8 +1,7 @@
-﻿@*
+﻿@model AxpCallerRewrite.Models.CompanyModel
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-}
 <!DOCTYPE html>
 <html>
 
@@ -14,52 +13,60 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="row">
-        <p>What would you like to do?</p>
-        <button type="button" id="btnCreateCompany" class="btn btn-default">Create Company</button>
-        @*--- Modal--- *@
-        <div class="modal fade" id="modalCreateCompany" role="dialog">
-            <div class="modal-dialog">
-                @* ----- Modal Content ---- *@
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span> Create A Company</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="companyName">Company Name</label>
-                                <input type="text" class="form-control" id="inputCompanyName">
-                                <label for="companyCountry">Country</label>
-                                <div>
-                                    <select id="companyType" class="form-control">
-                                        <option>US</option>
-                                        <option>Canada</option>
-                                        <option>Mexico</option>
-                                    </select>
-                                </div>
-                                <label for="companyState">State</label>
-                                <div>
-                                    <select id="companyState" class="form-control">
-                                        <option>LoadState 1</option>
-                                        <option>Load State 2</option>
-                                        <option>Load State 3</option>
-                                    </select>
-                                </div>
-                                <label for="companyAddress">Address</label>
-                                <input type="text" class="form-control" id="inputCompanyAddress">
-                                <label for="companyCity">City</label>
-                                <input type="text" class="form-control" id="inputCompanyCity">        
-                                <label for="companyZip">Zip</label>
-                                <input type="text" class="form-control" id="inputCompanyZip">
-                                <label for="companyPhone">Phone</label>
-                                <input type="text" class="form-control" id="inputCompanyPhone">
-                                <label for="companyFax">Fax</label>
-                                <input type="text" class="form-control" id="inputCompanyFax">
+    <div class="container">
+        <div class="row">
+            <p>What would you like to do?</p>
+            <button type="button" id="btnCreateCompany" class="btn btn-default">Create Company</button>
+            @*--- Modal--- *@
+            <div class="modal fade" id="modalCreateCompany" role="dialog">
+                <div class="modal-dialog">
+                    @* ----- Modal Content ---- *@
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span> Create A Company</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("CreateCompany","Home"))
+                            {
                                 <div class="form-group">
-                                    <label class="control-label" for="companyType">Company Type</label>
+                                    @Html.Label("CompanyName", "Company Name")
+                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control" })
+
+                                    @Html.Label("Country", "Country")
+                                    <div>
+                                        <select id="Country" class="form-control">
+                                            <option>US</option>
+                                            <option>Canada</option>
+                                            <option>Mexico</option>
+                                        </select>
+                                    </div>
+
+                                    @Html.Label("companyState", "Company State")
+                                    <div>
+                                        <select id="companyState" class="form-control">
+                                            <option>LoadState 1</option>
+                                            <option>Load State 2</option>
+                                            <option>Load State 3</option>
+                                        </select>
+                                    </div>
+
+                                    @Html.Label("Address", "Address")
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+
+                                    @Html.Label("City", "City")
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+
+                                    @Html.Label("Zip", "Zip")
+                                    @Html.TextBoxFor(m => m.Zip, new { @class = "form-control" })
+
+                                    @Html.Label("Phone", "Phone")
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+
+                                    @Html.Label("Fax", "Fax")
+                                    @Html.TextBoxFor(m => m.Fax, new { @class = "form-control" })
+
+                                    @Html.Label("companyType", "Company Type")
                                     <div>
                                         <select id="companyType" class="form-control">
                                             <option>Load DB1</option>
@@ -67,16 +74,16 @@
                                             <option>Load DB3</option>
                                         </select>
                                     </div>
+
+                                    <button type="submit" id="btnCreateCompanyAction" class="btn btn-default">Create</button>
                                 </div>
-                                <button type="button" id="btnCreateCompanyAction" class="btn btn-default">Create</button>
-                            </div>
-                        </form>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 </body>
 
