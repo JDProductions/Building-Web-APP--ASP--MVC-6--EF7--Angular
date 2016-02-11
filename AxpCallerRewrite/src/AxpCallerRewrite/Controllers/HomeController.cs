@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Xml.Serialization;
+using System;
 using AxpCallerRewrite.Concrete;
 using AxpCallerRewrite.Interfaces;
 using AxpCallerRewrite.Models;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json;
+using System.IO;
+
 namespace AxpCallerRewrite.Controllers
 {
 
@@ -103,6 +104,16 @@ namespace AxpCallerRewrite.Controllers
         public IActionResult Error()
         {
             return View();
+        }
+
+        public IActionResult CreateCompany(CompanyModel company)
+        {
+            //Convert company to XML string
+            StringWriter writer = new StringWriter();
+            XmlSerializer serializer = new XmlSerializer(company.GetType());
+            serializer.Serialize(writer, company);
+
+            return RedirectToAction("Axprevamp");
         }
     }
 }
