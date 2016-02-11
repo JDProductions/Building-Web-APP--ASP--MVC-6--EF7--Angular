@@ -36,7 +36,6 @@
         "Microsoft.Net.Http": "2.2.29"
       }
     },
-    "dnxcore50": { }
   },
 
   "exclude": [
