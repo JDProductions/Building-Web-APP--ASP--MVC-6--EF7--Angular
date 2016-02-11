@@ -21,6 +21,7 @@ namespace AxpCallerRewrite.Concrete
 
         public void GetCompanyData()
         {
+            // Need access to db
             using (SqlDataReader reader = repo.GetCompanyTypes().ExecuteReader())
             {
                 while (reader.Read())
