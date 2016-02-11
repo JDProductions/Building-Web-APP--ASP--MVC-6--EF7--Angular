@@ -68,6 +68,7 @@ namespace AxpCallerRewrite.Concrete
                            case "Dev":
                                try
                                {
+                            // Testing
                                    baseUri = new Uri("http://devapp1/OEConnection.Application.SubscriptionController.Web/ControllerService.svc/DoWork");
                                    client.BaseAddress = baseUri;
                                    client.DefaultRequestHeaders.Accept.Add(
