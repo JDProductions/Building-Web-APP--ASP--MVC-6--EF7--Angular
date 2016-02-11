@@ -29,13 +29,13 @@
   "frameworks": {
     "dnx451": {
       "frameworkAssemblies": {
+        "System.Data": "4.0.0.0",
         "System.Web": "4.0.0.0"
       },
       "dependencies": {
         "Microsoft.Net.Http": "2.2.29"
       }
     },
-    "dnxcore50": { }
   },
 
   "exclude": [
