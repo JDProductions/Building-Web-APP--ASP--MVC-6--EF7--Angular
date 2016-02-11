@@ -113,6 +113,8 @@ namespace AxpCallerRewrite.Controllers
             XmlSerializer serializer = new XmlSerializer(company.GetType());
             serializer.Serialize(writer, company);
 
+            string xmlString = writer.ToString();
+
             return RedirectToAction("Axprevamp");
         }
     }
