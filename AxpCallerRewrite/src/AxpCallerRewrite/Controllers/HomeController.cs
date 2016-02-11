@@ -96,7 +96,7 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult AxpRevamp()
         {
-           _legacyHelper.GetCompanyData();
+           //_legacyHelper.GetCompanyData();
             return View();
         }
 

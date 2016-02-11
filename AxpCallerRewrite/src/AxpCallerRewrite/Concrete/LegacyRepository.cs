@@ -11,27 +11,29 @@ namespace AxpCallerRewrite.Concrete
             throw new NotImplementedException();
         }
 
-        public SqlConnection OpenConnection()
+        //not sure if we should use this method to open a connection
+        //public SqlConnection OpenConnection()
 
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                // Connection pool created
-               connection.ConnectionString = "Server=[test_server];Database=[dataBASE!@@];Trusted_Connection=true";
-                return connection;
+        //{
+        //    using (SqlConnection connection = new SqlConnection())
+        //    {
+        //        // Connection pool created
+        //       connection.ConnectionString = "Server=[test_server];Database=[dataBASE!@@];Trusted_Connection=true";
+        //        return connection;
 
-            }   
+        //    }   
 
-        }
+        //}
 
         public SqlCommand GetCompanyTypes()
         {
-            SqlConnection conn = OpenConnection();
-            conn.Open();
-            SqlCommand companyTypes = new SqlCommand("SELECT * FROM TableName", conn);
-            return companyTypes;
-
-
+            using (SqlConnection conn = new SqlConnection("Server=[test_server];Database=[dataBASE!@@];Trusted_Connection=true"))
+            {
+                // Connection pool created
+                SqlCommand companyTypes = new SqlCommand("SELECT * FROM TableName", conn);
+                conn.Open();
+                return companyTypes;
+            }
         }
 
         public void GetDeactivateFeature()

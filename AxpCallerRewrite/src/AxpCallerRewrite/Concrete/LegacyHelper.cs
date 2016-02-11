@@ -19,8 +19,10 @@ namespace AxpCallerRewrite.Concrete
 
         LegacyRepository repo = new LegacyRepository();
 
-        public void GetCompanyData()
+        //I think this should return a List<string>. with the strings being the Company types.
+        public List<string> GetCompanyData()
         {
+            List<string> CompanyTypes = new List<string>();
             using (SqlDataReader reader = repo.GetCompanyTypes().ExecuteReader())
             {
                 //a list to keep track of the rows and their values
@@ -50,9 +52,11 @@ namespace AxpCallerRewrite.Concrete
 
                     }
 
-                    //Do stuff with data depending on what is given from the database
-                    //Example: CompanyTypeList.Add(rowInfo[0])
+                    //Add the company type to the list. Not sure what column the company type names are in. Assumed it was in column 0
+                    CompanyTypes.Add(rowInfo[0]);
                 }
+
+                return CompanyTypes;
             }
         }
     }

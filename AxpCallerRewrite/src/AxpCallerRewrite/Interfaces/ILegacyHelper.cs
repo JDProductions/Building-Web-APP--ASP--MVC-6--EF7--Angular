@@ -7,6 +7,6 @@ namespace AxpCallerRewrite.Interfaces
 {
    public  interface ILegacyHelper
    {
-       void GetCompanyData();
+       List<string> GetCompanyData();
    }
 }
