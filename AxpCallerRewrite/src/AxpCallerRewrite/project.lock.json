@@ -18489,6 +18489,7 @@
     ],
     "DNX,Version=v4.5.1": [
       "Microsoft.Net.Http >= 2.2.29",
+      "fx/System.Data >= 4.0.0",
       "fx/System.Web >= 4.0.0"
     ],
     "DNXCore,Version=v5.0": []

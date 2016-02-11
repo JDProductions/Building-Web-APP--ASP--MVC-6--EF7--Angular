@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace AxpCallerRewrite.Interfaces
 {
-   public  interface ILegacyHelper 
-    {
-    }
+   public  interface ILegacyHelper
+   {
+       void GetCompanyData();
+   }
 }
