@@ -45,10 +45,5 @@ namespace AxpCallerRewrite.Concrete
         {
             return;
         }
-
-        public void Weseleysmells()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
