@@ -13,15 +13,14 @@ namespace AxpCallerRewrite.Concrete
 
         //I understand why this needs to be used now
         public SqlConnection OpenConnection()
-
         {
             using (SqlConnection connection = new SqlConnection())
             {
                 // Connection pool created
-               connection.ConnectionString = "Server=[test_server];Database=[dataBASE!@@];Trusted_Connection=true";
+                connection.ConnectionString = "Server=[test_server];Database=[dataBASE!@@];Trusted_Connection=true";
                 return connection;
 
-            }   
+            }
 
         }
 

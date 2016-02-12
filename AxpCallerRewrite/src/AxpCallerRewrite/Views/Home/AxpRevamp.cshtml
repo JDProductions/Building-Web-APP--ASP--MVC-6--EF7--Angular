@@ -27,11 +27,11 @@
                             <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span> Create A Company</h4>
                         </div>
                         <div class="modal-body">
-                            @using (Html.BeginForm("CreateCompany","Home"))
+                            @using (Html.BeginForm("CreateCompany", "Home", new { onsubmit = "return validateForm()" }))
                             {
                                 <div class="form-group">
                                     @Html.Label("CompanyName", "Company Name")
-                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", required = "required" })
 
                                     @Html.Label("Country", "Country")
                                     <div>
@@ -52,19 +52,19 @@
                                     </div>
 
                                     @Html.Label("Address", "Address")
-                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", required = "required" })
 
                                     @Html.Label("City", "City")
-                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", required = "required" })
 
                                     @Html.Label("Zip", "Zip")
-                                    @Html.TextBoxFor(m => m.Zip, new { @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", required = "required" })
 
                                     @Html.Label("Phone", "Phone")
-                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", required = "required" })
 
                                     @Html.Label("Fax", "Fax")
-                                    @Html.TextBoxFor(m => m.Fax, new { @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", required = "required" })
 
                                     @{ SelectList companyTypes = ViewBag.CompanyTypes;}
                                     @Html.Label("CompanyType", "Company Type")
@@ -72,7 +72,7 @@
 
                                     <button type="submit" id="btnCreateCompanyAction" class="btn btn-default">Create</button>
                                 </div>
-                            }
+                                        }
                         </div>
                     </div>
                 </div>
@@ -80,6 +80,12 @@
         </div>
     </div>
 
+    <script>
+        function validateForm()
+        {
+            return false;
+        }
+    </script>
 </body>
 
 </html>
