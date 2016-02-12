@@ -27,7 +27,7 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult Index(string fileName, string fileType, int fileSize)
         {
-           
+
             var model = new HomeViewModel { Environment = "DEV" };
             Console.Write(fileName);
             return View();
@@ -43,13 +43,13 @@ namespace AxpCallerRewrite.Controllers
                 var content = reader.ReadToEnd();
 
                 // Deserialzation
-               
+
                 // Taking string of Json, taking out key value maps and binding it to a model we defined
                 try
                 {
                     input = JsonConvert.DeserializeObject<FileInputModel>(content);
                     var test = "";
-                    
+
                 }
                 catch (Exception e)
                 {
@@ -66,8 +66,8 @@ namespace AxpCallerRewrite.Controllers
             // Send Axp Template
             SendTemplate template = new SendTemplate();
             ParseHelper parser = new ParseHelper();
-            var CompanyIDTest  = parser.SplitCompanyIDs(companyIds);
-            
+            var CompanyIDTest = parser.SplitCompanyIDs(companyIds);
+
 
             template.SendAxpTemplate(CompanyIDTest, axpTemplate, environmentLevel);
             var test = "";
@@ -98,7 +98,7 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult AxpRevamp()
         {
-           ViewBag.CompanyTypes = _legacyHelper.GetCompanyData();
+            //ViewBag.CompanyTypes = _legacyHelper.GetCompanyData();
             return View();
         }
 
