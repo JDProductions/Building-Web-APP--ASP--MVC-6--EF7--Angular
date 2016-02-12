@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using AxpCallerRewrite.Concrete;
 using AxpCallerRewrite.Interfaces;
 using Newtonsoft.Json.Bson;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace AxpCallerRewrite.Concrete
 {
@@ -19,10 +20,10 @@ namespace AxpCallerRewrite.Concrete
 
         LegacyRepository repo = new LegacyRepository();
 
-        //I think this should return a List<string>. with the strings being the Company types.
-        public List<string> GetCompanyData()
+        //I think this should return a SelectList to be used in a dropdown
+        public SelectList GetCompanyData()
         {
-            List<string> CompanyTypes = new List<string>();
+            List<SelectListItem> companyTypes = new List<SelectListItem>();
             using (SqlDataReader reader = repo.GetCompanyTypes().ExecuteReader())
             {
                 //a list to keep track of the rows and their values
@@ -52,11 +53,13 @@ namespace AxpCallerRewrite.Concrete
 
                     }
 
-                    //Add the company type to the list. Not sure what column the company type names are in. Assumed it was in column 0
-                    CompanyTypes.Add(rowInfo[0]);
+                    //Add the company type to the list. Assuming type name is in column 1 and list value is column 0
+                    companyTypes.Add(new SelectListItem { Text = rowInfo[1], Value = rowInfo[0] });
                 }
 
-                return CompanyTypes;
+                
+
+                return new SelectList(companyTypes, "Value", "Text");
             }
         }
     }

@@ -6,6 +6,7 @@ using AxpCallerRewrite.Models;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json;
 using System.IO;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace AxpCallerRewrite.Controllers
 {
@@ -97,7 +98,7 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult AxpRevamp()
         {
-           //_legacyHelper.GetCompanyData();
+           ViewBag.CompanyTypes = _legacyHelper.GetCompanyData();
             return View();
         }
 

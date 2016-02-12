@@ -66,14 +66,9 @@
                                     @Html.Label("Fax", "Fax")
                                     @Html.TextBoxFor(m => m.Fax, new { @class = "form-control" })
 
+                                    @{ SelectList companyTypes = ViewBag.CompanyTypes;}
                                     @Html.Label("companyType", "Company Type")
-                                    <div>
-                                        <select id="companyType" class="form-control">
-                                            <option>Load DB1</option>
-                                            <option>Load DB2</option>
-                                            <option>Load DB3</option>
-                                        </select>
-                                    </div>
+                                    @Html.DropDownListFor(m => m.CompanyType, companyTypes)
 
                                     <button type="submit" id="btnCreateCompanyAction" class="btn btn-default">Create</button>
                                 </div>
