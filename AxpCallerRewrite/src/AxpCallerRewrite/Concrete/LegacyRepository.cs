@@ -11,23 +11,23 @@ namespace AxpCallerRewrite.Concrete
             throw new NotImplementedException();
         }
 
-        //not sure if we should use this method to open a connection
-        //public SqlConnection OpenConnection()
+        //I understand why this needs to be used now
+        public SqlConnection OpenConnection()
 
-        //{
-        //    using (SqlConnection connection = new SqlConnection())
-        //    {
-        //        // Connection pool created
-        //       connection.ConnectionString = "Server=[test_server];Database=[dataBASE!@@];Trusted_Connection=true";
-        //        return connection;
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                // Connection pool created
+               connection.ConnectionString = "Server=[test_server];Database=[dataBASE!@@];Trusted_Connection=true";
+                return connection;
 
-        //    }   
+            }   
 
-        //}
+        }
 
         public SqlCommand GetCompanyTypes()
         {
-            using (SqlConnection conn = new SqlConnection("Server=[test_server];Database=[dataBASE!@@];Trusted_Connection=true"))
+            using (SqlConnection conn = OpenConnection())
             {
                 // Connection pool created
                 SqlCommand companyTypes = new SqlCommand("SELECT * FROM TableName", conn);
