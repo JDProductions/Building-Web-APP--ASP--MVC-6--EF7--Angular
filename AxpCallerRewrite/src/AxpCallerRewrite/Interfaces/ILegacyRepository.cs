@@ -6,8 +6,6 @@ namespace AxpCallerRewrite.Interfaces
     {
         SqlCommand GetCompanyTypes();
         void GetOecProducts();
-
-
         void GetActivateFeature();
         void GetDeactivateFeature();
         
