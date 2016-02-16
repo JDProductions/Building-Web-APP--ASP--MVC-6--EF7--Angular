@@ -110,18 +110,7 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult CreateCompany(CompanyModel company)
         {
-            //Convert company to XML string
-            StringWriter writer = new StringWriter();
-            XmlSerializer serializer = new XmlSerializer(company.GetType());
-            serializer.Serialize(writer, company);
-
-            string xmlString = writer.ToString();
-            // Created an instance of SendTemplate 
-            SendTemplate template = new SendTemplate();
-            // Send Create Company Template to Server
-           template.SendAxpTemplate(xmlString, company.EnvironmentLevel);
-           //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
-           // return RedirectToAction("Axprevamp");
+            _legacyHelper.ToXml(company);
             return Json(new { success = true });
         }
     }

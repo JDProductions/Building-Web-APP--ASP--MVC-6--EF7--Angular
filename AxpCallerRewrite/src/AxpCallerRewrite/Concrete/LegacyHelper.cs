@@ -8,6 +8,9 @@ using AxpCallerRewrite.Concrete;
 using AxpCallerRewrite.Interfaces;
 using Newtonsoft.Json.Bson;
 using Microsoft.AspNet.Mvc.Rendering;
+using AxpCallerRewrite.Models;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace AxpCallerRewrite.Concrete
 {
@@ -65,6 +68,22 @@ namespace AxpCallerRewrite.Concrete
 
                 return new SelectList(companyTypes, "Value", "Text");
             }
+        }
+
+        public void ToXml(CompanyModel company)
+        {
+            //Convert company to XML string
+            StringWriter writer = new StringWriter();
+            XmlSerializer serializer = new XmlSerializer(company.GetType());
+            serializer.Serialize(writer, company);
+
+            string xmlString = writer.ToString();
+            // Created an instance of SendTemplate 
+            SendTemplate template = new SendTemplate();
+            // Send Create Company Template to Server
+            template.SendAxpTemplate(xmlString, company.EnvironmentLevel);
+            //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
+            // return RedirectToAction("Axprevamp");
         }
     }
 }
