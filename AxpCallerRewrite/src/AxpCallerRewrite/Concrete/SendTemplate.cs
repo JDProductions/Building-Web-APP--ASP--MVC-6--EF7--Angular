@@ -45,12 +45,29 @@ namespace AxpCallerRewrite.Concrete
 
 
         }
+
+        // This method is purley for sending the template to the specified environment
+       
+        public async void SendAxpTemplate( string template, string environment)
+        {
+
+            var input = new FileInputModel();
+            var responses = new StringBuilder();
+           await CallController(environment, template, responses);
+            var testfdsf = "";
+
+
+
+
+
+        }
         private async Task<string> CallController(string environment, string axpTemplate, StringBuilder r)
         {
             var httpContent = new StringContent(r.ToString(), Encoding.UTF8, "application/xml");
             if (r.Length == 0)
             {
                httpContent = new StringContent(axpTemplate, Encoding.UTF8, "application/xml");
+
             }
             var testdsfs = "";
             

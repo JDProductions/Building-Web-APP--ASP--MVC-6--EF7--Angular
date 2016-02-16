@@ -108,7 +108,7 @@ namespace AxpCallerRewrite.Controllers
             return View();
         }
 
-        public IActionResult CreateCompany(CompanyModel company)
+        public IActionResult CreateCompany(CompanyModel company, EnvironmentModel environment)
         {
             //Convert company to XML string
             StringWriter writer = new StringWriter();
@@ -116,8 +116,13 @@ namespace AxpCallerRewrite.Controllers
             serializer.Serialize(writer, company);
 
             string xmlString = writer.ToString();
-
-            return RedirectToAction("Axprevamp");
+            // Created an instance of SendTemplate 
+            SendTemplate template = new SendTemplate();
+            // Send Create Company Template to Server
+           // template.SendAxpTemplate(xmlString, company.EnvironmentLevel);
+           template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
+           // return RedirectToAction("Axprevamp");
+            return Json(new { success = true });
         }
     }
 }

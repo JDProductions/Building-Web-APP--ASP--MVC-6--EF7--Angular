@@ -30,6 +30,24 @@
                             @using (Html.BeginForm("CreateCompany", "Home", new { onsubmit = "return validateForm()" }))
                             {
                                 <div class="form-group">
+                                    @Html.Label("EnvironmentLevel", "EnvironmentLevel")
+                                    <div>
+                                  @Html.DropDownListFor(model => model.EnvironmentLevel, new SelectList(
+                                      new List<Object>{
+                                           new { value = "Dev" , text = "Dev"  },
+                                           new { value = "QA" , text = "QA" },
+                                           new { value = "Prod" , text = "Prod"}
+                                        },
+                                      "value",
+                                      "text",
+                                       2))
+                                        @*<select id="EnvironmentLevel" class="form-control">
+                                            <option>Dev</option>
+                                            <option>QA</option>
+                                            <option>Prod</option>
+                                        </select>*@
+                                    </div>
+
                                     @Html.Label("CompanyName", "Company Name")
                                     @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", required = "required" })
 
@@ -81,8 +99,7 @@
     </div>
 
     <script>
-        function validateForm()
-        {
+        function validateForm() {
             return false;
         }
     </script>

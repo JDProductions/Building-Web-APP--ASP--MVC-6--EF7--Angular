@@ -23,11 +23,11 @@ namespace AxpCallerRewrite.Concrete
         //I think this should return a SelectList to be used in a dropdown
         public SelectList GetCompanyData()
         {
-<<<<<<< HEAD
+
             // Need access to db
-=======
+
             List<SelectListItem> companyTypes = new List<SelectListItem>();
->>>>>>> refs/remotes/origin/KingWesBranch
+
             using (SqlDataReader reader = repo.GetCompanyTypes().ExecuteReader())
             {
                 //a list to keep track of the rows and their values
