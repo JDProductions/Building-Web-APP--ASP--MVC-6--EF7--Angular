@@ -39,7 +39,7 @@ $(function () {
             success: function (data) {
                 alert('here');
             }
-        }).done(function(data) {
+        }).done(function (data) {
             alert(data);
         });
         return false;
@@ -47,9 +47,13 @@ $(function () {
 });
 
 // Popup Create company Window
-$(document).ready(function(){
-    $("#btnCreateCompany").click(function(){
+$(document).ready(function () {
+    $("#btnCreateCompany").click(function () {
         $("#modalCreateCompany").modal();
+    });
+
+    $("#btnActivateFeature").click(function () {
+        $("#modalActivateFeature").modal()
     });
 });
 

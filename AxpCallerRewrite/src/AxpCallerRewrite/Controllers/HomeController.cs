@@ -110,8 +110,14 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult CreateCompany(CompanyModel company)
         {
-            _legacyHelper.ToXml(company);
-            return Json(new { success = true });
+            _legacyHelper.CreateCompany(company);
+            return RedirectToAction("AxpRevamp");
+        }
+
+        public IActionResult ActivateFeature(FeatureModel feature)
+        {
+            _legacyHelper.ActivateFeature(feature);
+            return RedirectToAction("AxpRevamp");
         }
     }
 }
