@@ -99,6 +99,7 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult AxpRevamp()
         {
+            //  create the list of company types. but since we aren't able to get anything from the database yet i just made it empty.
             ViewBag.CompanyTypes = new SelectList(new List<SelectListItem>(), "", "");//_legacyHelper.GetCompanyData();
             return View();
         }

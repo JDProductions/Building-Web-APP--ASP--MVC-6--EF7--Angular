@@ -82,7 +82,6 @@ namespace AxpCallerRewrite.Concrete
             SendTemplate template = new SendTemplate();
             // Send Create Company Template to Server
             template.SendAxpTemplate(xmlString, company.EnvironmentLevel);
-            //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
             // return RedirectToAction("Axprevamp");
         }
     }
