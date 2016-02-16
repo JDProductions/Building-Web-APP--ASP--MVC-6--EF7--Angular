@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using AxpCallerRewrite.Concrete;
 using AxpCallerRewrite.Interfaces;
 using Newtonsoft.Json.Bson;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace AxpCallerRewrite.Concrete
 {
@@ -19,23 +20,54 @@ namespace AxpCallerRewrite.Concrete
 
         LegacyRepository repo = new LegacyRepository();
 
-        public void GetCompanyData()
+        //I think this should return a SelectList to be used in a dropdown
+        public SelectList GetCompanyData()
         {
+<<<<<<< HEAD
             // Need access to db
+=======
+            List<SelectListItem> companyTypes = new List<SelectListItem>();
+>>>>>>> refs/remotes/origin/KingWesBranch
             using (SqlDataReader reader = repo.GetCompanyTypes().ExecuteReader())
             {
+                //a list to keep track of the rows and their values
+                List<Object> rowList = new List<Object>();
+
                 while (reader.Read())
                 {
-                    // write the data on to the screen
-                    Console.WriteLine(String.Format("{0} \t | {1} \t | {2} \t | {3}",
-                    // call the objects from their index
-                    reader[0], reader[1], reader[2], reader[3]));
+                    //creates an array obect the size of the number of columns
+                    object[] values = new object[reader.FieldCount];
+                    //inserts the column values into the object array for the current row
+                    reader.GetValues(values);
+                    //add the row to the list
+                    rowList.Add(values);
                 }
+
+                foreach (object[] row in rowList)
+                {
+                    // Create a string array large enough to hold all the column values in this array
+                    string[] rowInfo = new string[row.Length];
+                    // Create a column index into the array
+                    int columnIndex = 0;
+                    // Now process each column value
+                    foreach (object column in row)
+                    {
+                        // Convert the value to a string and stick it in the string array
+                        rowInfo[columnIndex++] = Convert.ToString(column);
+
+                    }
+
+                    //Add the company type to the list. Assuming type name is in column 1 and list value is column 0
+                    companyTypes.Add(new SelectListItem { Text = rowInfo[1], Value = rowInfo[0] });
+                }
+
+                
+
+                return new SelectList(companyTypes, "Value", "Text");
             }
         }
     }
-
-    }
+}
 
 
 

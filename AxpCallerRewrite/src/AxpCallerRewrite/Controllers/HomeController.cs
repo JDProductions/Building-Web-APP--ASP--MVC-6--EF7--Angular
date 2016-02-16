@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Xml.Serialization;
+using System;
 using AxpCallerRewrite.Concrete;
 using AxpCallerRewrite.Interfaces;
 using AxpCallerRewrite.Models;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json;
+using System.IO;
+using Microsoft.AspNet.Mvc.Rendering;
+using System.Collections.Generic;
+
 namespace AxpCallerRewrite.Controllers
 {
 
@@ -25,7 +28,7 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult Index(string fileName, string fileType, int fileSize)
         {
-           
+
             var model = new HomeViewModel { Environment = "DEV" };
             Console.Write(fileName);
             return View();
@@ -41,13 +44,13 @@ namespace AxpCallerRewrite.Controllers
                 var content = reader.ReadToEnd();
 
                 // Deserialzation
-               
+
                 // Taking string of Json, taking out key value maps and binding it to a model we defined
                 try
                 {
                     input = JsonConvert.DeserializeObject<FileInputModel>(content);
                     var test = "";
-                    
+
                 }
                 catch (Exception e)
                 {
@@ -64,8 +67,8 @@ namespace AxpCallerRewrite.Controllers
             // Send Axp Template
             SendTemplate template = new SendTemplate();
             ParseHelper parser = new ParseHelper();
-            var CompanyIDTest  = parser.SplitCompanyIDs(companyIds);
-            
+            var CompanyIDTest = parser.SplitCompanyIDs(companyIds);
+
 
             template.SendAxpTemplate(CompanyIDTest, axpTemplate, environmentLevel);
             var test = "";
@@ -96,13 +99,25 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult AxpRevamp()
         {
-           _legacyHelper.GetCompanyData();
+            ViewBag.CompanyTypes = new SelectList(new List<SelectListItem>(), "", "");//_legacyHelper.GetCompanyData();
             return View();
         }
 
         public IActionResult Error()
         {
             return View();
+        }
+
+        public IActionResult CreateCompany(CompanyModel company)
+        {
+            //Convert company to XML string
+            StringWriter writer = new StringWriter();
+            XmlSerializer serializer = new XmlSerializer(company.GetType());
+            serializer.Serialize(writer, company);
+
+            string xmlString = writer.ToString();
+
+            return RedirectToAction("Axprevamp");
         }
     }
 }
