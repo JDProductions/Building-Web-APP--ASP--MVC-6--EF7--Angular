@@ -1,8 +1,15 @@
-﻿namespace AxpCallerRewrite.Interfaces
+﻿using System.Data.SqlClient;
+
+namespace AxpCallerRewrite.Interfaces
 {
     public interface ILegacyRepository
     {
-        void GetCompanyTypes();
+        SqlCommand GetCompanyTypes();
         void GetOecProducts();
+
+
+        void GetActivateFeature();
+        void GetDeactivateFeature();
+        
     }
 }
