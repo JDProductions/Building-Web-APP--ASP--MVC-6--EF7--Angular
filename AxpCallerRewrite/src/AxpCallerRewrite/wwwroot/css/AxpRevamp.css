@@ -3,14 +3,17 @@
 }
 
   .modal-header,  .close {
-      background-color: #5cb85c;
+      /*background-color: #5cb85c;*/
+      background-color: #002942;
       color:white !important;
       text-align: center;
       font-size: 30px;
   }
   .modal-header h4 {
       font-size: 30px;
-      color: white !important;
+      /*color: white !important;*/
+      color: #67d80e !important;
+
   }
   textarea {
       resize: none;
