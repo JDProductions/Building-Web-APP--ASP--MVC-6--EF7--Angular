@@ -79,7 +79,7 @@ namespace AxpCallerRewrite.Concrete
             try
             {
                 xmlDoc.Load(
-                    "C:\\Users\\duboisj\\Desktop\\Projects\\Building - Web - APP--ASP--MVC - 6--EF7--Angular\\AxpCallerRewrite\\src\\AxpCallerRewrite\\Templates\\CreateCompany.xml")
+                    "Templates\\CreateCompany.xml")
                 ;
 
             }
