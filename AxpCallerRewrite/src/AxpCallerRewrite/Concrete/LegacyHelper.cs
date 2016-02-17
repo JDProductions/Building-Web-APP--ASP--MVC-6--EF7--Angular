@@ -81,17 +81,22 @@ namespace AxpCallerRewrite.Concrete
             XmlElement info = (XmlElement)xmlDoc.SelectSingleNode("//CompanyInfo");
             if (info != null)
             {
-                info.SetAttribute("CompanyName", company.CompanyName); // Set to new value.
-                info.SetAttribute("Add1", company.Address); // Set to new value.
-                info.SetAttribute("City", company.City); // Set to new value.
-                info.SetAttribute("State", company.State); // Set to new value.
-                info.SetAttribute("Zip", company.Zip.ToString()); // Set to new value.
-                info.SetAttribute("Phone", company.Phone); // Set to new value.
+                info.SetAttribute("Email", "");
+                info.SetAttribute("StatusID", ""); // Set to new value.
+                info.SetAttribute("Website", "");
                 info.SetAttribute("Fax", company.Fax); // Set to new value.
-                info.SetAttribute("StatusID", company.State); // Set to new value.
+                info.SetAttribute("Extension", ""); // Set to new value.
+                info.SetAttribute("Phone", company.Phone); // Set to new value.
+                info.SetAttribute("Country", company.Country); // Set to new value.
+                info.SetAttribute("Zip", company.Zip.ToString()); // Set to new value.
+                info.SetAttribute("State", company.State); // Set to new value.
+                info.SetAttribute("City", company.City); // Set to new value.
+                info.SetAttribute("Add2", ""); // Set to new value.
+                info.SetAttribute("Add1", company.Address); // Set to new value.
+                info.SetAttribute("CompanyName", company.CompanyName); // Set to new value.
             }
             XmlElement type = (XmlElement)xmlDoc.SelectSingleNode("//CompanyType");
-            if (info != null)
+            if (type != null)
             {
                 type.SetAttribute("Type", company.CompanyType); // Set to new value.
             }
@@ -106,28 +111,57 @@ namespace AxpCallerRewrite.Concrete
             // Send Create Company Template to Server
             template.SendAxpTemplate(xmlString, company.EnvironmentLevel);
             //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
-            // return RedirectToAction("Axprevamp");
         }
 
         public void ActivateFeature(FeatureModel feature)
         {
             //Convert company to XML string
-            StringWriter writer = new StringWriter();
-            XmlSerializer serializer = new XmlSerializer(feature.GetType());
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-            ns.Add("", "");
-            serializer.Serialize(writer, feature);
+            XmlDocument xmlDoc = new XmlDocument();
 
-            string xmlString = writer.ToString();
-            xmlString = "<AXP Version=\"1.0\" OECNTUserName=\"oec\\budzickb\" >\n" +
-                "<System Version=\"1.0\"Name=\"FeatureMgmt\">\n" +
-                                   "<Request Action=\"ModifyFeatures\">/n" +
-                                                    "<Company CompanyID=\"[COMPANYID]\">>" + xmlString +
-                                                    "\n</Company>\n" +
-                                    "</Request>\n" +
-                "</System>\n" +
-                "</AXP>";
+            xmlDoc.Load("Templates\\Feature.xml");
 
+            XmlElement info = (XmlElement)xmlDoc.SelectSingleNode("//Feature");
+            if (info != null)
+            {
+                info.SetAttribute("ProdID", feature.ProdId.ToString());
+                info.SetAttribute("DirtyFlag", feature.DirtyFlag.ToString()); // Set to new value.
+                info.SetAttribute("StatusID", feature.OemId.ToString());
+                info.SetAttribute("FeatureID", feature.FeatureId.ToString()); // Set to new value.
+            }
+
+            StringWriter stringWriter = new StringWriter();
+            XmlTextWriter xmltextWriter = new XmlTextWriter(stringWriter);
+            xmlDoc.WriteTo(xmltextWriter);
+            string xmlString = stringWriter.ToString();
+            // Created an instance of SendTemplate 
+            SendTemplate template = new SendTemplate();
+            // Send Create Company Template to Server
+            template.SendAxpTemplate(xmlString, feature.EnvironmentLevel);
+            //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
+            // return RedirectToAction("Axprevamp");
+        }
+
+        //Need to make this differnt from activate feature somehow
+        public void DeactivateFeature(FeatureModel feature)
+        {
+            //Convert company to XML string
+            XmlDocument xmlDoc = new XmlDocument();
+
+            xmlDoc.Load("Templates\\Feature.xml");
+
+            XmlElement info = (XmlElement)xmlDoc.SelectSingleNode("//Feature");
+            if (info != null)
+            {
+                info.SetAttribute("ProdID", feature.ProdId.ToString());
+                info.SetAttribute("DirtyFlag", feature.DirtyFlag.ToString()); // Set to new value.
+                info.SetAttribute("StatusID", feature.OemId.ToString());
+                info.SetAttribute("FeatureID", feature.FeatureId.ToString()); // Set to new value.
+            }
+
+            StringWriter stringWriter = new StringWriter();
+            XmlTextWriter xmltextWriter = new XmlTextWriter(stringWriter);
+            xmlDoc.WriteTo(xmltextWriter);
+            string xmlString = stringWriter.ToString();
             // Created an instance of SendTemplate 
             SendTemplate template = new SendTemplate();
             // Send Create Company Template to Server

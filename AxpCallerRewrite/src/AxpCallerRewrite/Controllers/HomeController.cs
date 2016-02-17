@@ -119,5 +119,11 @@ namespace AxpCallerRewrite.Controllers
             _legacyHelper.ActivateFeature(feature);
             return RedirectToAction("AxpRevamp");
         }
+
+        public IActionResult DeactivateFeature(FeatureModel feature)
+        {
+            _legacyHelper.DeactivateFeature(feature);
+            return RedirectToAction("AxpRevamp");
+        }
     }
 }

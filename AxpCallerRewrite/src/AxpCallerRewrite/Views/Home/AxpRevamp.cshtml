@@ -30,7 +30,16 @@
             <div class="modal fade" id="modalActivateFeature" role="dialog">
                 <div class="modal-dialog">
                     @* ----- Modal Content ---- *@
-                    @Html.Partial("_Feature")
+                    @Html.Partial("_ActivateFeature")
+                </div>
+            </div>
+
+            <button type="button" id="btnDeactivateFeature" class="btn btn-default">Deactivate Feature</button>
+            @*--- Modal--- *@
+            <div class="modal fade" id="modalDeactivateFeature" role="dialog">
+                <div class="modal-dialog">
+                    @* ----- Modal Content ---- *@
+                    @Html.Partial("_DeactivateFeature")
                 </div>
             </div>
         </div>

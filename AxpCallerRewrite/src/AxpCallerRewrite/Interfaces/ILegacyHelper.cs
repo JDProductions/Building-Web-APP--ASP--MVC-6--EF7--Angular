@@ -12,5 +12,6 @@ namespace AxpCallerRewrite.Interfaces
         SelectList GetCompanyData();
         void CreateCompany(CompanyModel company);
         void ActivateFeature(FeatureModel feature);
+        void DeactivateFeature(FeatureModel feature);
    }
 }

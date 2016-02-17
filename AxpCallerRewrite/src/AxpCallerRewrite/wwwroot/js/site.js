@@ -55,6 +55,10 @@ $(document).ready(function () {
     $("#btnActivateFeature").click(function () {
         $("#modalActivateFeature").modal()
     });
+
+    $("#btnDeactivateFeature").click(function () {
+        $("#modalDeactivateFeature").modal()
+    });
 });
 
 
