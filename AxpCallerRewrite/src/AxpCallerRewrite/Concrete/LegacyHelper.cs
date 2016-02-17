@@ -76,8 +76,16 @@ namespace AxpCallerRewrite.Concrete
             //Convert company to XML string
             XmlDocument xmlDoc = new XmlDocument();
 
-            xmlDoc.Load("C:\\Users\\kingw\\Desktop\\Building-Web-APP--ASP--MVC-6--EF7--Angular\\AxpCallerRewrite\\src\\AxpCallerRewrite\\Templates\\CreateCompany.xml");
-
+            try
+            {
+                xmlDoc.Load(
+                    "C:\\Users\\kingw\\Desktop\\Building-Web-APP--ASP--MVC-6--EF7--Angular\\AxpCallerRewrite\\src\\AxpCallerRewrite\\Templates\\CreateCompany.xml");
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+                
+            }
             XmlElement info = (XmlElement)xmlDoc.SelectSingleNode("//CompanyInfo");
             if (info != null)
             {
@@ -130,13 +138,10 @@ namespace AxpCallerRewrite.Concrete
 
             // Created an instance of SendTemplate 
             SendTemplate template = new SendTemplate();
-            // Send Create Company Template to Server
-<<<<<<< HEAD
-            template.SendAxpTemplate(xmlString, company.EnvironmentLevel);
-=======
+
+
             template.SendAxpTemplate(xmlString, feature.EnvironmentLevel);
             //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
->>>>>>> refs/remotes/origin/master
             // return RedirectToAction("Axprevamp");
         }
     }
