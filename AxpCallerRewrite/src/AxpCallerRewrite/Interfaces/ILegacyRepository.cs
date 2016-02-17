@@ -8,6 +8,5 @@ namespace AxpCallerRewrite.Interfaces
         void GetOecProducts();
         void GetActivateFeature();
         void GetDeactivateFeature();
-        
     }
 }

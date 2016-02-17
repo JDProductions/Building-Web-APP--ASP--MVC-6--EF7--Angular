@@ -1,0 +1,12 @@
+﻿<AXP Version="1.0" OECNTUserName="UESRegistration">
+                <System Version="1.0" Name="CompanyMgmt">
+                                <Request Action="CreateCompany">
+                                                <Company>
+                                                                <CompanyInfo CompanyName="" Add1="" Add2="" City="" State="" Zip="" CountryCode="" Phone="" Extension="" Fax="" Website="" StatusID="" Email=""/>
+                                                                <CompanyTypes>
+                                                                                <CompanyType Type=""/>
+                                                                </CompanyTypes>
+                                                </Company>
+                                </Request>
+                </System>
+</AXP>

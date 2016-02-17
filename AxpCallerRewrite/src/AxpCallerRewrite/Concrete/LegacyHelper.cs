@@ -8,6 +8,10 @@ using AxpCallerRewrite.Concrete;
 using AxpCallerRewrite.Interfaces;
 using Newtonsoft.Json.Bson;
 using Microsoft.AspNet.Mvc.Rendering;
+using AxpCallerRewrite.Models;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace AxpCallerRewrite.Concrete
 {
@@ -65,6 +69,71 @@ namespace AxpCallerRewrite.Concrete
 
                 return new SelectList(companyTypes, "Value", "Text");
             }
+        }
+
+        public void CreateCompany(CompanyModel company)
+        {
+            //Convert company to XML string
+            XmlDocument xmlDoc = new XmlDocument();
+
+            xmlDoc.Load("C:\\Users\\kingw\\Desktop\\Building-Web-APP--ASP--MVC-6--EF7--Angular\\AxpCallerRewrite\\src\\AxpCallerRewrite\\Templates\\CreateCompany.xml");
+
+            XmlElement info = (XmlElement)xmlDoc.SelectSingleNode("//CompanyInfo");
+            if (info != null)
+            {
+                info.SetAttribute("CompanyName", company.CompanyName); // Set to new value.
+                info.SetAttribute("Add1", company.Address); // Set to new value.
+                info.SetAttribute("City", company.City); // Set to new value.
+                info.SetAttribute("State", company.State); // Set to new value.
+                info.SetAttribute("Zip", company.Zip.ToString()); // Set to new value.
+                info.SetAttribute("Phone", company.Phone); // Set to new value.
+                info.SetAttribute("Fax", company.Fax); // Set to new value.
+                info.SetAttribute("StatusID", company.State); // Set to new value.
+            }
+            XmlElement type = (XmlElement)xmlDoc.SelectSingleNode("//CompanyType");
+            if (info != null)
+            {
+                type.SetAttribute("Type", company.CompanyType); // Set to new value.
+            }
+
+            StringWriter stringWriter = new StringWriter();
+            XmlTextWriter xmltextWriter = new XmlTextWriter(stringWriter);
+            xmlDoc.WriteTo(xmltextWriter);
+            string xmlString = stringWriter.ToString();
+
+            // Created an instance of SendTemplate 
+            SendTemplate template = new SendTemplate();
+            // Send Create Company Template to Server
+            template.SendAxpTemplate(xmlString, company.EnvironmentLevel);
+            //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
+            // return RedirectToAction("Axprevamp");
+        }
+
+        public void ActivateFeature(FeatureModel feature)
+        {
+            //Convert company to XML string
+            StringWriter writer = new StringWriter();
+            XmlSerializer serializer = new XmlSerializer(feature.GetType());
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("", "");
+            serializer.Serialize(writer, feature);
+
+            string xmlString = writer.ToString();
+            xmlString = "<AXP Version=\"1.0\" OECNTUserName=\"oec\\budzickb\" >\n" +
+                "<System Version=\"1.0\"Name=\"FeatureMgmt\">\n" +
+                                   "<Request Action=\"ModifyFeatures\">/n" +
+                                                    "<Company CompanyID=\"[COMPANYID]\">>" + xmlString +
+                                                    "\n</Company>\n" +
+                                    "</Request>\n" +
+                "</System>\n" +
+                "</AXP>";
+
+            // Created an instance of SendTemplate 
+            SendTemplate template = new SendTemplate();
+            // Send Create Company Template to Server
+            template.SendAxpTemplate(xmlString, feature.EnvironmentLevel);
+            //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
+            // return RedirectToAction("Axprevamp");
         }
     }
 }
