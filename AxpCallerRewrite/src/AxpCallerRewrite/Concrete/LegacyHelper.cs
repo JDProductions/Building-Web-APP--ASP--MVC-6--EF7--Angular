@@ -76,7 +76,7 @@ namespace AxpCallerRewrite.Concrete
             //Convert company to XML string
             XmlDocument xmlDoc = new XmlDocument();
 
-            xmlDoc.Load("C:\\Users\\kingw\\Desktop\\Building-Web-APP--ASP--MVC-6--EF7--Angular\\AxpCallerRewrite\\src\\AxpCallerRewrite\\Templates\\CreateCompany.xml");
+            xmlDoc.Load("Templates\\CreateCompany.xml");
 
             XmlElement info = (XmlElement)xmlDoc.SelectSingleNode("//CompanyInfo");
             if (info != null)
