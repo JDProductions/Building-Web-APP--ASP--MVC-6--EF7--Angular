@@ -10,6 +10,7 @@ namespace AxpCallerRewrite.Interfaces
    public  interface ILegacyHelper
    {
         SelectList GetCompanyData();
+        SelectList GetStates();
         void CreateCompany(CompanyModel company);
         void ActivateFeature(FeatureModel feature);
         void DeactivateFeature(FeatureModel feature);

@@ -2,7 +2,7 @@
                 <System Version="1.0" Name="CompanyMgmt">
                                 <Request Action="CreateCompany">
                                                 <Company>
-                                                                <CompanyInfo CompanyName="" Add1="" Add2="" City="" State="" Zip="" CountryCode="" Phone="" Extension="" Fax="" Website="" StatusID="" Email=""/>
+                                                                <CompanyInfo CompanyName="" Add1="" Add2="" City="" State="" Zip="" CountryCode="" Phone="" Extension="" Fax="" Website="" StatusID="1" Email=""/>
                                                                 <CompanyTypes>
                                                                                 <CompanyType Type=""/>
                                                                 </CompanyTypes>

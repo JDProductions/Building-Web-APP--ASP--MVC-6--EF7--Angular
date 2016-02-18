@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Data.SqlClient;
 using AxpCallerRewrite.Interfaces;
+using Dapper;
+using Microsoft.AspNet.Mvc.Rendering;
+using System.Collections.Generic;
+using System.Linq;
+using AxpCallerRewrite.Models;
 
 namespace AxpCallerRewrite.Concrete
 {
@@ -11,27 +16,24 @@ namespace AxpCallerRewrite.Concrete
             throw new NotImplementedException();
         }
 
-        //I understand why this needs to be used now
         public SqlConnection OpenConnection()
         {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                // Connection pool created
-                connection.ConnectionString = "Server=[test_server];Database=[dataBASE!@@];Trusted_Connection=true";
-                return connection;
-
-            }
-
+                return new SqlConnection("Server=sdvdb1\\oec;Database=OECMain;Trusted_Connection=true");
         }
 
-        public SqlCommand GetCompanyTypes()
+        public IEnumerable<CompanyType> GetCompanyTypes()
         {
             using (SqlConnection conn = OpenConnection())
             {
-                // Connection pool created
-                SqlCommand companyTypes = new SqlCommand("SELECT * FROM TableName", conn);
-                conn.Open();
-                return companyTypes;
+                return conn.Query<CompanyType>("SELECT CompanyTypeID, CompanyTypeDesc FROM oecmain..CompanyTypeMaster");
+            }
+        }
+
+        public IEnumerable<State> GetStates()
+        {
+            using (SqlConnection conn = OpenConnection())
+            {
+                return conn.Query<State>("SELECT StateAbbr, StateName FROM OECGeoData..USStates_vw");
             }
         }
 

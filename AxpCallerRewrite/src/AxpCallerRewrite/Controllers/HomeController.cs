@@ -99,7 +99,18 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult AxpRevamp()
         {
-            ViewBag.CompanyTypes = new SelectList(new List<SelectListItem>(), "", "");//_legacyHelper.GetCompanyData();
+
+            ViewBag.States = _legacyHelper.GetStates();
+
+            ViewBag.Countries = new SelectList(
+                new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "United States", Value = "US" },
+                    new SelectListItem { Text = "Canada", Value = "CA" },
+                    new SelectListItem { Text = "Mexico", Value = "MX" }
+                }, "Value", "Text");
+
+            ViewBag.CompanyTypes =_legacyHelper.GetCompanyData();
             return View();
         }
 

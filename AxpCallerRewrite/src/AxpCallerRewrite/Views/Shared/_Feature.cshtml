@@ -1,0 +1,28 @@
+﻿@model AxpCallerRewrite.Models.FeatureModel
+
+@Html.Label("EnvironmentLevel", "Environment Level")
+@Html.DropDownListFor(m => m.EnvironmentLevel, new SelectList(
+                                      new List<Object>{
+                                           new { value = "Dev" , text = "Dev"  },
+                                           new { value = "QA" , text = "QA" },
+                                           new { value = "Prod" , text = "Prod"}
+                                        },
+                                      "value",
+                                      "text",
+                                       2), new { @class = "form-control", required = "required" })
+
+
+@Html.Label("FeatureId", "Feature ID")
+@Html.TextBoxFor(m => m.FeatureId, new { @class = "form-control", required = "required", type = "number" })
+
+@Html.Label("OemId", "OEM ID")
+@Html.TextBoxFor(m => m.OemId, new { @class = "form-control", required = "required", type = "number" })
+
+@Html.Label("StatusId", "Status ID")
+@Html.TextBoxFor(m => m.StatusId, new { @class = "form-control", required = "required", type = "number" })
+
+@Html.Label("DirtyFlag", "Dirty Flag")
+@Html.TextBoxFor(m => m.DirtyFlag, new { @class = "form-control", required = "required", type = "number" })
+
+@Html.Label("ProdId", "Product ID")
+@Html.TextBoxFor(m => m.ProdId, new { @class = "form-control", required = "required", type = "number" })

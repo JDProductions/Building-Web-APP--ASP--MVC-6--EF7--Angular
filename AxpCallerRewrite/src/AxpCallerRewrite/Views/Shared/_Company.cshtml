@@ -1,7 +1,4 @@
 ﻿@model AxpCallerRewrite.Models.CompanyModel
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
 
 <div class="modal-content">
     <div class="modal-header">
@@ -12,9 +9,8 @@
         @using (Html.BeginForm("CreateCompany", "Home"))
         {
             <div class="form-group">
-                @Html.Label("EnvironmentLevel", "EnvironmentLevel", new { onsubmit = "return validateForm()" })
-                <div>
-                    @Html.DropDownListFor(model => model.EnvironmentLevel, new SelectList(
+                @Html.Label("EnvironmentLevel", "Environment Level")
+                @Html.DropDownListFor(m => m.EnvironmentLevel, new SelectList(
                                       new List<Object>{
                                            new { value = "Dev" , text = "Dev"  },
                                            new { value = "QA" , text = "QA" },
@@ -23,48 +19,37 @@
                                       "value",
                                       "text",
                                        2), new { @class = "form-control", required = "required" })
-                    @*<select id="EnvironmentLevel" class="form-control">
-                            <option>Dev</option>
-                            <option>QA</option>
-                            <option>Prod</option>
-                        </select>*@
-                </div>
 
                 @Html.Label("CompanyName", "Company Name")
                 @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", required = "required" })
 
+                @{ SelectList Countries = ViewBag.Countries;}
                 @Html.Label("Country", "Country")
-                <div>
-                    <select id="Country" class="form-control">
-                        <option>US</option>
-                        <option>Canada</option>
-                        <option>Mexico</option>
-                    </select>
-                </div>
+                @Html.DropDownListFor(m => m.Country, Countries, new { @class = "form-control" })
 
+                @{ SelectList states = ViewBag.States;}
                 @Html.Label("companyState", "Company State")
-                <div>
-                    <select id="companyState" class="form-control">
-                        <option>LoadState 1</option>
-                        <option>Load State 2</option>
-                        <option>Load State 3</option>
-                    </select>
-                </div>
+                @Html.DropDownListFor(m => m.State, states, new { @class = "form-control", required = "required" })
 
-                @Html.Label("Address", "Address")
-                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", required = "required" })
+                @Html.Label("Address1", "Address Line 1")
+                @Html.TextBoxFor(m => m.Address1, new { @class = "form-control", required = "required" })
+
+                @Html.Label("Address2", "Address Line 2")
+                @Html.TextBoxFor(m => m.Address2, new { @class = "form-control" })
 
                 @Html.Label("City", "City")
-                @Html.TextBoxFor(m => m.City, new { @class = "form-control", required = "required" })
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control", required = "required", pattern = "^[a-zA-Z]+(?:[\\s-][a-zA-Z]+)*$" })
 
                 @Html.Label("Zip", "Zip Code")
                 @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", required = "required", pattern = "^\\d{5}(?:[-\\s]\\d{4})?$" })
 
+                @Html.Label("Email", "Email")
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required", type = "email"})
                 @Html.Label("Phone", "Phone Number")
-                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", required = "required", type = "tel", pattern= "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$" })
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", required = "required", type = "tel", pattern = "^\\d{10}$", placeholder ="Ex: 1234567890" })
 
-                @Html.Label("Fax", "Fax")
-                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", required = "required" })
+                @Html.Label("Fax", "Fax Number")
+                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", pattern = "^\\d{10}$", placeholder = "Ex: 1234567890" })
 
                 @{ SelectList companyTypes = ViewBag.CompanyTypes;}
                 @Html.Label("CompanyType", "Company Type")
@@ -75,10 +60,3 @@
                     }
     </div>
 </div>
-
-<script>
-    function validateForm() {
-
-
-    }
-</script>
