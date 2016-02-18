@@ -110,7 +110,14 @@ namespace AxpCallerRewrite.Controllers
                     new SelectListItem { Text = "Mexico", Value = "MX" }
                 }, "Value", "Text");
 
-            ViewBag.CompanyTypes =_legacyHelper.GetCompanyData();
+            ViewBag.Environment = new SelectList(
+                new List<SelectListItem>{
+                    new SelectListItem { Value = "Dev" , Text = "Dev"  },
+                    new SelectListItem { Value = "QA" , Text = "QA" },
+                    new SelectListItem { Value = "Prod" , Text = "Prod"}
+                }, "Value", "Text");
+
+            ViewBag.CompanyTypes = _legacyHelper.GetCompanyData();
             return View();
         }
 

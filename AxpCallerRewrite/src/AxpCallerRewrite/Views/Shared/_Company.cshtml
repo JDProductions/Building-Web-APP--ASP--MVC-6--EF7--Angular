@@ -9,16 +9,9 @@
         @using (Html.BeginForm("CreateCompany", "Home"))
         {
             <div class="form-group">
+                @{ SelectList environments = ViewBag.Environment;}
                 @Html.Label("EnvironmentLevel", "Environment Level")
-                @Html.DropDownListFor(m => m.EnvironmentLevel, new SelectList(
-                                      new List<Object>{
-                                           new { value = "Dev" , text = "Dev"  },
-                                           new { value = "QA" , text = "QA" },
-                                           new { value = "Prod" , text = "Prod"}
-                                        },
-                                      "value",
-                                      "text",
-                                       2), new { @class = "form-control", required = "required" })
+                @Html.DropDownListFor(m => m.EnvironmentLevel, environments, new { @class = "form-control", required = "required" })
 
                 @Html.Label("CompanyName", "Company Name")
                 @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", required = "required" })
@@ -46,10 +39,10 @@
                 @Html.Label("Email", "Email")
                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required", type = "email"})
                 @Html.Label("Phone", "Phone Number")
-                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", required = "required", type = "tel", pattern = "^\\d{10}$", placeholder ="Ex: 1234567890" })
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", required = "required", type = "tel", pattern = "^\\d{10}$", placeholder ="E.g. 1234567890" })
 
                 @Html.Label("Fax", "Fax Number")
-                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", pattern = "^\\d{10}$", placeholder = "Ex: 1234567890" })
+                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", pattern = "^\\d{10}$", placeholder = "E.g. 1234567890" })
 
                 @{ SelectList companyTypes = ViewBag.CompanyTypes;}
                 @Html.Label("CompanyType", "Company Type")
