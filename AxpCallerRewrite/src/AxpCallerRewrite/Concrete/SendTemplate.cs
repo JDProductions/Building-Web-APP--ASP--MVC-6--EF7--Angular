@@ -32,13 +32,10 @@ namespace AxpCallerRewrite.Concrete
                 
                 // send the template with new data to post????
                 Console.Write(responses);
-                var test = "";
                 await CallController(environment,template, responses);
-                var test2 = "";
                 
             }
                 await CallController(environment, template, responses);
-            var testfdsf = "";
 
 
 
@@ -54,7 +51,6 @@ namespace AxpCallerRewrite.Concrete
             var input = new FileInputModel();
             var responses = new StringBuilder();
            await CallController(environment, template, responses);
-            var testfdsf = "";
 
 
 
@@ -69,7 +65,6 @@ namespace AxpCallerRewrite.Concrete
                httpContent = new StringContent(axpTemplate, Encoding.UTF8, "application/xml");
 
             }
-            var testdsfs = "";
             
             
 
@@ -97,7 +92,6 @@ namespace AxpCallerRewrite.Concrete
                                        var messageContents = await httpResponseMessage.Content.ReadAsStringAsync();
                                 Console.WriteLine(messageContents);
                                 Console.Write(httpResponseMessage.IsSuccessStatusCode);
-                                       var testing = "";
                                    }
 
                                }
@@ -105,7 +99,6 @@ namespace AxpCallerRewrite.Concrete
                                {
                                    Console.Write(e.Message);
                                }
-                               var test1 = "";
 
                         break;
 

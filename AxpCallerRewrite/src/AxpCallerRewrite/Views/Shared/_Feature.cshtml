@@ -1,28 +1,20 @@
 ﻿@model AxpCallerRewrite.Models.FeatureModel
 
+@{ SelectList Environments = ViewBag.Environments;}
 @Html.Label("EnvironmentLevel", "Environment Level")
-@Html.DropDownListFor(m => m.EnvironmentLevel, new SelectList(
-                                      new List<Object>{
-                                           new { value = "Dev" , text = "Dev"  },
-                                           new { value = "QA" , text = "QA" },
-                                           new { value = "Prod" , text = "Prod"}
-                                        },
-                                      "value",
-                                      "text",
-                                       2), new { @class = "form-control", required = "required" })
+@Html.DropDownListFor(m => m.EnvironmentLevel, Environments, new { @class = "form-control" })
 
+@Html.Label("CompanyIds", "Company IDs")
+@Html.TextBoxFor(m => m.CompanyIds, new { @class = "form-control", required = "required", pattern = "^([0-9a-zA-Z]{3}[-]){2}[0-9a-zA-Z]{3}([\n;,]([0-9a-zA-Z]{3}[-]){2}[0-9a-zA-Z]{3})*$" })
 
-@Html.Label("FeatureId", "Feature ID")
-@Html.TextBoxFor(m => m.FeatureId, new { @class = "form-control", required = "required", type = "number" })
+@{ SelectList Features = ViewBag.Features;}
+@Html.Label("FeatureId", "Feature")
+@Html.DropDownListFor(m => m.FeatureId, Features, new { @class = "form-control" })
 
-@Html.Label("OemId", "OEM ID")
-@Html.TextBoxFor(m => m.OemId, new { @class = "form-control", required = "required", type = "number" })
+@{ SelectList OEMs = ViewBag.OEMs;}
+@Html.Label("OemId", "OEM")
+@Html.DropDownListFor(m => m.OemId, OEMs, new { @class = "form-control" })
 
-@Html.Label("StatusId", "Status ID")
-@Html.TextBoxFor(m => m.StatusId, new { @class = "form-control", required = "required", type = "number" })
-
-@Html.Label("DirtyFlag", "Dirty Flag")
-@Html.TextBoxFor(m => m.DirtyFlag, new { @class = "form-control", required = "required", type = "number" })
-
-@Html.Label("ProdId", "Product ID")
-@Html.TextBoxFor(m => m.ProdId, new { @class = "form-control", required = "required", type = "number" })
+@{ SelectList Products = ViewBag.Products;}
+@Html.Label("ProdId", "Product")
+@Html.DropDownListFor(m => m.ProdId, Products, new { @class = "form-control"})

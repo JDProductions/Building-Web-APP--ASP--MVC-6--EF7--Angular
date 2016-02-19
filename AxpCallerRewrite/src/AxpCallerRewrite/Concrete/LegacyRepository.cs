@@ -6,6 +6,7 @@ using Microsoft.AspNet.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
 using AxpCallerRewrite.Models;
+using AxpCallerRewrite.Models.Database_Models;
 
 namespace AxpCallerRewrite.Concrete
 {
@@ -34,6 +35,30 @@ namespace AxpCallerRewrite.Concrete
             using (SqlConnection conn = OpenConnection())
             {
                 return conn.Query<State>("SELECT StateAbbr, StateName FROM OECGeoData..USStates_vw");
+            }
+        }
+
+        public IEnumerable<OEM> GetOEMs()
+        {
+            using (SqlConnection conn = OpenConnection())
+            {
+                return conn.Query<OEM>("SELECT OEMLongName, OEMID FROM oecmain..OEMMaster");
+            }
+        }
+
+        public IEnumerable<Product> GetProducts()
+        {
+            using (SqlConnection conn = OpenConnection())
+            {
+                return conn.Query<Product>("SELECT ProdID, DisplayName FROM oecmain..oecproducts");
+            }
+        }
+
+        public IEnumerable<Feature> GetFeatures()
+        {
+            using (SqlConnection conn = OpenConnection())
+            {
+                return conn.Query<Feature>("SELECT FeatureID, FeatureName FROM oecmain..oecfeatures");
             }
         }
 

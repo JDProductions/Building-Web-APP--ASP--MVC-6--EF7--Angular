@@ -49,7 +49,6 @@ namespace AxpCallerRewrite.Controllers
                 try
                 {
                     input = JsonConvert.DeserializeObject<FileInputModel>(content);
-                    var test = "";
 
                 }
                 catch (Exception e)
@@ -71,7 +70,6 @@ namespace AxpCallerRewrite.Controllers
 
 
             template.SendAxpTemplate(CompanyIDTest, axpTemplate, environmentLevel);
-            var test = "";
             return Json(new { success = true });
         }
 
@@ -110,7 +108,7 @@ namespace AxpCallerRewrite.Controllers
                     new SelectListItem { Text = "Mexico", Value = "MX" }
                 }, "Value", "Text");
 
-            ViewBag.Environment = new SelectList(
+            ViewBag.Environments = new SelectList(
                 new List<SelectListItem>{
                     new SelectListItem { Value = "Dev" , Text = "Dev"  },
                     new SelectListItem { Value = "QA" , Text = "QA" },
@@ -118,6 +116,13 @@ namespace AxpCallerRewrite.Controllers
                 }, "Value", "Text");
 
             ViewBag.CompanyTypes = _legacyHelper.GetCompanyData();
+
+            ViewBag.OEMs = _legacyHelper.GetOEMs();
+
+            ViewBag.Products = _legacyHelper.GetProducts();
+
+            ViewBag.Features = _legacyHelper.GetFeatures();
+
             return View();
         }
 

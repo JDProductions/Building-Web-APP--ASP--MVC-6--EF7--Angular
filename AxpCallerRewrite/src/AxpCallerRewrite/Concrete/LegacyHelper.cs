@@ -12,6 +12,7 @@ using AxpCallerRewrite.Models;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
+using AxpCallerRewrite.Models.Database_Models;
 
 namespace AxpCallerRewrite.Concrete
 {
@@ -51,6 +52,48 @@ namespace AxpCallerRewrite.Concrete
             }
 
             return new SelectList(itemsList,"Value", "Text");
+        }
+
+        public SelectList GetOEMs()
+        {
+            List<OEM> oemList = repo.GetOEMs().ToList();
+
+            List<SelectListItem> itemsList = new List<SelectListItem>();
+
+            foreach (OEM item in oemList)
+            {
+                itemsList.Add(new SelectListItem { Value = item.OEMID.ToString(), Text = item.OEMLongName });
+            }
+
+            return new SelectList(itemsList, "Value", "Text");
+        }
+
+        public SelectList GetProducts()
+        {
+            List<Product> productList = repo.GetProducts().ToList();
+
+            List<SelectListItem> itemsList = new List<SelectListItem>();
+
+            foreach (Product item in productList)
+            {
+                itemsList.Add(new SelectListItem { Value = item.ProdID.ToString(), Text = item.DisplayName });
+            }
+
+            return new SelectList(itemsList, "Value", "Text");
+        }
+
+        public SelectList GetFeatures()
+        {
+            List<Feature> featureList = repo.GetFeatures().ToList();
+
+            List<SelectListItem> itemsList = new List<SelectListItem>();
+
+            foreach (Feature item in featureList)
+            {
+                itemsList.Add(new SelectListItem { Value = item.FeatureID.ToString(), Text = item.FeatureName });
+            }
+
+            return new SelectList(itemsList, "Value", "Text");
         }
 
         public void CreateCompany(CompanyModel company)
@@ -98,42 +141,63 @@ namespace AxpCallerRewrite.Concrete
         {
             // Created an instance of SendTemplate 
             SendTemplate template = new SendTemplate();
-            // Send Create Company Template to Server
-            template.SendAxpTemplate(CreateFeature(feature, true), feature.EnvironmentLevel);
-            //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
+
+            string[] ids = SplitCompanyIds(feature.CompanyIds);
+            foreach (string id in ids)
+            {
+                // Send Create Company Template to Server
+                template.SendAxpTemplate(CreateFeatureXML(feature, id, true), feature.EnvironmentLevel);
+                //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
+            }
         }
 
-        //Need to make this differnt from activate feature somehow
         public void DeactivateFeature(FeatureModel feature)
         {
             // Created an instance of SendTemplate 
             SendTemplate template = new SendTemplate();
-            // Send Create Company Template to Server
-            template.SendAxpTemplate(CreateFeature(feature, false), feature.EnvironmentLevel);
-            //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
+
+            string[] ids = SplitCompanyIds(feature.CompanyIds);
+            foreach (string id in ids)
+            {
+                // Send Create Company Template to Server
+                template.SendAxpTemplate(CreateFeatureXML(feature, id, false), feature.EnvironmentLevel);
+                //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
+            }
         }
 
-        private string CreateFeature(FeatureModel feature, bool activate)
+        private string CreateFeatureXML(FeatureModel feature, string id, bool activate)
         {
             //Insert Feature into Featrue template
             XmlDocument xmlDoc = new XmlDocument();
 
             xmlDoc.Load("Templates\\Feature.xml");
 
-            XmlElement info = (XmlElement)xmlDoc.SelectSingleNode("//Feature");
-            if (info != null)
+            XmlElement company = (XmlElement)xmlDoc.SelectSingleNode("//Company");
+            if (company != null)
             {
-                info.SetAttribute("StatusID", Convert.ToInt32(activate).ToString());
-                info.SetAttribute("ProdID", feature.ProdId.ToString());
-                info.SetAttribute("DirtyFlag", feature.DirtyFlag.ToString());
-                info.SetAttribute("StatusID", feature.OemId.ToString());
-                info.SetAttribute("FeatureID", feature.FeatureId.ToString());
+                company.SetAttribute("CompanyID", id);
+            }
+
+            XmlElement featureNode = (XmlElement)xmlDoc.SelectSingleNode("//Feature");
+            if (featureNode != null)
+            {
+                featureNode.SetAttribute("StatusID", Convert.ToInt32(activate).ToString());
+                featureNode.SetAttribute("ProdID", feature.ProdId.ToString());
+                featureNode.SetAttribute("StatusID", feature.OemId.ToString());
+                featureNode.SetAttribute("FeatureID", feature.FeatureId.ToString());
             }
 
             StringWriter stringWriter = new StringWriter();
             XmlTextWriter xmltextWriter = new XmlTextWriter(stringWriter);
             xmlDoc.WriteTo(xmltextWriter);
             return stringWriter.ToString();
+        }
+
+        private string[] SplitCompanyIds(string ids)
+        {
+            char[] splitters = { ',', ';', '\n' };
+
+            return ids.Split(splitters);
         }
     }
 }

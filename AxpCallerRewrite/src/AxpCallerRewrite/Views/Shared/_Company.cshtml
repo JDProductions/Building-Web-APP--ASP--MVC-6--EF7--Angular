@@ -9,7 +9,7 @@
         @using (Html.BeginForm("CreateCompany", "Home"))
         {
             <div class="form-group">
-                @{ SelectList environments = ViewBag.Environment;}
+                @{ SelectList environments = ViewBag.Environments;}
                 @Html.Label("EnvironmentLevel", "Environment Level")
                 @Html.DropDownListFor(m => m.EnvironmentLevel, environments, new { @class = "form-control", required = "required" })
 
@@ -21,7 +21,7 @@
                 @Html.DropDownListFor(m => m.Country, Countries, new { @class = "form-control" })
 
                 @{ SelectList states = ViewBag.States;}
-                @Html.Label("companyState", "Company State")
+                @Html.Label("State", "Company State")
                 @Html.DropDownListFor(m => m.State, states, new { @class = "form-control", required = "required" })
 
                 @Html.Label("Address1", "Address Line 1")

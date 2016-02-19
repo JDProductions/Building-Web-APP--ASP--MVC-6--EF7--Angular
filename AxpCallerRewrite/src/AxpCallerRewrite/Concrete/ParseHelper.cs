@@ -26,7 +26,6 @@ namespace AxpCallerRewrite.Concrete
                 else
                 {
                     CompanyIDList = value.Split(',').ToList();
-                    var test = "";
                 }
 
                 foreach (var item in CompanyIDList)

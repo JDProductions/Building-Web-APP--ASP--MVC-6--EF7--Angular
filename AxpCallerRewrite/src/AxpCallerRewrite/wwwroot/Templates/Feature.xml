@@ -2,7 +2,7 @@
   <System Version="1.0" Name="FeatureMgmt">
     <Request Action="ModifyFeatures">
       <Company CompanyID="[COMPANYID]">
-        <Feature FeatureID="" OEMID="" StatusID="" DirtyFlag="" ProdID=""/>
+        <Feature FeatureID="" OEMID="" StatusID="" DirtyFlag="1" ProdID=""/>
       </Company>
     </Request>
   </System>
