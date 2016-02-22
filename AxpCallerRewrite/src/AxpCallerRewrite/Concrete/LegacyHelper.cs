@@ -24,6 +24,7 @@ namespace AxpCallerRewrite.Concrete
         // Create a new SQLReader object and read data from the command
 
         LegacyRepository repo = new LegacyRepository();
+        char[] splitters = { ',', ';', '\n' };
 
         public SelectList GetCompanyData()
         {
@@ -142,7 +143,7 @@ namespace AxpCallerRewrite.Concrete
             // Created an instance of SendTemplate 
             SendTemplate template = new SendTemplate();
 
-            string[] ids = SplitCompanyIds(feature.CompanyIds);
+            string[] ids = feature.CompanyIds.Split(splitters);
             foreach (string id in ids)
             {
                 // Send Create Company Template to Server
@@ -156,7 +157,7 @@ namespace AxpCallerRewrite.Concrete
             // Created an instance of SendTemplate 
             SendTemplate template = new SendTemplate();
 
-            string[] ids = SplitCompanyIds(feature.CompanyIds);
+            string[] ids = feature.CompanyIds.Split(splitters);
             foreach (string id in ids)
             {
                 // Send Create Company Template to Server
@@ -183,7 +184,7 @@ namespace AxpCallerRewrite.Concrete
             {
                 featureNode.SetAttribute("StatusID", Convert.ToInt32(activate).ToString());
                 featureNode.SetAttribute("ProdID", feature.ProdId.ToString());
-                featureNode.SetAttribute("StatusID", feature.OemId.ToString());
+                featureNode.SetAttribute("OEMID", feature.OemId.ToString());
                 featureNode.SetAttribute("FeatureID", feature.FeatureId.ToString());
             }
 
@@ -191,13 +192,6 @@ namespace AxpCallerRewrite.Concrete
             XmlTextWriter xmltextWriter = new XmlTextWriter(stringWriter);
             xmlDoc.WriteTo(xmltextWriter);
             return stringWriter.ToString();
-        }
-
-        private string[] SplitCompanyIds(string ids)
-        {
-            char[] splitters = { ',', ';', '\n' };
-
-            return ids.Split(splitters);
         }
     }
 }

@@ -6,15 +6,17 @@
         <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span> Create A Company</h4>
     </div>
     <div class="modal-body">
-        @using (Html.BeginForm("CreateCompany", "Home"))
+
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "company" }))
         {
+            @Html.ValidationSummary(true)
             <div class="form-group">
                 @{ SelectList environments = ViewBag.Environments;}
                 @Html.Label("EnvironmentLevel", "Environment Level")
-                @Html.DropDownListFor(m => m.EnvironmentLevel, environments, new { @class = "form-control", required = "required" })
+                @Html.DropDownListFor(m => m.EnvironmentLevel, environments, new { @class = "form-control"})
 
                 @Html.Label("CompanyName", "Company Name")
-                @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", required = "required" })
+                @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control"})
 
                 @{ SelectList Countries = ViewBag.Countries;}
                 @Html.Label("Country", "Country")
@@ -22,27 +24,30 @@
 
                 @{ SelectList states = ViewBag.States;}
                 @Html.Label("State", "Company State")
-                @Html.DropDownListFor(m => m.State, states, new { @class = "form-control", required = "required" })
+                @Html.DropDownListFor(m => m.State, states, new { @class = "form-control" })
 
                 @Html.Label("Address1", "Address Line 1")
-                @Html.TextBoxFor(m => m.Address1, new { @class = "form-control", required = "required" })
+                <div>
+                    @Html.TextBoxFor(m => m.Address1, new { @class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.Address1)
+                </div>
 
                 @Html.Label("Address2", "Address Line 2")
                 @Html.TextBoxFor(m => m.Address2, new { @class = "form-control" })
 
                 @Html.Label("City", "City")
-                @Html.TextBoxFor(m => m.City, new { @class = "form-control", required = "required", pattern = "^[a-zA-Z]+(?:[\\s-][a-zA-Z]+)*$" })
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control"})
 
                 @Html.Label("Zip", "Zip Code")
-                @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", required = "required", pattern = "^\\d{5}(?:[-\\s]\\d{4})?$" })
+                @Html.TextBoxFor(m => m.Zip, new { @class = "form-control"})
 
                 @Html.Label("Email", "Email")
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required", type = "email"})
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                 @Html.Label("Phone", "Phone Number")
-                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", required = "required", type = "tel", pattern = "^\\d{10}$", placeholder ="E.g. 1234567890" })
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", type = "tel", placeholder = "E.g. 1234567890" })
 
                 @Html.Label("Fax", "Fax Number")
-                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", pattern = "^\\d{10}$", placeholder = "E.g. 1234567890" })
+                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", placeholder = "E.g. 1234567890" })
 
                 @{ SelectList companyTypes = ViewBag.CompanyTypes;}
                 @Html.Label("CompanyType", "Company Type")

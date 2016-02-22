@@ -4,7 +4,7 @@
 @Html.Label("EnvironmentLevel", "Environment Level")
 @Html.DropDownListFor(m => m.EnvironmentLevel, Environments, new { @class = "form-control" })
 
-@Html.Label("CompanyIds", "Company IDs")
+@Html.Label("CompanyIds", "Company IDs (seperated by a ',' or a ';')")
 @Html.TextBoxFor(m => m.CompanyIds, new { @class = "form-control", required = "required", pattern = "^([0-9a-zA-Z]{3}[-]){2}[0-9a-zA-Z]{3}([\n;,]([0-9a-zA-Z]{3}[-]){2}[0-9a-zA-Z]{3})*$" })
 
 @{ SelectList Features = ViewBag.Features;}

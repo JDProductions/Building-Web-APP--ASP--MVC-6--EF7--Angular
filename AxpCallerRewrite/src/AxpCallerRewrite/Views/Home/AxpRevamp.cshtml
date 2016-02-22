@@ -74,6 +74,19 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script>
+        $("#btnCreateCompanyAction").click(function () {
+            $.post("CreateCompany", $("#Company").serialize(), function (data) {
+                $("#message").val(data);
+            });
+        });
+
+        $("#close").click(function () {
+            $("form").trigger("reset");
+
+        })
+    </script>
 </body>
 
 </html>

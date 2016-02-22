@@ -131,10 +131,15 @@ namespace AxpCallerRewrite.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult CreateCompany(CompanyModel company)
         {
+            if(ModelState.IsValid)
+            {
+
+            }
             _legacyHelper.CreateCompany(company);
-            return RedirectToAction("AxpRevamp");
+            return Ok();
         }
 
         public IActionResult ActivateFeature(FeatureModel feature)
