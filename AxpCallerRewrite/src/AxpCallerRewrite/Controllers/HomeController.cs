@@ -1,11 +1,9 @@
-﻿using System.Xml.Serialization;
-using System;
+﻿using System;
 using AxpCallerRewrite.Concrete;
 using AxpCallerRewrite.Interfaces;
 using AxpCallerRewrite.Models;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json;
-using System.IO;
 using Microsoft.AspNet.Mvc.Rendering;
 using System.Collections.Generic;
 
@@ -97,7 +95,66 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult AxpRevamp()
         {
+            PrepareAxpRevamp();
+            return View();
+        }
 
+        public IActionResult Error()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateCompany(CompanyModel company)
+        {
+            
+            if(ModelState.IsValid)
+            {
+                _legacyHelper.CreateCompany(company);
+
+                return Ok();
+            }
+            else
+            {
+                PrepareAxpRevamp();
+                return PartialView("_Company", company);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult ActivateFeature(FeatureModel feature)
+        {
+            if (ModelState.IsValid)
+            {
+                _legacyHelper.ActivateFeature(feature);
+
+                return Ok();
+            }
+            else
+            {
+                PrepareAxpRevamp();
+                return PartialView("_Feature", feature);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult DeactivateFeature(FeatureModel feature)
+        {
+            if (ModelState.IsValid)
+            {
+                _legacyHelper.DeactivateFeature(feature);
+
+                return Ok();
+            }
+            else
+            {
+                PrepareAxpRevamp();
+                return PartialView("_Feature", feature);
+            }
+        }
+
+        private void PrepareAxpRevamp()
+        {
             ViewBag.States = _legacyHelper.GetStates();
 
             ViewBag.Countries = new SelectList(
@@ -122,36 +179,6 @@ namespace AxpCallerRewrite.Controllers
             ViewBag.Products = _legacyHelper.GetProducts();
 
             ViewBag.Features = _legacyHelper.GetFeatures();
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult CreateCompany(CompanyModel company)
-        {
-            if(ModelState.IsValid)
-            {
-
-            }
-            _legacyHelper.CreateCompany(company);
-            return Ok();
-        }
-
-        public IActionResult ActivateFeature(FeatureModel feature)
-        {
-            _legacyHelper.ActivateFeature(feature);
-            return RedirectToAction("AxpRevamp");
-        }
-
-        public IActionResult DeactivateFeature(FeatureModel feature)
-        {
-            _legacyHelper.DeactivateFeature(feature);
-            return RedirectToAction("AxpRevamp");
         }
     }
 }

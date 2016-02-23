@@ -1,60 +1,64 @@
 ﻿@model AxpCallerRewrite.Models.CompanyModel
 
-<div class="modal-content">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span> Create A Company</h4>
-    </div>
-    <div class="modal-body">
 
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "company" }))
-        {
-            @Html.ValidationSummary(true)
-            <div class="form-group">
-                @{ SelectList environments = ViewBag.Environments;}
-                @Html.Label("EnvironmentLevel", "Environment Level")
-                @Html.DropDownListFor(m => m.EnvironmentLevel, environments, new { @class = "form-control"})
+@{ SelectList environments = ViewBag.Environments;}
+@Html.Label("EnvironmentLevel", "Environment Level")
+@Html.DropDownListFor(m => m.EnvironmentLevel, environments, new { @class = "form-control" })
 
-                @Html.Label("CompanyName", "Company Name")
-                @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control"})
-
-                @{ SelectList Countries = ViewBag.Countries;}
-                @Html.Label("Country", "Country")
-                @Html.DropDownListFor(m => m.Country, Countries, new { @class = "form-control" })
-
-                @{ SelectList states = ViewBag.States;}
-                @Html.Label("State", "Company State")
-                @Html.DropDownListFor(m => m.State, states, new { @class = "form-control" })
-
-                @Html.Label("Address1", "Address Line 1")
-                <div>
-                    @Html.TextBoxFor(m => m.Address1, new { @class = "form-control"})
-                    @Html.ValidationMessageFor(m => m.Address1)
-                </div>
-
-                @Html.Label("Address2", "Address Line 2")
-                @Html.TextBoxFor(m => m.Address2, new { @class = "form-control" })
-
-                @Html.Label("City", "City")
-                @Html.TextBoxFor(m => m.City, new { @class = "form-control"})
-
-                @Html.Label("Zip", "Zip Code")
-                @Html.TextBoxFor(m => m.Zip, new { @class = "form-control"})
-
-                @Html.Label("Email", "Email")
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                @Html.Label("Phone", "Phone Number")
-                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", type = "tel", placeholder = "E.g. 1234567890" })
-
-                @Html.Label("Fax", "Fax Number")
-                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", placeholder = "E.g. 1234567890" })
-
-                @{ SelectList companyTypes = ViewBag.CompanyTypes;}
-                @Html.Label("CompanyType", "Company Type")
-                @Html.DropDownListFor(m => m.CompanyType, companyTypes, new { @class = "form-control" })
-
-                <button type="submit" id="btnCreateCompanyAction" class="btn btn-default">Create</button>
-            </div>
-                    }
-    </div>
+@Html.Label("CompanyName", "Company Name")
+<div>
+    @Html.ValidationMessageFor(m => m.CompanyName)
+    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control" })
 </div>
+
+@{ SelectList Countries = ViewBag.Countries;}
+@Html.Label("Country", "Country")
+@Html.DropDownListFor(m => m.Country, Countries, new { @class = "form-control" })
+
+@{ SelectList states = ViewBag.States;}
+@Html.Label("State", "Company State")
+@Html.DropDownListFor(m => m.State, states, new { @class = "form-control" })
+
+@Html.Label("Address1", "Address Line 1")
+<div>
+    @Html.ValidationMessageFor(m => m.Address1)
+    @Html.TextBoxFor(m => m.Address1, new { @class = "form-control" })
+</div>
+
+@Html.Label("Address2", "Address Line 2")
+@Html.TextBoxFor(m => m.Address2, new { @class = "form-control" })
+
+@Html.Label("City", "City")
+<div>
+    @Html.ValidationMessageFor(m => m.City)
+    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+</div>
+
+@Html.Label("Zip", "Zip Code")
+<div>
+    @Html.ValidationMessageFor(m => m.Zip)
+    @Html.TextBoxFor(m => m.Zip, new { @class = "form-control" })
+</div>
+
+@Html.Label("Email", "Email")
+<div>
+    @Html.ValidationMessageFor(m => m.Email)
+    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+</div>
+
+@Html.Label("Phone", "Phone Number")
+<div>
+    @Html.ValidationMessageFor(m => m.Phone)
+    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "E.g. 1234567890" })
+</div>
+
+@Html.Label("Fax", "Fax Number")
+<div>
+    @Html.ValidationMessageFor(m => m.Fax)
+    @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", placeholder = "E.g. 1234567890" })
+</div>
+
+@{ SelectList companyTypes = ViewBag.CompanyTypes;}
+@Html.Label("CompanyType", "Company Type")
+@Html.DropDownListFor(m => m.CompanyType, companyTypes, new { @class = "form-control" })
+

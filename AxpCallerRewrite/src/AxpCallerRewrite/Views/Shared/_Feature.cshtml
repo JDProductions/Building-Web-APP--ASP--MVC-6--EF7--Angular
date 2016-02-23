@@ -5,7 +5,10 @@
 @Html.DropDownListFor(m => m.EnvironmentLevel, Environments, new { @class = "form-control" })
 
 @Html.Label("CompanyIds", "Company IDs (seperated by a ',' or a ';')")
-@Html.TextBoxFor(m => m.CompanyIds, new { @class = "form-control", required = "required", pattern = "^([0-9a-zA-Z]{3}[-]){2}[0-9a-zA-Z]{3}([\n;,]([0-9a-zA-Z]{3}[-]){2}[0-9a-zA-Z]{3})*$" })
+<div>
+    @Html.ValidationMessageFor(m => m.CompanyIds)
+    @Html.TextBoxFor(m => m.CompanyIds, new { @class = "form-control" })
+</div>
 
 @{ SelectList Features = ViewBag.Features;}
 @Html.Label("FeatureId", "Feature")
@@ -17,4 +20,4 @@
 
 @{ SelectList Products = ViewBag.Products;}
 @Html.Label("ProdId", "Product")
-@Html.DropDownListFor(m => m.ProdId, Products, new { @class = "form-control"})
+@Html.DropDownListFor(m => m.ProdId, Products, new { @class = "form-control" })
