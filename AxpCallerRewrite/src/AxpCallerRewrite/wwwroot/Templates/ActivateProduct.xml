@@ -1,0 +1,10 @@
+﻿<AXP Version="1.0" OECNTUserName="NTUSERNAME">
+  <System Version="1.0" Name="SubscrMgmt">
+    <Request Action="Manage">
+      <OEC3PI OEC3PICompanyID="" OEC3PIProdID="" OEC3PIProdVer=""/>
+      <Company CompanyID="" UserID="">
+        <Product ProdID="" ProdLevelID="" ProdAction=""/>
+      </Company>
+    </Request>
+  </System>
+</AXP>

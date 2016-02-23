@@ -85,6 +85,31 @@
                     </div>
                 </div>
             </div>
+
+            @*Activate Product*@
+            <button type="button" id="btnActivateProduct" class="btn btn-default">Activate Product</button>
+            @*--- Modal--- *@
+            <div class="modal fade" id="modalActivateProduct" role="dialog">
+                <div class="modal-dialog">
+                    @* ----- Modal Content ---- *@
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close product-close" data-dismiss="modal">&times;</button>
+                            <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span>Activate Product</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="activate-product-form">
+                                <div class="form-group">
+                                    <div id="activate-product-partial">
+                                        @Html.Partial("_Product")
+                                    </div>
+                                    <button type="button" id="btnActivateProductAction" class="btn btn-default">Activate</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -108,7 +133,7 @@
             });
         });
 
-        $('#company-close').click(function () {
+        $('#company-close','.in').click(function () {
             $('#CompanyName').val('');
             $('#Address1').val('');
             $('#Address2').val('');

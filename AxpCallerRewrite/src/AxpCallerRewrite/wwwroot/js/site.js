@@ -59,6 +59,10 @@ $(document).ready(function () {
     $("#btnDeactivateFeature").click(function () {
         $("#modalDeactivateFeature").modal()
     });
+
+    $("#btnActivateProduct").click(function () {
+        $("#modalActivateProduct").modal()
+    });
 });
 
 

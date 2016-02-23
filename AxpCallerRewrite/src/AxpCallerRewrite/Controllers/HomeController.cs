@@ -111,6 +111,7 @@ namespace AxpCallerRewrite.Controllers
             if(ModelState.IsValid)
             {
                 _legacyHelper.CreateCompany(company);
+                SendTemplate template = new SendTemplate();
 
                 return Ok();
             }
