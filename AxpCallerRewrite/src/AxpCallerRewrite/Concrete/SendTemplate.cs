@@ -18,7 +18,7 @@ namespace AxpCallerRewrite.Concrete
 
         public async void SendAxpTemplate(List<string> companyIDs, string template, string environment)
         {
-            
+
             var input = new FileInputModel();
             var responses = new StringBuilder();
 
@@ -29,13 +29,13 @@ namespace AxpCallerRewrite.Concrete
                 responses.AppendLine(template.Replace("[COMPANYID]", companyIDs[i]));
                 responses.Clear();
                 responses.AppendLine(template.Replace("[COMPANYID]", companyIDs[i]));
-                
+
                 // send the template with new data to post????
                 Console.Write(responses);
-                await CallController(environment,template, responses);
-                
-            }
                 await CallController(environment, template, responses);
+
+            }
+            await CallController(environment, template, responses);
 
 
 
@@ -44,80 +44,75 @@ namespace AxpCallerRewrite.Concrete
         }
 
         // This method is purley for sending the template to the specified environment
-       
-        public async void SendAxpTemplate( string template, string environment)
+        public async Task<string> SendAxpTemplate(string template, string environment)
         {
 
             var input = new FileInputModel();
             var responses = new StringBuilder();
-           await CallController(environment, template, responses);
+            return await CallController(environment, template, responses);
 
 
 
 
 
         }
+
         private async Task<string> CallController(string environment, string axpTemplate, StringBuilder r)
         {
             var httpContent = new StringContent(r.ToString(), Encoding.UTF8, "application/xml");
             if (r.Length == 0)
             {
-               httpContent = new StringContent(axpTemplate, Encoding.UTF8, "application/xml");
+                httpContent = new StringContent(axpTemplate, Encoding.UTF8, "application/xml");
 
             }
-            
-            
+
+
 
             // Creating the Request
 
-                using (var client = new HttpClient())
-                    {
-                        switch (environment)
-                       {       
-                            case "Prod":
-                            break;
+            using (var client = new HttpClient())
+            {
+                switch (environment)
+                {
+                    case "Prod":
+                        break;
 
-                           case "Dev":
-                               try
-                               {
+                    case "Dev":
+                        try
+                        {
                             // Testing
-                                   baseUri = new Uri("http://devapp1/OEConnection.Application.SubscriptionController.Web/ControllerService.svc/DoWork");
-                                   client.BaseAddress = baseUri;
-                                   client.DefaultRequestHeaders.Accept.Add(
-                                       new MediaTypeWithQualityHeaderValue("application/xml"));
-                                   var httpResponseMessage = await client.PostAsync(baseUri, httpContent);
-                                    
-                                   if (httpResponseMessage.StatusCode == HttpStatusCode.OK)
-                                   {
-                                       var messageContents = await httpResponseMessage.Content.ReadAsStringAsync();
-                                Console.WriteLine(messageContents);
-                                Console.Write(httpResponseMessage.IsSuccessStatusCode);
-                                   }
+                            baseUri = new Uri("http://devapp1/OEConnection.Application.SubscriptionController.Web/ControllerService.svc/DoWork");
+                            client.BaseAddress = baseUri;
+                            client.DefaultRequestHeaders.Accept.Add(
+                                new MediaTypeWithQualityHeaderValue("application/xml"));
+                            var httpResponseMessage = await client.PostAsync(baseUri, httpContent);
 
-                               }
-                               catch (HttpRequestException e)
-                               {
-                                   Console.Write(e.Message);
-                               }
+                            if (httpResponseMessage.StatusCode == HttpStatusCode.OK)
+                            {
+                                return await httpResponseMessage.Content.ReadAsStringAsync();
+                            }
+
+                        }
+                        catch (HttpRequestException e)
+                        {
+                            Console.Write(e.Message);
+                        }
 
                         break;
 
-                            case "QA":
-                                baseUri = new Uri("http://www.QA.com/");
-                                   client.BaseAddress = baseUri;
-                            break;
-                            case "NewQA":
-                                baseUri = new Uri("http://www.NewQA.com/");
-                                client.BaseAddress = baseUri;
-                            break;
+                    case "QA":
+                        baseUri = new Uri("http://www.QA.com/");
+                        client.BaseAddress = baseUri;
+                        break;
+                    case "NewQA":
+                        baseUri = new Uri("http://www.NewQA.com/");
+                        client.BaseAddress = baseUri;
+                        break;
 
-                    }   
+                }
+                return null;
 
             }
-
-
-
-            return environment;
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using AxpCallerRewrite.Models;
 using AxpCallerRewrite.Models.Database_Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AxpCallerRewrite.Interfaces
 {
@@ -14,5 +15,6 @@ namespace AxpCallerRewrite.Interfaces
         void GetOecProducts();
         void GetActivateFeature();
         void GetDeactivateFeature();
+        Task<string> SendXml(string xmlString, string environmentLevel);
     }
 }

@@ -111,9 +111,8 @@ namespace AxpCallerRewrite.Controllers
             if(ModelState.IsValid)
             {
                 _legacyHelper.CreateCompany(company);
-                SendTemplate template = new SendTemplate();
 
-                return Ok();
+                return Ok("Successfully Sent");
             }
             else
             {
@@ -129,7 +128,7 @@ namespace AxpCallerRewrite.Controllers
             {
                 _legacyHelper.ActivateFeature(feature);
 
-                return Ok();
+                return Ok("Successfully Sent");
             }
             else
             {
@@ -145,7 +144,7 @@ namespace AxpCallerRewrite.Controllers
             {
                 _legacyHelper.DeactivateFeature(feature);
 
-                return Ok();
+                return Ok("Successfully Sent"); ;
             }
             else
             {
@@ -154,6 +153,21 @@ namespace AxpCallerRewrite.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult ActivateProduct(ProductModel product)
+        {
+            if (ModelState.IsValid)
+            {
+                _legacyHelper.ActivateProduct(product);
+
+                return Ok("Successfully Sent");
+            }
+            else
+            {
+                PrepareAxpRevamp();
+                return PartialView("_Product", product);
+            }
+        }
         private void PrepareAxpRevamp()
         {
             ViewBag.States = _legacyHelper.GetStates();

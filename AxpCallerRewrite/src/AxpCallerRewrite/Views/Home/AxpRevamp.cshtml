@@ -133,7 +133,13 @@
             });
         });
 
-        $('#company-close','.in').click(function () {
+        $('#btnActivateProductAction').click(function () {
+            $.post('@Url.Action("ActivateProduct", "Home")', $('#activate-product-form').serialize(), function (result) {
+                $('#activate-product-partial').html(result);
+            });
+        });
+
+        $('#company-close').click(function () {
             $('#CompanyName').val('');
             $('#Address1').val('');
             $('#Address2').val('');
@@ -147,7 +153,8 @@
         });
 
         $('.feature-close').click(function () {
-            $
+            $('#CompanyIds').val('');
+            $('.field-validation-error').empty();
 
         })
     </script>

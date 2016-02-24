@@ -14,8 +14,9 @@ namespace AxpCallerRewrite.Interfaces
         SelectList GetOEMs();
         SelectList GetProducts();
         SelectList GetFeatures();
-        void CreateCompany(CompanyModel company);
-        void ActivateFeature(FeatureModel feature);
-        void DeactivateFeature(FeatureModel feature);
+        Task<string> CreateCompany(CompanyModel company);
+        Task<string> ActivateFeature(FeatureModel feature);
+        Task<string> DeactivateFeature(FeatureModel feature);
+        Task<string> ActivateProduct(ProductModel product);
    }
 }

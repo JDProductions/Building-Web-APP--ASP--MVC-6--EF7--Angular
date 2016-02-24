@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AxpCallerRewrite.Models;
 using AxpCallerRewrite.Models.Database_Models;
+using System.Threading.Tasks;
 
 namespace AxpCallerRewrite.Concrete
 {
@@ -70,6 +71,14 @@ namespace AxpCallerRewrite.Concrete
         public void GetOecProducts()
         {
             return;
+        }
+
+        public Task<string> SendXml (string xmlString, string environmentLevel)
+        {
+            // Created an instance of SendTemplate 
+            SendTemplate template = new SendTemplate();
+            // Send Create Company Template to Server
+            return template.SendAxpTemplate(xmlString, environmentLevel);
         }
     }
 }

@@ -97,7 +97,7 @@ namespace AxpCallerRewrite.Concrete
             return new SelectList(itemsList, "Value", "Text");
         }
 
-        public void CreateCompany(CompanyModel company)
+        public Task<string> CreateCompany(CompanyModel company)
         {
             //Insert Company properties into CreateCompany template
             XmlDocument xmlDoc = new XmlDocument();
@@ -131,39 +131,68 @@ namespace AxpCallerRewrite.Concrete
             xmlDoc.WriteTo(xmltextWriter);
             string xmlString = stringWriter.ToString();
 
+            return repo.SendXml(xmlString, company.EnvironmentLevel);
+        }
+
+        public Task<string> ActivateFeature(FeatureModel feature)
+        {
             // Created an instance of SendTemplate 
             SendTemplate template = new SendTemplate();
-            // Send Create Company Template to Server
-            template.SendAxpTemplate(xmlString, company.EnvironmentLevel);
+
+            string[] ids = feature.CompanyIds.Split(splitters);
+
+            //question here
+            foreach (string id in ids)
+            {
+                repo.SendXml(CreateFeatureXML(feature, id, true), feature.EnvironmentLevel);
+            }
+
+            return null;
+        }
+
+        public Task<string> DeactivateFeature(FeatureModel feature)
+        {
+            // Created an instance of SendTemplate 
+            SendTemplate template = new SendTemplate();
+
+            string[] ids = feature.CompanyIds.Split(splitters);
+
+            //quetion here
+            foreach (string id in ids)
+            {
+                repo.SendXml(CreateFeatureXML(feature, id, false), feature.EnvironmentLevel);
+            }
+            return null;
+        }
+
+        public Task<string> ActivateProduct(ProductModel product)
+        {
+            //Insert Company properties into ActivateProdcut template
+            XmlDocument xmlDoc = new XmlDocument();
+
+            xmlDoc.Load("Templates\\ActivateProduct.xml");
+
+            XmlElement companyInfo = (XmlElement)xmlDoc.SelectSingleNode("//Company");
+            if (companyInfo != null)
+            {
+                companyInfo.SetAttribute("CompanyID", product.CompanyId.ToString());
+                companyInfo.SetAttribute("UserID", product.UserId.ToString());
+            }
+            XmlElement productInfo = (XmlElement)xmlDoc.SelectSingleNode("//Product");
+            if (productInfo != null)
+            {
+                productInfo.SetAttribute("ProdID", product.ProductId.ToString()); // Set to new value.
+                productInfo.SetAttribute("ProdLevel", product.ProductLevelId.ToString()); // Set to new value.
+                productInfo.SetAttribute("ProdAction", "Activate"); // Set to new value.
+            }
+
+            StringWriter stringWriter = new StringWriter();
+            XmlTextWriter xmltextWriter = new XmlTextWriter(stringWriter);
+            xmlDoc.WriteTo(xmltextWriter);
+            string xmlString = stringWriter.ToString();
+
+            return repo.SendXml(xmlString, product.EnvironmentLevel);
             //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
-        }
-
-        public void ActivateFeature(FeatureModel feature)
-        {
-            // Created an instance of SendTemplate 
-            SendTemplate template = new SendTemplate();
-
-            string[] ids = feature.CompanyIds.Split(splitters);
-            foreach (string id in ids)
-            {
-                // Send Create Company Template to Server
-                template.SendAxpTemplate(CreateFeatureXML(feature, id, true), feature.EnvironmentLevel);
-                //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
-            }
-        }
-
-        public void DeactivateFeature(FeatureModel feature)
-        {
-            // Created an instance of SendTemplate 
-            SendTemplate template = new SendTemplate();
-
-            string[] ids = feature.CompanyIds.Split(splitters);
-            foreach (string id in ids)
-            {
-                // Send Create Company Template to Server
-                template.SendAxpTemplate(CreateFeatureXML(feature, id, false), feature.EnvironmentLevel);
-                //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
-            }
         }
 
         private string CreateFeatureXML(FeatureModel feature, string id, bool activate)

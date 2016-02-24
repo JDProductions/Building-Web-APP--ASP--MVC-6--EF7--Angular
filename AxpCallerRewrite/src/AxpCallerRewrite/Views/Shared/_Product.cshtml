@@ -1,5 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model AxpCallerRewrite.Models.ProductModel
+
+@{ SelectList environments = ViewBag.Environments;}
+@Html.Label("EnvironmentLevel", "Environment Level")
+@Html.DropDownListFor(m => m.EnvironmentLevel, environments, new { @class = "form-control" })
+
+@Html.Label("CompanyId", "Company ID")
+@Html.DropDownListFor(m => m.CompanyId, new SelectList(new List<SelectListItem>()), new { @class = "form-control" })
+
+@{ SelectList Products = ViewBag.Products;}
+@Html.Label("ProdId", "Product")
+@Html.DropDownListFor(m => m.ProductId, Products, new { @class = "form-control" })
+
+@Html.Label("ProductLevelId", "Prduct Level")
+@Html.DropDownListFor(m => m.ProductLevelId, new SelectList(new List<SelectListItem>()), new { @class = "form-control" })
