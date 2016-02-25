@@ -34,7 +34,11 @@ namespace AxpCallerRewrite.Concrete
 
             foreach (CompanyType item in companyTypesList)
             {
-                itemsList.Add(new SelectListItem { Value = item.CompanyTypeID.ToString(), Text = item.CompanyTypeDesc });
+                if (item.CompanyTypeID != 1)
+                {
+                    string text = item.CompanyTypeDesc + "(" + item.CompanyTypeID.ToString() + ")";
+                    itemsList.Add(new SelectListItem { Value = item.CompanyTypeID.ToString(), Text = text });
+                }
             }
 
 
@@ -52,7 +56,7 @@ namespace AxpCallerRewrite.Concrete
                 itemsList.Add(new SelectListItem { Value = item.StateAbbr, Text = item.StateName });
             }
 
-            return new SelectList(itemsList,"Value", "Text");
+            return new SelectList(itemsList, "Value", "Text");
         }
 
         public SelectList GetOEMs()
@@ -97,7 +101,7 @@ namespace AxpCallerRewrite.Concrete
             return new SelectList(itemsList, "Value", "Text");
         }
 
-        public Task<string> CreateCompany(CompanyModel company)
+        public string CreateCompany(CompanyModel company)
         {
             //Insert Company properties into CreateCompany template
             XmlDocument xmlDoc = new XmlDocument();
@@ -120,10 +124,29 @@ namespace AxpCallerRewrite.Concrete
                 info.SetAttribute("Add1", company.Address1);
                 info.SetAttribute("CompanyName", company.CompanyName);
             }
+
+            
             XmlElement type = (XmlElement)xmlDoc.SelectSingleNode("//CompanyType");
             if (type != null)
             {
-                type.SetAttribute("Type", company.CompanyType); // Set to new value.
+                if (company.Demo)
+                    type.SetAttribute("Type", Convert.ToInt32(company.Demo).ToString());
+                else
+                {
+                    type.SetAttribute("Type", company.CompanyTypes[0].ToString());
+                    company.CompanyTypes.Remove(company.CompanyTypes[0]);
+                }
+            }
+
+            XmlElement types = (XmlElement)xmlDoc.SelectSingleNode("//CompanyTypes");
+            if (types != null)
+            {
+                foreach (int item in company.CompanyTypes)
+                {
+                    XmlElement element = (XmlElement)xmlDoc.CreateNode("element", "CompanyType", "");
+                    element.SetAttribute("Type", item.ToString());
+                    types.AppendChild(element);
+                }
             }
 
             StringWriter stringWriter = new StringWriter();
@@ -131,41 +154,41 @@ namespace AxpCallerRewrite.Concrete
             xmlDoc.WriteTo(xmltextWriter);
             string xmlString = stringWriter.ToString();
 
-            return repo.SendXml(xmlString, company.EnvironmentLevel);
+            return ServerResponse(repo.SendXml(xmlString, company.EnvironmentLevel));
         }
 
-        public Task<string> ActivateFeature(FeatureModel feature)
+        public string ActivateFeature(FeatureModel feature)
         {
             // Created an instance of SendTemplate 
             SendTemplate template = new SendTemplate();
 
             string[] ids = feature.CompanyIds.Split(splitters);
-
+            string messages = "";
             //question here
             foreach (string id in ids)
             {
-                repo.SendXml(CreateFeatureXML(feature, id, true), feature.EnvironmentLevel);
+                messages += ServerResponse(repo.SendXml(CreateFeatureXML(feature, id, true), feature.EnvironmentLevel)) + " ";
             }
 
-            return null;
+            return messages;
         }
 
-        public Task<string> DeactivateFeature(FeatureModel feature)
+        public string DeactivateFeature(FeatureModel feature)
         {
             // Created an instance of SendTemplate 
             SendTemplate template = new SendTemplate();
 
             string[] ids = feature.CompanyIds.Split(splitters);
+            string messages = "";
 
-            //quetion here
             foreach (string id in ids)
             {
-                repo.SendXml(CreateFeatureXML(feature, id, false), feature.EnvironmentLevel);
+                messages += ServerResponse(repo.SendXml(CreateFeatureXML(feature, id, false), feature.EnvironmentLevel)) + " ";
             }
-            return null;
+            return messages;
         }
 
-        public Task<string> ActivateProduct(ProductModel product)
+        public string ActivateProduct(ProductModel product)
         {
             //Insert Company properties into ActivateProdcut template
             XmlDocument xmlDoc = new XmlDocument();
@@ -191,7 +214,7 @@ namespace AxpCallerRewrite.Concrete
             xmlDoc.WriteTo(xmltextWriter);
             string xmlString = stringWriter.ToString();
 
-            return repo.SendXml(xmlString, product.EnvironmentLevel);
+            return ServerResponse(repo.SendXml(xmlString, product.EnvironmentLevel));
             //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
         }
 
@@ -221,6 +244,23 @@ namespace AxpCallerRewrite.Concrete
             XmlTextWriter xmltextWriter = new XmlTextWriter(stringWriter);
             xmlDoc.WriteTo(xmltextWriter);
             return stringWriter.ToString();
+        }
+
+        private string ServerResponse(string message)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(message);
+
+            XmlElement error = (XmlElement)doc.SelectSingleNode("//Error");
+            if (error != null)
+            {
+                if (!error.GetAttribute("ErrDesc").Equals(""))
+                    return "Error: " + error.GetAttribute("ErrDesc");
+                if (!error.GetAttribute("Description").Equals(""))
+                    return "Error: " + error.GetAttribute("Description");
+            }
+
+            return "Error: oops";
         }
     }
 }

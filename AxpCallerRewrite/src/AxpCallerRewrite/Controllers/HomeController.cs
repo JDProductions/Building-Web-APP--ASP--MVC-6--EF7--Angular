@@ -110,9 +110,9 @@ namespace AxpCallerRewrite.Controllers
             
             if(ModelState.IsValid)
             {
-                _legacyHelper.CreateCompany(company);
+                var data = _legacyHelper.CreateCompany(company);
 
-                return Ok("Successfully Sent");
+                return Ok(data);
             }
             else
             {
@@ -126,9 +126,9 @@ namespace AxpCallerRewrite.Controllers
         {
             if (ModelState.IsValid)
             {
-                _legacyHelper.ActivateFeature(feature);
+                var data = _legacyHelper.ActivateFeature(feature);
 
-                return Ok("Successfully Sent");
+                return Ok(data);
             }
             else
             {
@@ -142,9 +142,9 @@ namespace AxpCallerRewrite.Controllers
         {
             if (ModelState.IsValid)
             {
-                _legacyHelper.DeactivateFeature(feature);
+                var data =_legacyHelper.DeactivateFeature(feature);
 
-                return Ok("Successfully Sent"); ;
+                return Ok(data); ;
             }
             else
             {
@@ -158,9 +158,9 @@ namespace AxpCallerRewrite.Controllers
         {
             if (ModelState.IsValid)
             {
-                _legacyHelper.ActivateProduct(product);
+                var data = _legacyHelper.ActivateProduct(product);
 
-                return Ok("Successfully Sent");
+                return Ok(data);
             }
             else
             {

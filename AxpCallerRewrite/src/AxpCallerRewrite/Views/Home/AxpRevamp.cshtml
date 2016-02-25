@@ -19,13 +19,14 @@
                     @* ----- Modal Content ---- *@
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" id="company-close"data-dismiss="modal">&times;</button>
+                            <button type="button" class="close" id="company-close" data-dismiss="modal">&times;</button>
                             <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span> Create A Company</h4>
                         </div>
                         <div class="modal-body">
                             <form id="company-form">
                                 <div class="form-group">
                                     <div id="create-company-partial">
+                                        <div id="create-company-message" class="message"></div>
                                         @Html.Partial("_Company")
                                     </div>
                                     <button type="button" id="btnCreateCompanyAction" class="btn btn-default">Create</button>
@@ -36,12 +37,12 @@
                 </div>
             </div>
 
-            @*Activate Feature*@
+            @*Activate Feature
             <button type="button" id="btnActivateFeature" class="btn btn-default">Activate Feature</button>
-            @*--- Modal--- *@
+            @*--- Modal--- 
             <div class="modal fade" id="modalActivateFeature" role="dialog">
                 <div class="modal-dialog">
-                    @* ----- Modal Content ---- *@
+                    @* ----- Modal Content ---- 
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close feature-close" data-dismiss="modal">&times;</button>
@@ -51,6 +52,7 @@
                             <form id="activate-feature-form">
                                 <div class="form-group">
                                     <div id="activate-feature-partial">
+                                        <div id="activate-feature-message" class="message"></div>
                                         @Html.Partial("_Feature")
                                     </div>
                                     <button type="button" id="btnActivateFeatureAction" class="btn btn-default">Activate</button>
@@ -61,12 +63,12 @@
                 </div>
             </div>
 
-            @*Deactivate Feature*@
+            @*Deactivate Feature
             <button type="button" id="btnDeactivateFeature" class="btn btn-default">Deactivate Feature</button>
-            @*--- Modal--- *@
+            @*--- Modal--- 
             <div class="modal fade" id="modalDeactivateFeature" role="dialog">
                 <div class="modal-dialog">
-                    @* ----- Modal Content ---- *@
+                    @* ----- Modal Content ---- 
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close feature-close" data-dismiss="modal">&times;</button>
@@ -76,6 +78,7 @@
                             <form id="deactivate-feature-form">
                                 <div class="form-group">
                                     <div id="deactivate-feature-partial">
+                                        <div id="deactivate-feature-message" class="message"></div>
                                         @Html.Partial("_Feature")
                                     </div>
                                     <button type="button" id="btnDeactivateFeatureAction" class="btn btn-default">Deactivate</button>
@@ -84,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
 
             @*Activate Product*@
             <button type="button" id="btnActivateProduct" class="btn btn-default">Activate Product</button>
@@ -101,6 +104,7 @@
                             <form id="activate-product-form">
                                 <div class="form-group">
                                     <div id="activate-product-partial">
+                                        <div id="activate-product-message" class="message"></div>
                                         @Html.Partial("_Product")
                                     </div>
                                     <button type="button" id="btnActivateProductAction" class="btn btn-default">Activate</button>
@@ -116,26 +120,54 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script>
         $('#btnActivateFeatureAction').click(function () {
-            $.post('@Url.Action("ActivateFeature", "Home")', $('#activate-feature-form').serialize(), function (result) {
-                $('#activate-feature-partial').html(result);
+            $.post('@Url.Action("ActivateFeature", "Home")', $('#activate-feature-form').serialize(), function (data) {
+                if (data.indexOf("Error") >= 0) {
+                    $('#activate-feature-message').html(data);
+
+                }
+                else {
+                    $('#activate-feature-partial').html(data);
+
+                }
+
             });
         });
 
         $('#btnDeactivateFeatureAction').click(function () {
-            $.post('@Url.Action("DeactivateFeature", "Home")', $('#deactivate-feature-form').serialize(), function (result) {
-                $('#deactivate-feature-partial').html(result);
+            $.post('@Url.Action("DeactivateFeature", "Home")', $('#deactivate-feature-form').serialize(), function (data) {
+                if (data.indexOf("Error") >= 0) {
+                    $('#deactivate-feature-message').html(data);
+
+                }
+                else {
+                    $('#deactivate-feature-partial').html(data);
+
+                }
             });
         });
 
         $('#btnCreateCompanyAction').click(function () {
-            $.post('@Url.Action("CreateCompany", "Home")', $('#company-form').serialize(), function (result) {
-                $('#create-company-partial').html(result);
+            $('#company-types-select options').attr("selected");
+            $.post('@Url.Action("CreateCompany", "Home")', $('#company-form').serialize(), function (data) {
+                if (data.indexOf("Error") >= 0) {
+                    $('#create-company-message').html(data);
+
+                }
+                else {
+                    $('#create-company-partial').html(data);
+                }
             });
         });
 
         $('#btnActivateProductAction').click(function () {
-            $.post('@Url.Action("ActivateProduct", "Home")', $('#activate-product-form').serialize(), function (result) {
-                $('#activate-product-partial').html(result);
+            $.post('@Url.Action("ActivateProduct", "Home")', $('#activate-product-form').serialize(), function (data) {
+                if (data.indexOf("Error") >= 0) {
+                    $('#activate-product-message').html(data);
+
+                }
+                else {
+                    $('#activate-product-partial').html(data);
+                }
             });
         });
 
@@ -148,15 +180,45 @@
             $('#Email').val('');
             $('#Phone').val('');
             $('#Fax').val('');
+            $('#create-company-message').empty();
             $('.field-validation-error').empty();
+            $('#Demo').attr('checked', false);
 
         });
 
         $('.feature-close').click(function () {
             $('#CompanyIds').val('');
+            $('#activate-feature-message').empty();
             $('.field-validation-error').empty();
 
-        })
+        });
+
+        $('.product-close').click(function () {
+            $('#CompanyId').val('');
+            $('#activate-company-message').empty();
+            $('.field-validation-error').empty();
+
+        });
+
+        function Select()
+        {
+            $('#company-types-options option:selected').each(function () {
+                $(this).removeAttr('selected');
+                $('#company-types-select').append($(this));
+
+            });
+
+        }
+
+        function Deselect()
+        {
+            $('#company-types-select option:selected').each(function () {
+                $(this).removeAttr('selected');
+                $('#company-types-options').append($(this));
+
+            });
+
+        }
     </script>
 </body>
 

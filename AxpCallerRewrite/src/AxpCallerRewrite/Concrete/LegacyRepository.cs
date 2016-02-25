@@ -73,12 +73,12 @@ namespace AxpCallerRewrite.Concrete
             return;
         }
 
-        public Task<string> SendXml (string xmlString, string environmentLevel)
+        public string SendXml (string xmlString, string environmentLevel)
         {
             // Created an instance of SendTemplate 
             SendTemplate template = new SendTemplate();
             // Send Create Company Template to Server
-            return template.SendAxpTemplate(xmlString, environmentLevel);
+            return template.SendAxpTemplate(xmlString, environmentLevel).Result;
         }
     }
 }

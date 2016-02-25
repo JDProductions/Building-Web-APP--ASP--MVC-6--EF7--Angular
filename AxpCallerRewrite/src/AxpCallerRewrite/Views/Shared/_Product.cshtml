@@ -5,11 +5,14 @@
 @Html.DropDownListFor(m => m.EnvironmentLevel, environments, new { @class = "form-control" })
 
 @Html.Label("CompanyId", "Company ID")
-@Html.DropDownListFor(m => m.CompanyId, new SelectList(new List<SelectListItem>()), new { @class = "form-control" })
+<div>
+    @Html.ValidationMessageFor(m => m.CompanyId)
+    @Html.TextBoxFor(m => m.CompanyId, new { @class = "form-control" })
+</div>
 
 @{ SelectList Products = ViewBag.Products;}
 @Html.Label("ProdId", "Product")
 @Html.DropDownListFor(m => m.ProductId, Products, new { @class = "form-control" })
 
-@Html.Label("ProductLevelId", "Prduct Level")
+@Html.Label("ProductLevelId", "Product Level")
 @Html.DropDownListFor(m => m.ProductLevelId, new SelectList(new List<SelectListItem>()), new { @class = "form-control" })

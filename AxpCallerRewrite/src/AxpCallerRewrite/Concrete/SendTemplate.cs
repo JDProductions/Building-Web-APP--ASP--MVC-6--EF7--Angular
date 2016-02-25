@@ -86,12 +86,10 @@ namespace AxpCallerRewrite.Concrete
                             client.DefaultRequestHeaders.Accept.Add(
                                 new MediaTypeWithQualityHeaderValue("application/xml"));
                             var httpResponseMessage = await client.PostAsync(baseUri, httpContent);
-
                             if (httpResponseMessage.StatusCode == HttpStatusCode.OK)
                             {
                                 return await httpResponseMessage.Content.ReadAsStringAsync();
                             }
-
                         }
                         catch (HttpRequestException e)
                         {

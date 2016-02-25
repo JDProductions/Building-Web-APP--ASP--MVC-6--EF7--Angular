@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 
 namespace AxpCallerRewrite.Models
@@ -34,7 +35,10 @@ namespace AxpCallerRewrite.Models
 
         [RegularExpression("^\\d{10}$", ErrorMessage = "Fax Nuber is Not Valid")]
         public string Fax { get; set; }
-        public string CompanyType { get; set; }
+
+        [Required(ErrorMessage = "Company Types are Required")]
+        public List<int> CompanyTypes { get; set; }
+        public bool Demo { get; set; }
 
     }
 }

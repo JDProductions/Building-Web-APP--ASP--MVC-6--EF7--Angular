@@ -15,6 +15,6 @@ namespace AxpCallerRewrite.Interfaces
         void GetOecProducts();
         void GetActivateFeature();
         void GetDeactivateFeature();
-        Task<string> SendXml(string xmlString, string environmentLevel);
+        string SendXml(string xmlString, string environmentLevel);
     }
 }

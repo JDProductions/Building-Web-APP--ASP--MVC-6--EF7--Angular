@@ -59,6 +59,14 @@
 </div>
 
 @{ SelectList companyTypes = ViewBag.CompanyTypes;}
-@Html.Label("CompanyType", "Company Type")
-@Html.DropDownListFor(m => m.CompanyType, companyTypes, new { @class = "form-control" })
-
+@Html.Label("CompanyType", "Company Types (Hold Ctrl to Select Multiple)")
+<div>
+    @Html.ValidationMessageFor(m => m.CompanyTypes)
+    @Html.CheckBoxFor(m => m.Demo) @Html.Label("Demo", "Demo")
+    <div>
+        @Html.DropDownList("CompanyType", companyTypes, new { @class = "form-control", multiple = "multiple", id = "company-types-options" })
+        <button type="button" id="select" onclick="Select()">></button><br />
+        <button type="button" id="deselct" onclick="Deselect()"><</button>
+        @Html.DropDownListFor(m => m.CompanyTypes, new SelectList(new List<SelectListItem>()), new { @class = "form-control", multiple = "multiple", id = "company-types-select" })
+    </div>
+</div>
