@@ -27,6 +27,7 @@
                                 <div class="form-group">
                                     <div id="create-company-partial">
                                         <div id="create-company-message" class="message"></div>
+                                        <div id="create-company-message-success" class="successful"></div>
                                         @Html.Partial("_Company")
                                     </div>
                                     <button type="button" id="btnCreateCompanyAction" class="btn btn-default">Create</button>
@@ -105,6 +106,7 @@
                                 <div class="form-group">
                                     <div id="activate-product-partial">
                                         <div id="activate-product-message" class="message"></div>
+                                        <div id="activate-product-message-success" class="successful"></div>
                                         @Html.Partial("_Product")
                                     </div>
                                     <button type="button" id="btnActivateProductAction" class="btn btn-default">Activate</button>
@@ -147,14 +149,22 @@
         });
 
         $('#btnCreateCompanyAction').click(function () {
-            $('#company-types-select options').attr("selected");
+            $('.field-validation-error').empty();
+            $('#company-types-select option').each(function () {
+                $(this).prop('selected', true);
+            });
             $.post('@Url.Action("CreateCompany", "Home")', $('#company-form').serialize(), function (data) {
                 if (data.indexOf("Error") >= 0) {
                     $('#create-company-message').html(data);
 
                 }
+                else if (data.indexOf("Company ID") >= 0) {
+                    $('#create-company-message-success').html(data);
+
+                }
                 else {
                     $('#create-company-partial').html(data);
+
                 }
             });
         });
@@ -183,6 +193,10 @@
             $('#create-company-message').empty();
             $('.field-validation-error').empty();
             $('#Demo').attr('checked', false);
+            $('#company-types-select option').each(function () {
+                $(this).prop('selected', true);
+            });
+            Deselect();
 
         });
 
@@ -203,8 +217,9 @@
         function Select()
         {
             $('#company-types-options option:selected').each(function () {
-                $(this).removeAttr('selected');
-                $('#company-types-select').append($(this));
+                $(this).prop('selected', false);
+                $('#company-types-select').append(this);
+
 
             });
 
@@ -212,10 +227,20 @@
 
         function Deselect()
         {
-            $('#company-types-select option:selected').each(function () {
-                $(this).removeAttr('selected');
-                $('#company-types-options').append($(this));
+            var list = $('#company-types-options option');
+            $('#company-types-options option').remove();
 
+            $('#company-types-select option:selected').each(function () {
+                $(this).prop('selected', false);
+                list.push($(this));
+
+            });
+
+            list.sort(function (a, b) {
+                return $(a).val() - $(b).val()
+            });
+            list.each(function () {
+                $('#company-types-options').append($(this));
             });
 
         }

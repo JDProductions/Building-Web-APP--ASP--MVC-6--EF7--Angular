@@ -36,7 +36,7 @@ namespace AxpCallerRewrite.Concrete
             {
                 if (item.CompanyTypeID != 1)
                 {
-                    string text = item.CompanyTypeDesc + "(" + item.CompanyTypeID.ToString() + ")";
+                    string text = item.CompanyTypeDesc + " (" + item.CompanyTypeID.ToString() + ")";
                     itemsList.Add(new SelectListItem { Value = item.CompanyTypeID.ToString(), Text = text });
                 }
             }
@@ -259,8 +259,16 @@ namespace AxpCallerRewrite.Concrete
                 if (!error.GetAttribute("Description").Equals(""))
                     return "Error: " + error.GetAttribute("Description");
             }
+            else
+            {
+                XmlElement companyInfo = (XmlElement)doc.SelectSingleNode("//CompanyInfo");
+                if(companyInfo != null)
+                {
+                    return "Company ID: " + companyInfo.GetAttribute("CompanyID");
+                }
+            }
 
-            return "Error: oops";
+            return "Something went wrong";
         }
     }
 }
