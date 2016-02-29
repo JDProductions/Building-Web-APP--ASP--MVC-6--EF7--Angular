@@ -101,6 +101,33 @@ namespace AxpCallerRewrite.Concrete
             return new SelectList(itemsList, "Value", "Text");
         }
 
+        public SelectList GetProdIdLevelNum()
+        {
+            List<ProdIdLevelNum> idNumList = repo.GetProdIdLevelNum().ToList();
+
+            List<SelectListItem> itemsList = new List<SelectListItem>();
+
+            foreach (ProdIdLevelNum item in idNumList)
+            {
+                if (item.LegacyProductID != 0 && item.ProductLevelNumber != 0)
+                {
+                    itemsList.Add(new SelectListItem
+                    {
+                        Value = item.LegacyProductID.ToString() + "," + item.ProductLevelNumber,
+                        Text = item.LegacyProductName + " (" + item.LegacyProductID.ToString() + ") " +
+                        item.ProductLevelKey + " (" + item.ProductLevelNumber.ToString() + ")"
+                    });
+                }
+                else if (item.LegacyProductID != 0 && item.ProductLevelNumber == 0)
+                {
+                    itemsList.Add(new SelectListItem
+                    { Value = item.LegacyProductID.ToString(), Text = item.LegacyProductName + " (" + item.LegacyProductID.ToString() + ")" });
+                }
+            }
+
+            return new SelectList(itemsList, "Value", "Text");
+        }
+
         public string CreateCompany(CompanyModel company)
         {
             //Insert Company properties into CreateCompany template
@@ -125,7 +152,7 @@ namespace AxpCallerRewrite.Concrete
                 info.SetAttribute("CompanyName", company.CompanyName);
             }
 
-            
+
             XmlElement type = (XmlElement)xmlDoc.SelectSingleNode("//CompanyType");
             if (type != null)
             {
@@ -204,8 +231,10 @@ namespace AxpCallerRewrite.Concrete
             XmlElement productInfo = (XmlElement)xmlDoc.SelectSingleNode("//Product");
             if (productInfo != null)
             {
-                productInfo.SetAttribute("ProdID", product.ProductId.ToString()); // Set to new value.
-                productInfo.SetAttribute("ProdLevel", product.ProductLevelId.ToString()); // Set to new value.
+                string[] ids = product.ProdIdLevelNum.Split(',');
+                productInfo.SetAttribute("ProdID", ids[0]); // Set to new value.
+                if (ids.Length > 1)
+                    productInfo.SetAttribute("ProdLevelID", ids[1]); // Set to new value.
                 productInfo.SetAttribute("ProdAction", "Activate"); // Set to new value.
             }
 
@@ -258,11 +287,13 @@ namespace AxpCallerRewrite.Concrete
                     return "Error: " + error.GetAttribute("ErrDesc");
                 if (!error.GetAttribute("Description").Equals(""))
                     return "Error: " + error.GetAttribute("Description");
+                if (!error.GetAttribute("Desc").Equals(""))
+                    return "Error: " + error.GetAttribute("Desc");
             }
             else
             {
                 XmlElement companyInfo = (XmlElement)doc.SelectSingleNode("//CompanyInfo");
-                if(companyInfo != null)
+                if (companyInfo != null)
                 {
                     return "Company ID: " + companyInfo.GetAttribute("CompanyID");
                 }

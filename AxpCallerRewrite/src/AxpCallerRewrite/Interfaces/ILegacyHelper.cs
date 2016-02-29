@@ -14,6 +14,7 @@ namespace AxpCallerRewrite.Interfaces
         SelectList GetOEMs();
         SelectList GetProducts();
         SelectList GetFeatures();
+        SelectList GetProdIdLevelNum();
         string CreateCompany(CompanyModel company);
         string ActivateFeature(FeatureModel feature);
         string DeactivateFeature(FeatureModel feature);

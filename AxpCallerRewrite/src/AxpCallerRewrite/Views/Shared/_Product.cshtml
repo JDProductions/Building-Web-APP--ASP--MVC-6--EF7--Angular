@@ -10,9 +10,6 @@
     @Html.TextBoxFor(m => m.CompanyId, new { @class = "form-control" })
 </div>
 
-@{ SelectList Products = ViewBag.Products;}
-@Html.Label("ProdId", "Product")
-@Html.DropDownListFor(m => m.ProductId, Products, new { @class = "form-control" })
-
-@Html.Label("ProductLevelId", "Product Level")
-@Html.DropDownListFor(m => m.ProductLevelId, new SelectList(new List<SelectListItem>()), new { @class = "form-control" })
+@{ SelectList ProdsLevels = ViewBag.ProdIdLevelNum;}
+@Html.Label("ProdIdLevelNum", "Product and Product Level")
+@Html.DropDownListFor(m => m.ProdIdLevelNum, ProdsLevels, new { @class = "form-control" })

@@ -63,6 +63,14 @@ namespace AxpCallerRewrite.Concrete
             }
         }
 
+        public IEnumerable<ProdIdLevelNum> GetProdIdLevelNum()
+        {
+            using (SqlConnection conn = OpenConnection())
+            {
+                return conn.Query<ProdIdLevelNum>("SELECT LegacyProductID, LegacyProductName, ProductLevelNumber, ProductLevelKey FROM oeconnection..Security_enu_ProfileProductLevel");
+            }
+        }
+
         public void GetDeactivateFeature()
         {
             throw new NotImplementedException();

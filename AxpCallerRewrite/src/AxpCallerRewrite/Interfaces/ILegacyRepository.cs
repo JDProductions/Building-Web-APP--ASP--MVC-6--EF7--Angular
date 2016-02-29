@@ -12,6 +12,7 @@ namespace AxpCallerRewrite.Interfaces
         IEnumerable<OEM> GetOEMs();
         IEnumerable<Product> GetProducts();
         IEnumerable<Feature> GetFeatures();
+        IEnumerable<ProdIdLevelNum> GetProdIdLevelNum();
         void GetOecProducts();
         void GetActivateFeature();
         void GetDeactivateFeature();

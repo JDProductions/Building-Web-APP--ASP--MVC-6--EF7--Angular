@@ -194,6 +194,8 @@ namespace AxpCallerRewrite.Controllers
             ViewBag.Products = _legacyHelper.GetProducts();
 
             ViewBag.Features = _legacyHelper.GetFeatures();
+
+            ViewBag.ProdIdLevelNum = _legacyHelper.GetProdIdLevelNum();
         }
     }
 }

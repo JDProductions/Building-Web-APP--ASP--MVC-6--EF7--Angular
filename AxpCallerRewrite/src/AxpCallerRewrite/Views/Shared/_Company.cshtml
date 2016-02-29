@@ -62,13 +62,21 @@
 @Html.Label("CompanyType", "Company Types (Hold Ctrl to Select Multiple)")
 <div>
     @Html.ValidationMessageFor(m => m.CompanyTypes)
-    <div>
-        @Html.CheckBoxFor(m => m.Demo) @Html.Label("Demo", "Demo")
-        @Html.DropDownList("CompanyType", companyTypes, new { @class = "form-control multi-select", multiple = "multiple", id = "company-types-options" })
-        <div>
-            <button type="button" id="select" onclick="Select()">&#9660;</button>
-            <button type="button" id="deselct" onclick="Deselect()">&#9650;</button>
+    <div id="multi-select-boxes" style="height: 200px;">
+        <div id="demo">
+            @Html.CheckBoxFor(m => m.Demo) @Html.Label("Demo", "Demo")
         </div>
-        @Html.DropDownListFor(m => m.CompanyTypes, new SelectList(new List<SelectListItem>()), new { @class = "form-control multi-select", multiple = "multiple", id = "company-types-select" })
+        <div class="multi-select-group">
+            @Html.DropDownList("CompanyType", companyTypes, new { @class = "form-control multi-select", multiple = "multiple", id = "company-types-options" })
+        </div>
+
+        <div id="select-buttons">
+            <button type="button" id="select" onclick="Select()">&#9658;</button>
+            <button type="button" id="deselct" onclick="Deselect()">&#9668;</button>
+        </div>
+
+        <div class="multi-select-group">
+            @Html.DropDownListFor(m => m.CompanyTypes, new SelectList(new List<SelectListItem>()), new { @class = "form-control multi-select", multiple = "multiple", id = "company-types-select" })
+        </div>
     </div>
 </div>

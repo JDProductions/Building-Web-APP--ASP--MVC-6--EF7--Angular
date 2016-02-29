@@ -2,22 +2,23 @@
     resize: none;
 }
 
-  .modal-header,  .close {
-      /*background-color: #5cb85c;*/
-      background-color: #002942;
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  }
-  .modal-header h4 {
-      font-size: 30px;
-      /*color: white !important;*/
-      color: #67d80e !important;
+.modal-header, .close {
+    /*background-color: #5cb85c;*/
+    background-color: #002942;
+    color: white !important;
+    text-align: center;
+    font-size: 30px;
+}
 
-  }
-  textarea {
-      resize: none;
-  }
+    .modal-header h4 {
+        font-size: 30px;
+        /*color: white !important;*/
+        color: #67d80e !important;
+    }
+
+textarea {
+    resize: none;
+}
 
 .field-validation-error {
     color: red;
@@ -29,4 +30,40 @@
 
 .successful {
     color: green;
+}
+
+.multi-select {
+    width: 250px;
+}
+
+#multi-select-boxes {
+    height: 200px;
+}
+
+#demo {
+    text-align: right;
+    margin-right:15px;
+}
+
+.form-control.multi-select{
+    height:100%;
+}
+
+.multi-select-group {
+    float:left;
+    height:100%;
+}
+#select-buttons{
+    padding: 0px 10px;
+    width:58px;
+    height:100%;
+    float: left;
+}
+
+#select {
+    margin-bottom:15px;
+}
+
+#btnCreateCompanyAction {
+    margin-top:15px;
 }

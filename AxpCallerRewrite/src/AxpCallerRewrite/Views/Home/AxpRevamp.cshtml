@@ -121,7 +121,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script>
-        $('#btnActivateFeatureAction').click(function () {
+        @*$('#btnActivateFeatureAction').click(function () {
             $.post('@Url.Action("ActivateFeature", "Home")', $('#activate-feature-form').serialize(), function (data) {
                 if (data.indexOf("Error") >= 0) {
                     $('#activate-feature-message').html(data);
@@ -146,7 +146,7 @@
 
                 }
             });
-        });
+        });*@
 
         $('#btnCreateCompanyAction').click(function () {
             $('.field-validation-error').empty();
@@ -174,6 +174,10 @@
                 if (data.indexOf("Error") >= 0) {
                     $('#activate-product-message').html(data);
 
+                }
+                else if(data.indexOf("Success") >= 0){
+                    $('activat-product-message-success').html(data);
+                    
                 }
                 else {
                     $('#activate-product-partial').html(data);
@@ -211,6 +215,7 @@
             $('#CompanyId').val('');
             $('#activate-company-message').empty();
             $('.field-validation-error').empty();
+            $('#activate-product-message').empty()
 
         });
 
