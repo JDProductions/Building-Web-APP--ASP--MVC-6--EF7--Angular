@@ -59,8 +59,9 @@ $('#btnCreateCompanyAction').click(function () {
 
             for(var i = 0; i<selectedValues.length; i++)
             {
-                $('#company-types-select').append($('#company-types-options option[value=' + selectedValues[i] + ']'));
+                $('#company-types-options option[value=' + selectedValues[i] + ']').prop('selected', true);
             }
+            Select();
         }
     });
 });

@@ -86,9 +86,7 @@ function CloseCompany() {
     $('#create-company-message-success').empty();
     $('.field-validation-error').empty();
     $('#Demo').attr('checked', false);
-    $('#company-types-option option:selected').each(function () {
-        $(this).prop('selected', false);
-    });
+    Select();
     $('#company-types-select option').each(function () {
         $(this).prop('selected', true);
     });
