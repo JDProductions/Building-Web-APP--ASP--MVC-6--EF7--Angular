@@ -39,56 +39,56 @@
             </div>
 
             @*Activate Feature
-            <button type="button" id="btnActivateFeature" class="btn btn-default">Activate Feature</button>
-            @*--- Modal--- 
-            <div class="modal fade" id="modalActivateFeature" role="dialog">
-                <div class="modal-dialog">
-                    @* ----- Modal Content ---- 
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close feature-close" data-dismiss="modal">&times;</button>
-                            <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span>Activate Feature</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form id="activate-feature-form">
-                                <div class="form-group">
-                                    <div id="activate-feature-partial">
-                                        <div id="activate-feature-message" class="message"></div>
-                                        @Html.Partial("_Feature")
+                <button type="button" id="btnActivateFeature" class="btn btn-default">Activate Feature</button>
+                @*--- Modal---
+                <div class="modal fade" id="modalActivateFeature" role="dialog">
+                    <div class="modal-dialog">
+                        @* ----- Modal Content ----
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close feature-close" data-dismiss="modal">&times;</button>
+                                <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span>Activate Feature</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="activate-feature-form">
+                                    <div class="form-group">
+                                        <div id="activate-feature-partial">
+                                            <div id="activate-feature-message" class="message"></div>
+                                            @Html.Partial("_Feature")
+                                        </div>
+                                        <button type="button" id="btnActivateFeatureAction" class="btn btn-default">Activate</button>
                                     </div>
-                                    <button type="button" id="btnActivateFeatureAction" class="btn btn-default">Activate</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            @*Deactivate Feature
-            <button type="button" id="btnDeactivateFeature" class="btn btn-default">Deactivate Feature</button>
-            @*--- Modal--- 
-            <div class="modal fade" id="modalDeactivateFeature" role="dialog">
-                <div class="modal-dialog">
-                    @* ----- Modal Content ---- 
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close feature-close" data-dismiss="modal">&times;</button>
-                            <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span>Deactivate Feature</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form id="deactivate-feature-form">
-                                <div class="form-group">
-                                    <div id="deactivate-feature-partial">
-                                        <div id="deactivate-feature-message" class="message"></div>
-                                        @Html.Partial("_Feature")
+                @*Deactivate Feature
+                <button type="button" id="btnDeactivateFeature" class="btn btn-default">Deactivate Feature</button>
+                @*--- Modal---
+                <div class="modal fade" id="modalDeactivateFeature" role="dialog">
+                    <div class="modal-dialog">
+                        @* ----- Modal Content ----
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close feature-close" data-dismiss="modal">&times;</button>
+                                <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span>Deactivate Feature</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="deactivate-feature-form">
+                                    <div class="form-group">
+                                        <div id="deactivate-feature-partial">
+                                            <div id="deactivate-feature-message" class="message"></div>
+                                            @Html.Partial("_Feature")
+                                        </div>
+                                        <button type="button" id="btnDeactivateFeatureAction" class="btn btn-default">Deactivate</button>
                                     </div>
-                                    <button type="button" id="btnDeactivateFeatureAction" class="btn btn-default">Deactivate</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
 
             @*Activate Product*@
             <button type="button" id="btnActivateProduct" class="btn btn-default">Activate Product</button>
@@ -119,137 +119,8 @@
         </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script>
-        @*$('#btnActivateFeatureAction').click(function () {
-            $.post('@Url.Action("ActivateFeature", "Home")', $('#activate-feature-form').serialize(), function (data) {
-                if (data.indexOf("Error") >= 0) {
-                    $('#activate-feature-message').html(data);
-
-                }
-                else {
-                    $('#activate-feature-partial').html(data);
-
-                }
-
-            });
-        });
-
-        $('#btnDeactivateFeatureAction').click(function () {
-            $.post('@Url.Action("DeactivateFeature", "Home")', $('#deactivate-feature-form').serialize(), function (data) {
-                if (data.indexOf("Error") >= 0) {
-                    $('#deactivate-feature-message').html(data);
-
-                }
-                else {
-                    $('#deactivate-feature-partial').html(data);
-
-                }
-            });
-        });*@
-
-        $('#btnCreateCompanyAction').click(function () {
-            $('.field-validation-error').empty();
-            $('#company-types-select option').each(function () {
-                $(this).prop('selected', true);
-            });
-            $.post('@Url.Action("CreateCompany", "Home")', $('#company-form').serialize(), function (data) {
-                if (data.indexOf("Error") >= 0) {
-                    $('#create-company-message').html(data);
-
-                }
-                else if (data.indexOf("Company ID") >= 0) {
-                    $('#create-company-message-success').html(data);
-
-                }
-                else {
-                    $('#create-company-partial').html(data);
-
-                }
-            });
-        });
-
-        $('#btnActivateProductAction').click(function () {
-            $.post('@Url.Action("ActivateProduct", "Home")', $('#activate-product-form').serialize(), function (data) {
-                if (data.indexOf("Error") >= 0) {
-                    $('#activate-product-message').html(data);
-
-                }
-                else if(data.indexOf("Success") >= 0){
-                    $('activat-product-message-success').html(data);
-                    
-                }
-                else {
-                    $('#activate-product-partial').html(data);
-                }
-            });
-        });
-
-        $('#company-close').click(function () {
-            $('#CompanyName').val('');
-            $('#Address1').val('');
-            $('#Address2').val('');
-            $('#City').val('');
-            $('#Zip').val('');
-            $('#Email').val('');
-            $('#Phone').val('');
-            $('#Fax').val('');
-            $('#create-company-message').empty();
-            $('.field-validation-error').empty();
-            $('#Demo').attr('checked', false);
-            $('#company-types-select option').each(function () {
-                $(this).prop('selected', true);
-            });
-            Deselect();
-
-        });
-
-        $('.feature-close').click(function () {
-            $('#CompanyIds').val('');
-            $('#activate-feature-message').empty();
-            $('.field-validation-error').empty();
-
-        });
-
-        $('.product-close').click(function () {
-            $('#CompanyId').val('');
-            $('#activate-company-message').empty();
-            $('.field-validation-error').empty();
-            $('#activate-product-message').empty()
-
-        });
-
-        function Select()
-        {
-            $('#company-types-options option:selected').each(function () {
-                $(this).prop('selected', false);
-                $('#company-types-select').append(this);
-
-
-            });
-
-        }
-
-        function Deselect()
-        {
-            var list = $('#company-types-options option');
-            $('#company-types-options option').remove();
-
-            $('#company-types-select option:selected').each(function () {
-                $(this).prop('selected', false);
-                list.push($(this));
-
-            });
-
-            list.sort(function (a, b) {
-                return $(a).val() - $(b).val()
-            });
-            list.each(function () {
-                $('#company-types-options').append($(this));
-            });
-
-        }
-    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/axp-revamp.js")"></script>
 </body>
 
 </html>

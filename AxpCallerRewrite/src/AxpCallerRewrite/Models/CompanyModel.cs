@@ -23,7 +23,7 @@ namespace AxpCallerRewrite.Models
         public string City { get; set; }
 
         [Required(ErrorMessage = "Zip Code is Required")]
-        public int Zip { get; set; }
+        public string Zip { get; set; }
 
         [Required(ErrorMessage = "Phone Number is Required")]
         [RegularExpression("^\\d{10}$", ErrorMessage = "Phone Number is Not Valid")]

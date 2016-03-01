@@ -13,10 +13,10 @@
 
 @{ SelectList Countries = ViewBag.Countries;}
 @Html.Label("Country", "Country")
-@Html.DropDownListFor(m => m.Country, Countries, new { @class = "form-control" })
+@Html.DropDownListFor(m => m.Country, Countries, new { @class = "form-control", onChange = "check()" })
 
 @{ SelectList states = ViewBag.States;}
-@Html.Label("State", "Company State")
+@Html.Label("State", "State")
 @Html.DropDownListFor(m => m.State, states, new { @class = "form-control" })
 
 @Html.Label("Address1", "Address Line 1")

@@ -144,7 +144,7 @@ namespace AxpCallerRewrite.Concrete
                 info.SetAttribute("Extension", "");
                 info.SetAttribute("Phone", company.Phone);
                 info.SetAttribute("CountryCode", company.Country);
-                info.SetAttribute("Zip", company.Zip.ToString());
+                info.SetAttribute("Zip", company.Zip);
                 info.SetAttribute("State", company.State);
                 info.SetAttribute("City", company.City);
                 info.SetAttribute("Add2", company.Address2);
@@ -226,7 +226,6 @@ namespace AxpCallerRewrite.Concrete
             if (companyInfo != null)
             {
                 companyInfo.SetAttribute("CompanyID", product.CompanyId.ToString());
-                companyInfo.SetAttribute("UserID", product.UserId.ToString());
             }
             XmlElement productInfo = (XmlElement)xmlDoc.SelectSingleNode("//Product");
             if (productInfo != null)
@@ -281,6 +280,7 @@ namespace AxpCallerRewrite.Concrete
             doc.LoadXml(message);
 
             XmlElement error = (XmlElement)doc.SelectSingleNode("//Error");
+            //There is some kind of error
             if (error != null)
             {
                 if (!error.GetAttribute("ErrDesc").Equals(""))
@@ -290,12 +290,17 @@ namespace AxpCallerRewrite.Concrete
                 if (!error.GetAttribute("Desc").Equals(""))
                     return "Error: " + error.GetAttribute("Desc");
             }
+            //There is no error
             else
             {
                 XmlElement companyInfo = (XmlElement)doc.SelectSingleNode("//CompanyInfo");
                 if (companyInfo != null)
                 {
                     return "Company ID: " + companyInfo.GetAttribute("CompanyID");
+                }
+                else
+                {
+                    return "Activate Successful";
                 }
             }
 
