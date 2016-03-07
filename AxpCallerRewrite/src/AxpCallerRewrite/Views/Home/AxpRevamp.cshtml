@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model AxpCallerRewrite.Models.AxpCallerRewriteViewModel
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -28,7 +29,7 @@
                                     <div id="create-company-partial">
                                         <div id="create-company-message" class="message"></div>
                                         <div id="create-company-message-success" class="successful"></div>
-                                        @Html.Partial("_Company")
+                                        @Html.Partial("_Company", Model.CompanyView)
                                     </div>
                                     <button type="button" id="btnCreateCompanyAction" class="btn btn-default">Create</button>
                                 </div>
@@ -107,7 +108,7 @@
                                     <div id="activate-product-partial">
                                         <div id="activate-product-message" class="message"></div>
                                         <div id="activate-product-message-success" class="successful"></div>
-                                        @Html.Partial("_Product")
+                                        @Html.Partial("_Product", Model.ProductView)
                                     </div>
                                     <button type="button" id="btnActivateProductAction" class="btn btn-default">Activate</button>
                                 </div>

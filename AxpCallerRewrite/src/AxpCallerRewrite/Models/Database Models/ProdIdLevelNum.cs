@@ -7,9 +7,9 @@ namespace AxpCallerRewrite.Models.Database_Models
 {
     public class ProdIdLevelNum
     {
-        public int LegacyProductID { get; set; }
+        public int? LegacyProductID { get; set; }
         public string LegacyProductName { get; set; }
-        public int ProductLevelNumber { get; set; }
+        public int? ProductLevelNumber { get; set; }
         public string ProductLevelKey { get; set; }
     }
 }

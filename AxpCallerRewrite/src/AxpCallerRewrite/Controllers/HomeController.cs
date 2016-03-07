@@ -95,8 +95,25 @@ namespace AxpCallerRewrite.Controllers
 
         public IActionResult AxpRevamp()
         {
-            PrepareAxpRevamp();
-            return View();
+            CompanyViewModel companyView = new CompanyViewModel();
+            companyView.States = _legacyHelper.GetStates();
+            companyView.Countries = GetCountries();
+            companyView.CompanyTypes = _legacyHelper.GetCompanyData();
+
+            ProductViewModel productView = new ProductViewModel();
+            productView.ProdIdLevelNum = _legacyHelper.GetProdIdLevelNum();
+
+            ViewBag.EnvironmentLevels = GetEnvironmentLevels();
+
+            AxpCallerRewriteViewModel viewModel = new AxpCallerRewriteViewModel();
+            viewModel.CompanyView = companyView;
+            viewModel.ProductView = productView;
+            //ViewBag.OEMs = _legacyHelper.GetOEMs();
+
+            //ViewBag.Products = _legacyHelper.GetProducts();
+
+            //ViewBag.Features = _legacyHelper.GetFeatures();
+            return View(viewModel);
         }
 
         public IActionResult Error()
@@ -107,7 +124,6 @@ namespace AxpCallerRewrite.Controllers
         [HttpPost]
         public IActionResult CreateCompany(CompanyModel company)
         {
-            
             if(ModelState.IsValid)
             {
                 var data = _legacyHelper.CreateCompany(company);
@@ -116,42 +132,48 @@ namespace AxpCallerRewrite.Controllers
             }
             else
             {
-                PrepareAxpRevamp();
-                return PartialView("_Company", company);
+                // PrepareAxpRevamp();
+                CompanyViewModel viewModel = new CompanyViewModel();
+                viewModel.Company = company;
+                viewModel.CompanyTypes = _legacyHelper.GetCompanyData();
+                viewModel.Countries = GetCountries();
+                viewModel.States = _legacyHelper.GetStates();
+                ViewBag.EnvironmentLevels = GetEnvironmentLevels();
+                return PartialView("_Company", viewModel);
             }
         }
 
-        [HttpPost]
-        public IActionResult ActivateFeature(FeatureModel feature)
-        {
-            if (ModelState.IsValid)
-            {
-                var data = _legacyHelper.ActivateFeature(feature);
+        //[HttpPost]
+        //public IActionResult ActivateFeature(FeatureModel feature)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var data = _legacyHelper.ActivateFeature(feature);
 
-                return Ok(data);
-            }
-            else
-            {
-                PrepareAxpRevamp();
-                return PartialView("_Feature", feature);
-            }
-        }
+        //        return Ok(data);
+        //    }
+        //    else
+        //    {
+        //        PrepareAxpRevamp();
+        //        return PartialView("_Feature", feature);
+        //    }
+        //}
 
-        [HttpPost]
-        public IActionResult DeactivateFeature(FeatureModel feature)
-        {
-            if (ModelState.IsValid)
-            {
-                var data =_legacyHelper.DeactivateFeature(feature);
+        //[HttpPost]
+        //public IActionResult DeactivateFeature(FeatureModel feature)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var data =_legacyHelper.DeactivateFeature(feature);
 
-                return Ok(data); ;
-            }
-            else
-            {
-                PrepareAxpRevamp();
-                return PartialView("_Feature", feature);
-            }
-        }
+        //        return Ok(data); ;
+        //    }
+        //    else
+        //    {
+        //        PrepareAxpRevamp();
+        //        return PartialView("_Feature", feature);
+        //    }
+        //}
 
         [HttpPost]
         public IActionResult ActivateProduct(ProductModel product)
@@ -164,38 +186,63 @@ namespace AxpCallerRewrite.Controllers
             }
             else
             {
-                PrepareAxpRevamp();
-                return PartialView("_Product", product);
+                //PrepareAxpRevamp();
+                ProductViewModel viewModel = new ProductViewModel();
+                viewModel.Product = product;
+                viewModel.ProdIdLevelNum = _legacyHelper.GetProdIdLevelNum();
+                ViewBag.EnvironmentLevels = GetEnvironmentLevels();
+                return PartialView("_Product", viewModel);
             }
         }
-        private void PrepareAxpRevamp()
-        {
-            ViewBag.States = _legacyHelper.GetStates();
 
-            ViewBag.Countries = new SelectList(
-                new List<SelectListItem>
-                {
+        private SelectList GetCountries()
+        {
+            return new SelectList(
+                new List<SelectListItem>{
                     new SelectListItem { Text = "United States", Value = "US" },
                     new SelectListItem { Text = "Canada", Value = "CA" },
                     new SelectListItem { Text = "Mexico", Value = "MX" }
                 }, "Value", "Text");
+        }
 
-            ViewBag.Environments = new SelectList(
+        private SelectList GetEnvironmentLevels()
+        {
+            return new SelectList(
                 new List<SelectListItem>{
                     new SelectListItem { Value = "Dev" , Text = "Dev"  },
                     new SelectListItem { Value = "QA" , Text = "QA" },
                     new SelectListItem { Value = "Prod" , Text = "Prod"}
                 }, "Value", "Text");
-
-            ViewBag.CompanyTypes = _legacyHelper.GetCompanyData();
-
-            ViewBag.OEMs = _legacyHelper.GetOEMs();
-
-            ViewBag.Products = _legacyHelper.GetProducts();
-
-            ViewBag.Features = _legacyHelper.GetFeatures();
-
-            ViewBag.ProdIdLevelNum = _legacyHelper.GetProdIdLevelNum();
         }
+        //private void PrepareAxpRevamp()
+        //{
+        //    AxpCallerRewriteViewModel viewModel = new AxpCallerRewriteViewModel();
+        //    viewModel.States = _legacyHelper.GetStates();
+
+        //    ViewBag.Countries = new SelectList(
+        //        new List<SelectListItem>
+        //        {
+        //            new SelectListItem { Text = "United States", Value = "US" },
+        //            new SelectListItem { Text = "Canada", Value = "CA" },
+        //            new SelectListItem { Text = "Mexico", Value = "MX" }
+        //        }, "Value", "Text");
+
+        //    ViewBag.Environments = new SelectList(
+        //        new List<SelectListItem>{
+        //            new SelectListItem { Value = "Dev" , Text = "Dev"  },
+        //            new SelectListItem { Value = "QA" , Text = "QA" },
+        //            new SelectListItem { Value = "Prod" , Text = "Prod"}
+        //        }, "Value", "Text");
+
+        //    viewModel.CompanyTypes = _legacyHelper.GetCompanyData();
+
+        //    //ViewBag.OEMs = _legacyHelper.GetOEMs();
+
+        //    //ViewBag.Products = _legacyHelper.GetProducts();
+
+        //    //ViewBag.Features = _legacyHelper.GetFeatures();
+
+        //    viewModel.ProdIdLevelNum = _legacyHelper.GetProdIdLevelNum();
+        //}
     }
 }

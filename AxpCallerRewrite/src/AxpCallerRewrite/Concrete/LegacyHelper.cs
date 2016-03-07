@@ -34,6 +34,7 @@ namespace AxpCallerRewrite.Concrete
 
             foreach (CompanyType item in companyTypesList)
             {
+                //removing Demo (1) because there is a seperate check box
                 if (item.CompanyTypeID != 1)
                 {
                     string text = item.CompanyTypeDesc + " (" + item.CompanyTypeID.ToString() + ")";
@@ -109,7 +110,7 @@ namespace AxpCallerRewrite.Concrete
 
             foreach (ProdIdLevelNum item in idNumList)
             {
-                if (item.LegacyProductID != 0 && item.ProductLevelNumber != 0)
+                if (item.LegacyProductID.HasValue && item.ProductLevelNumber.HasValue)
                 {
                     itemsList.Add(new SelectListItem
                     {
@@ -118,10 +119,11 @@ namespace AxpCallerRewrite.Concrete
                         item.ProductLevelKey + " (" + item.ProductLevelNumber.ToString() + ")"
                     });
                 }
-                else if (item.LegacyProductID != 0 && item.ProductLevelNumber == 0)
+                else if (item.LegacyProductID.HasValue && !item.ProductLevelNumber.HasValue)
                 {
                     itemsList.Add(new SelectListItem
-                    { Value = item.LegacyProductID.ToString(), Text = item.LegacyProductName + " (" + item.LegacyProductID.ToString() + ")" });
+                    { Value = item.LegacyProductID.ToString(),
+                        Text = string.Format("{0} ({1})", item.LegacyProductName, item.LegacyProductID.ToString())});
                 }
             }
 
@@ -139,12 +141,12 @@ namespace AxpCallerRewrite.Concrete
             if (info != null)
             {
                 info.SetAttribute("Email", company.Email);
-                info.SetAttribute("Website", "");
+                info.SetAttribute("Website", string.Empty);
                 info.SetAttribute("Fax", company.Fax);
-                info.SetAttribute("Extension", "");
+                info.SetAttribute("Extension", string.Empty);
                 info.SetAttribute("Phone", company.Phone);
                 info.SetAttribute("CountryCode", company.Country);
-                info.SetAttribute("Zip", company.Zip);
+                info.SetAttribute("Zip", company.Zip.ToString());
                 info.SetAttribute("State", company.State);
                 info.SetAttribute("City", company.City);
                 info.SetAttribute("Add2", company.Address2);
@@ -152,26 +154,19 @@ namespace AxpCallerRewrite.Concrete
                 info.SetAttribute("CompanyName", company.CompanyName);
             }
 
-
-            XmlElement type = (XmlElement)xmlDoc.SelectSingleNode("//CompanyType");
-            if (type != null)
-            {
-                if (company.Demo)
-                    type.SetAttribute("Type", Convert.ToInt32(company.Demo).ToString());
-                else
-                {
-                    type.SetAttribute("Type", company.CompanyTypes[0].ToString());
-                    company.CompanyTypes.Remove(company.CompanyTypes[0]);
-                }
-            }
-
             XmlElement types = (XmlElement)xmlDoc.SelectSingleNode("//CompanyTypes");
             if (types != null)
             {
-                foreach (int item in company.CompanyTypes)
+                if (company.Demo)
                 {
                     XmlElement element = (XmlElement)xmlDoc.CreateNode("element", "CompanyType", "");
-                    element.SetAttribute("Type", item.ToString());
+                    element.SetAttribute("Type", Convert.ToInt32(company.Demo).ToString());
+                    types.AppendChild(element);
+                }
+                foreach (int id in company.CompanyTypes)
+                {
+                    XmlElement element = (XmlElement)xmlDoc.CreateNode("element", "CompanyType", "");
+                    element.SetAttribute("Type", id.ToString());
                     types.AppendChild(element);
                 }
             }
@@ -181,43 +176,42 @@ namespace AxpCallerRewrite.Concrete
             xmlDoc.WriteTo(xmltextWriter);
             string xmlString = stringWriter.ToString();
 
-            return ServerResponse(repo.SendXml(xmlString, company.EnvironmentLevel));
+            return CompanyResponse(repo.SendXml(xmlString, company.EnvironmentLevel));
         }
 
-        public string ActivateFeature(FeatureModel feature)
-        {
-            // Created an instance of SendTemplate 
-            SendTemplate template = new SendTemplate();
+        //public string ActivateFeature(FeatureModel feature)
+        //{
+        //    // Created an instance of SendTemplate 
+        //    SendTemplate template = new SendTemplate();
 
-            string[] ids = feature.CompanyIds.Split(splitters);
-            string messages = "";
-            //question here
-            foreach (string id in ids)
-            {
-                messages += ServerResponse(repo.SendXml(CreateFeatureXML(feature, id, true), feature.EnvironmentLevel)) + " ";
-            }
+        //    string[] ids = feature.CompanyIds.Split(splitters);
+        //    string messages = "";
+        //    //question here
+        //    foreach (string id in ids)
+        //    {
+        //        messages += ServerResponse(repo.SendXml(CreateFeatureXML(feature, id, true), feature.EnvironmentLevel)) + " ";
+        //    }
 
-            return messages;
-        }
+        //    return messages;
+        //}
 
-        public string DeactivateFeature(FeatureModel feature)
-        {
-            // Created an instance of SendTemplate 
-            SendTemplate template = new SendTemplate();
+        //public string DeactivateFeature(FeatureModel feature)
+        //{
+        //    // Created an instance of SendTemplate 
+        //    SendTemplate template = new SendTemplate();
 
-            string[] ids = feature.CompanyIds.Split(splitters);
-            string messages = "";
+        //    string[] ids = feature.CompanyIds.Split(splitters);
+        //    string messages = "";
 
-            foreach (string id in ids)
-            {
-                messages += ServerResponse(repo.SendXml(CreateFeatureXML(feature, id, false), feature.EnvironmentLevel)) + " ";
-            }
-            return messages;
-        }
+        //    foreach (string id in ids)
+        //    {
+        //        messages += ServerResponse(repo.SendXml(CreateFeatureXML(feature, id, false), feature.EnvironmentLevel)) + " ";
+        //    }
+        //    return messages;
+        //}
 
         public string ActivateProduct(ProductModel product)
         {
-            //Insert Company properties into ActivateProdcut template
             XmlDocument xmlDoc = new XmlDocument();
 
             xmlDoc.Load("Templates\\ActivateProduct.xml");
@@ -231,10 +225,10 @@ namespace AxpCallerRewrite.Concrete
             if (productInfo != null)
             {
                 string[] ids = product.ProdIdLevelNum.Split(',');
-                productInfo.SetAttribute("ProdID", ids[0]); // Set to new value.
+                productInfo.SetAttribute("ProdID", ids[0]);
                 if (ids.Length > 1)
-                    productInfo.SetAttribute("ProdLevelID", ids[1]); // Set to new value.
-                productInfo.SetAttribute("ProdAction", "Activate"); // Set to new value.
+                    productInfo.SetAttribute("ProdLevelID", ids[1]);
+                productInfo.SetAttribute("ProdAction", "Activate");
             }
 
             StringWriter stringWriter = new StringWriter();
@@ -242,39 +236,94 @@ namespace AxpCallerRewrite.Concrete
             xmlDoc.WriteTo(xmltextWriter);
             string xmlString = stringWriter.ToString();
 
-            return ServerResponse(repo.SendXml(xmlString, product.EnvironmentLevel));
-            //template.SendAxpTemplate(xmlString, environment.EnvironmentLevel);
+            return ProductResponse(repo.SendXml(xmlString, product.EnvironmentLevel));
         }
 
-        private string CreateFeatureXML(FeatureModel feature, string id, bool activate)
+        //private string CreateFeatureXML(FeatureModel feature, string id, bool activate)
+        //{
+        //    //Insert Feature into Featrue template
+        //    XmlDocument xmlDoc = new XmlDocument();
+
+        //    xmlDoc.Load("Templates\\Feature.xml");
+
+        //    XmlElement company = (XmlElement)xmlDoc.SelectSingleNode("//Company");
+        //    if (company != null)
+        //    {
+        //        company.SetAttribute("CompanyID", id);
+        //    }
+
+        //    XmlElement featureNode = (XmlElement)xmlDoc.SelectSingleNode("//Feature");
+        //    if (featureNode != null)
+        //    {
+        //        featureNode.SetAttribute("StatusID", Convert.ToInt32(activate).ToString());
+        //        featureNode.SetAttribute("ProdID", feature.ProdId.ToString());
+        //        featureNode.SetAttribute("OEMID", feature.OemId.ToString());
+        //        featureNode.SetAttribute("FeatureID", feature.FeatureId.ToString());
+        //    }
+
+        //    StringWriter stringWriter = new StringWriter();
+        //    XmlTextWriter xmltextWriter = new XmlTextWriter(stringWriter);
+        //    xmlDoc.WriteTo(xmltextWriter);
+        //    return stringWriter.ToString();
+        //}
+
+        //private string ServerResponse(string message)
+        //{
+        //    XmlDocument doc = new XmlDocument();
+        //    doc.LoadXml(message);
+
+        //    XmlElement error = (XmlElement)doc.SelectSingleNode("//Error");
+        //    //There is some kind of error
+        //    if (error != null)
+        //    {
+        //        if (!error.GetAttribute("ErrDesc").Equals(""))
+        //            return "Error: " + error.GetAttribute("ErrDesc");
+        //        if (!error.GetAttribute("Description").Equals(""))
+        //            return "Error: " + error.GetAttribute("Description");
+        //        if (!error.GetAttribute("Desc").Equals(""))
+        //            return "Error: " + error.GetAttribute("Desc");
+        //    }
+        //    //There is no error
+        //    else
+        //    {
+        //        XmlElement companyInfo = (XmlElement)doc.SelectSingleNode("//CompanyInfo");
+        //        if (companyInfo != null)
+        //        {
+        //            return "Company ID: " + companyInfo.GetAttribute("CompanyID");
+        //        }
+        //        else
+        //        {
+        //            return "Activate Successful";
+        //        }
+        //    }
+
+        //    return "Something went wrong";
+        //}
+
+        private string CompanyResponse(string message)
         {
-            //Insert Feature into Featrue template
-            XmlDocument xmlDoc = new XmlDocument();
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(message);
 
-            xmlDoc.Load("Templates\\Feature.xml");
-
-            XmlElement company = (XmlElement)xmlDoc.SelectSingleNode("//Company");
-            if (company != null)
+            XmlElement error = (XmlElement)doc.SelectSingleNode("//Error");
+            if (error != null)
             {
-                company.SetAttribute("CompanyID", id);
+                if (!error.GetAttribute("Description").Equals(""))
+                    return "Error: " + error.GetAttribute("Description");
+            }
+            else
+            {
+                XmlElement companyInfo = (XmlElement)doc.SelectSingleNode("//CompanyInfo");
+                if (companyInfo != null)
+                {
+                    return "Company ID: " + companyInfo.GetAttribute("CompanyID");
+                }
             }
 
-            XmlElement featureNode = (XmlElement)xmlDoc.SelectSingleNode("//Feature");
-            if (featureNode != null)
-            {
-                featureNode.SetAttribute("StatusID", Convert.ToInt32(activate).ToString());
-                featureNode.SetAttribute("ProdID", feature.ProdId.ToString());
-                featureNode.SetAttribute("OEMID", feature.OemId.ToString());
-                featureNode.SetAttribute("FeatureID", feature.FeatureId.ToString());
-            }
-
-            StringWriter stringWriter = new StringWriter();
-            XmlTextWriter xmltextWriter = new XmlTextWriter(stringWriter);
-            xmlDoc.WriteTo(xmltextWriter);
-            return stringWriter.ToString();
+            return "Something went wrong.";
         }
 
-        private string ServerResponse(string message)
+        private string ProductResponse(string message)
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(message);
@@ -283,28 +332,15 @@ namespace AxpCallerRewrite.Concrete
             //There is some kind of error
             if (error != null)
             {
-                if (!error.GetAttribute("ErrDesc").Equals(""))
-                    return "Error: " + error.GetAttribute("ErrDesc");
-                if (!error.GetAttribute("Description").Equals(""))
-                    return "Error: " + error.GetAttribute("Description");
                 if (!error.GetAttribute("Desc").Equals(""))
                     return "Error: " + error.GetAttribute("Desc");
             }
-            //There is no error
             else
             {
-                XmlElement companyInfo = (XmlElement)doc.SelectSingleNode("//CompanyInfo");
-                if (companyInfo != null)
-                {
-                    return "Company ID: " + companyInfo.GetAttribute("CompanyID");
-                }
-                else
-                {
-                    return "Activate Successful";
-                }
+                return "Activate Successful.";
             }
 
-            return "Something went wrong";
+            return "Something went wrong.";
         }
     }
 }

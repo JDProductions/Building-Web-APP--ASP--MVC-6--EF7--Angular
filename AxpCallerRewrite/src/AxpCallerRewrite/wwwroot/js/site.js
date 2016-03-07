@@ -102,7 +102,3 @@ function CloseProduct() {
     $('#activate-product-message-success').empty();
 
 }
-
-
-
-

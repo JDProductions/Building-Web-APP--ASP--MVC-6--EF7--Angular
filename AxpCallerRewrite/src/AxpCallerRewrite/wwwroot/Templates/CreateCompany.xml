@@ -4,7 +4,6 @@
                                                 <Company>
                                                                 <CompanyInfo CompanyName="" Add1="" Add2="" City="" State="" Zip="" CountryCode="" Phone="" Extension="" Fax="" Website="" StatusID="1" Email=""/>
                                                                 <CompanyTypes>
-                                                                                <CompanyType Type=""/>
                                                                 </CompanyTypes>
                                                 </Company>
                                 </Request>

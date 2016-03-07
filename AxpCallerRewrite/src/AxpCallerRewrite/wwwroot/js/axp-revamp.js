@@ -38,13 +38,14 @@ var Url = {
 
 $('#btnCreateCompanyAction').click(function () {
     $('.field-validation-error').empty();
+    var selectedValues = []
     $('#company-types-select option').each(function () {
         $(this).prop('selected', true);
-    });
-    var selectedValues = []
-    $('#company-types-select option:selected').each(function () {
         selectedValues.push($(this).val());
-    })
+    });
+    //$('#company-types-select option:selected').each(function () {
+    //    selectedValues.push($(this).val());
+    //})
     $.post(Url.Action("CreateCompany", "Home"), $('#company-form').serialize(), function (data) {
         if (data.indexOf("Error") >= 0) {
             $('#create-company-message').html(data);

@@ -1,73 +1,69 @@
-﻿@model AxpCallerRewrite.Models.CompanyModel
+﻿@model AxpCallerRewrite.Models.CompanyViewModel
 
-
-@{ SelectList environments = ViewBag.Environments;}
+@{ SelectList environments = ViewBag.EnvironmentLevels;}
 @Html.Label("EnvironmentLevel", "Environment Level")
-@Html.DropDownListFor(m => m.EnvironmentLevel, environments, new { @class = "form-control" })
+@Html.DropDownListFor(m => m.Company.EnvironmentLevel, environments, new { @class = "form-control" })
 
 @Html.Label("CompanyName", "Company Name")
 <div>
-    @Html.ValidationMessageFor(m => m.CompanyName)
-    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Company.CompanyName)
+    @Html.TextBoxFor(m => m.Company.CompanyName, new { @class = "form-control", id = "CompanyName" })
 </div>
 
-@{ SelectList Countries = ViewBag.Countries;}
 @Html.Label("Country", "Country")
-@Html.DropDownListFor(m => m.Country, Countries, new { @class = "form-control", onChange = "check()" })
+@Html.DropDownListFor(m => m.Company.Country, Model.Countries, new { @class = "form-control", onChange = "check()", id="Country" })
 
-@{ SelectList states = ViewBag.States;}
 @Html.Label("State", "State")
-@Html.DropDownListFor(m => m.State, states, new { @class = "form-control" })
+@Html.DropDownListFor(m => m.Company.State, Model.States, new { @class = "form-control", id = "State" })
 
 @Html.Label("Address1", "Address Line 1")
 <div>
-    @Html.ValidationMessageFor(m => m.Address1)
-    @Html.TextBoxFor(m => m.Address1, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Company.Address1)
+    @Html.TextBoxFor(m => m.Company.Address1, new { @class = "form-control", id = "Address1" })
 </div>
 
 @Html.Label("Address2", "Address Line 2")
-@Html.TextBoxFor(m => m.Address2, new { @class = "form-control" })
+@Html.TextBoxFor(m => m.Company.Address2, new { @class = "form-control", id = "Address2" })
 
 @Html.Label("City", "City")
 <div>
-    @Html.ValidationMessageFor(m => m.City)
-    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Company.City)
+    @Html.TextBoxFor(m => m.Company.City, new { @class = "form-control", id = "City" })
 </div>
 
 @Html.Label("Zip", "Zip Code")
 <div>
-    @Html.ValidationMessageFor(m => m.Zip)
-    @Html.TextBoxFor(m => m.Zip, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Company.Zip)
+    @Html.TextBoxFor(m => m.Company.Zip, new { @class = "form-control", id = "Zip" })
 </div>
 
 @Html.Label("Email", "Email")
 <div>
-    @Html.ValidationMessageFor(m => m.Email)
-    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Company.Email)
+    @Html.TextBoxFor(m => m.Company.Email, new { @class = "form-control", id = "Email" })
 </div>
 
 @Html.Label("Phone", "Phone Number")
 <div>
-    @Html.ValidationMessageFor(m => m.Phone)
-    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "E.g. 1234567890" })
+    @Html.ValidationMessageFor(m => m.Company.Phone)
+    @Html.TextBoxFor(m => m.Company.Phone, new { @class = "form-control", placeholder = "E.g. 1234567890", id = "Phone" })
 </div>
 
 @Html.Label("Fax", "Fax Number")
 <div>
-    @Html.ValidationMessageFor(m => m.Fax)
-    @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", placeholder = "E.g. 1234567890" })
+    @Html.ValidationMessageFor(m => m.Company.Fax)
+    @Html.TextBoxFor(m => m.Company.Fax, new { @class = "form-control", placeholder = "E.g. 1234567890", id = "Fax" })
 </div>
 
-@{ SelectList companyTypes = ViewBag.CompanyTypes;}
 @Html.Label("CompanyType", "Company Types (Hold Ctrl to Select Multiple)")
 <div>
-    @Html.ValidationMessageFor(m => m.CompanyTypes)
+    @Html.ValidationMessageFor(m => m.Company.CompanyTypes)
     <div id="multi-select-boxes" style="height: 200px;">
         <div id="demo">
-            @Html.CheckBoxFor(m => m.Demo) @Html.Label("Demo", "Demo")
+            @Html.CheckBoxFor(m => m.Company.Demo) @Html.Label("Demo", "Demo",new { id="Demo"})
         </div>
         <div class="multi-select-group">
-            @Html.DropDownList("CompanyType", companyTypes, new { @class = "form-control multi-select", multiple = "multiple", id = "company-types-options" })
+            @Html.DropDownList("CompanyType", Model.CompanyTypes, new { @class = "form-control multi-select", multiple = "multiple", id = "company-types-options" })
         </div>
 
         <div id="select-buttons">
@@ -76,7 +72,7 @@
         </div>
 
         <div class="multi-select-group">
-            @Html.DropDownListFor(m => m.CompanyTypes, new SelectList(new List<SelectListItem>()), new { @class = "form-control multi-select", multiple = "multiple", id = "company-types-select" })
+            @Html.DropDownListFor(m => m.Company.CompanyTypes, new SelectList(new List<SelectListItem>()), new { @class = "form-control multi-select", multiple = "multiple", id = "company-types-select" })
         </div>
     </div>
 </div>
