@@ -46,7 +46,7 @@ $(function () {
     });
 });
 
-// Popup Create company Window
+// Popup Form Windows
 $(document).ready(function () {
     $("#btnCreateCompany").click(function () {
         $("#modalCreateCompany").modal();
@@ -55,7 +55,50 @@ $(document).ready(function () {
     $("#btnActivateFeature").click(function () {
         $("#modalActivateFeature").modal()
     });
+
+    $("#btnDeactivateFeature").click(function () {
+        $("#modalDeactivateFeature").modal()
+    });
+
+    $("#btnActivateProduct").click(function () {
+        $("#modalActivateProduct").modal()
+    });
 });
 
+$('#modalCreateCompany').on('hidden.bs.modal', function () {
+    CloseCompany();
+});
+
+$('#modalActivateProduct').on('hidden.bs.modal', function () {
+    CloseProduct();
+});
+
+function CloseCompany() {
+    $('#CompanyName').val('');
+    $('#Address1').val('');
+    $('#Address2').val('');
+    $('#City').val('');
+    $('#Zip').val('');
+    $('#Email').val('');
+    $('#Phone').val('');
+    $('#Fax').val('');
+    $('#create-company-message').empty();
+    $('#create-company-message-success').empty();
+    $('.field-validation-error').empty();
+    $('#Demo').attr('checked', false);
+    Select();
+    $('#company-types-select option').each(function () {
+        $(this).prop('selected', true);
+    });
+    Deselect();
 
 
+}
+
+function CloseProduct() {
+    $('#CompanyId').val('');
+    $('.field-validation-error').empty();
+    $('#activate-product-message').empty();
+    $('#activate-product-message-success').empty();
+
+}

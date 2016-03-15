@@ -1,6 +1,13 @@
 ﻿using System;
 using System.Data.SqlClient;
 using AxpCallerRewrite.Interfaces;
+using Dapper;
+using Microsoft.AspNet.Mvc.Rendering;
+using System.Collections.Generic;
+using System.Linq;
+using AxpCallerRewrite.Models;
+using AxpCallerRewrite.Models.Database_Models;
+using System.Threading.Tasks;
 
 namespace AxpCallerRewrite.Concrete
 {
@@ -11,27 +18,56 @@ namespace AxpCallerRewrite.Concrete
             throw new NotImplementedException();
         }
 
-        //I understand why this needs to be used now
         public SqlConnection OpenConnection()
         {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                // Connection pool created
-                connection.ConnectionString = "Server=[test_server];Database=[dataBASE!@@];Trusted_Connection=true";
-                return connection;
-
-            }
-
+                return new SqlConnection("Server=sdvdb1\\oec;Database=OECMain;Trusted_Connection=true");
         }
 
-        public SqlCommand GetCompanyTypes()
+        public IEnumerable<CompanyType> GetCompanyTypes()
         {
             using (SqlConnection conn = OpenConnection())
             {
-                // Connection pool created
-                SqlCommand companyTypes = new SqlCommand("SELECT * FROM TableName", conn);
-                conn.Open();
-                return companyTypes;
+                return conn.Query<CompanyType>("SELECT CompanyTypeID, CompanyTypeDesc FROM oecmain..CompanyTypeMaster");
+            }
+        }
+
+        public IEnumerable<State> GetStates()
+        {
+            using (SqlConnection conn = OpenConnection())
+            {
+                return conn.Query<State>("SELECT StateAbbr, StateName FROM OECGeoData..USStates_vw");
+            }
+        }
+
+        public IEnumerable<OEM> GetOEMs()
+        {
+            using (SqlConnection conn = OpenConnection())
+            {
+                return conn.Query<OEM>("SELECT OEMLongName, OEMID FROM oecmain..OEMMaster");
+            }
+        }
+
+        public IEnumerable<Product> GetProducts()
+        {
+            using (SqlConnection conn = OpenConnection())
+            {
+                return conn.Query<Product>("SELECT ProdID, DisplayName FROM oecmain..oecproducts");
+            }
+        }
+
+        public IEnumerable<Feature> GetFeatures()
+        {
+            using (SqlConnection conn = OpenConnection())
+            {
+                return conn.Query<Feature>("SELECT FeatureID, FeatureName FROM oecmain..oecfeatures");
+            }
+        }
+
+        public IEnumerable<ProdIdLevelNum> GetProdIdLevelNum()
+        {
+            using (SqlConnection conn = OpenConnection())
+            {
+                return conn.Query<ProdIdLevelNum>("SELECT LegacyProductID, LegacyProductName, ProductLevelNumber, ProductLevelKey FROM oeconnection..Security_enu_ProfileProductLevel");
             }
         }
 
@@ -43,6 +79,14 @@ namespace AxpCallerRewrite.Concrete
         public void GetOecProducts()
         {
             return;
+        }
+
+        public string SendXml (string xmlString, string environmentLevel)
+        {
+            // Created an instance of SendTemplate 
+            SendTemplate template = new SendTemplate();
+            // Send Create Company Template to Server
+            return template.SendAxpTemplate(xmlString, environmentLevel).Result;
         }
     }
 }

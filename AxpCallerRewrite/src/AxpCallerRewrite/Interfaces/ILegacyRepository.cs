@@ -1,12 +1,21 @@
-﻿using System.Data.SqlClient;
+﻿using AxpCallerRewrite.Models;
+using AxpCallerRewrite.Models.Database_Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AxpCallerRewrite.Interfaces
 {
     public interface ILegacyRepository
     {
-        SqlCommand GetCompanyTypes();
+        IEnumerable<CompanyType> GetCompanyTypes();
+        IEnumerable<State> GetStates();
+        IEnumerable<OEM> GetOEMs();
+        IEnumerable<Product> GetProducts();
+        IEnumerable<Feature> GetFeatures();
+        IEnumerable<ProdIdLevelNum> GetProdIdLevelNum();
         void GetOecProducts();
         void GetActivateFeature();
         void GetDeactivateFeature();
+        string SendXml(string xmlString, string environmentLevel);
     }
 }

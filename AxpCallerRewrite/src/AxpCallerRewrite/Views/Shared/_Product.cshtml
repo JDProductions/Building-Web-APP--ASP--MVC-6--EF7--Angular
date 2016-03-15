@@ -1,0 +1,14 @@
+﻿@model AxpCallerRewrite.Models.ProductViewModel
+
+@{ SelectList environment = ViewBag.EnvironmentLevels;}
+@Html.Label("EnvironmentLevel", "Environment Level")
+@Html.DropDownListFor(m => m.Product.EnvironmentLevel, environment, new { @class = "form-control" })
+
+@Html.Label("CompanyId", "Company ID")
+<div>
+    @Html.ValidationMessageFor(m => m.Product.CompanyId)
+    @Html.TextBoxFor(m => m.Product.CompanyId, new { @class = "form-control", id="CompanyId" })
+</div>
+
+@Html.Label("ProdIdLevelNum", "Product and Product Level")
+@Html.DropDownListFor(m => m.Product.ProdIdLevelNum, Model.ProdIdLevelNum, new { @class = "form-control" })

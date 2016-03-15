@@ -1,7 +1,4 @@
-﻿@model AxpCallerRewrite.Models.CompanyModel
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model AxpCallerRewrite.Models.AxpCallerRewriteViewModel
 <!DOCTYPE html>
 <html>
 
@@ -21,20 +18,110 @@
             <div class="modal fade" id="modalCreateCompany" role="dialog">
                 <div class="modal-dialog">
                     @* ----- Modal Content ---- *@
-                    @Html.Partial("_Company")
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" id="company-close" data-dismiss="modal">&times;</button>
+                            <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span> Create A Company</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="company-form">
+                                <div class="form-group">
+                                    <div id="create-company-partial">
+                                        <div id="create-company-message" class="message"></div>
+                                        <div id="create-company-message-success" class="successful"></div>
+                                        @Html.Partial("_Company", Model.CompanyView)
+                                    </div>
+                                    <button type="button" id="btnCreateCompanyAction" class="btn btn-default">Create</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <button type="button" id="btnActivateFeature" class="btn btn-default">Activate Feature</button>
+            @*Activate Feature
+                <button type="button" id="btnActivateFeature" class="btn btn-default">Activate Feature</button>
+                @*--- Modal---
+                <div class="modal fade" id="modalActivateFeature" role="dialog">
+                    <div class="modal-dialog">
+                        @* ----- Modal Content ----
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close feature-close" data-dismiss="modal">&times;</button>
+                                <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span>Activate Feature</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="activate-feature-form">
+                                    <div class="form-group">
+                                        <div id="activate-feature-partial">
+                                            <div id="activate-feature-message" class="message"></div>
+                                            @Html.Partial("_Feature")
+                                        </div>
+                                        <button type="button" id="btnActivateFeatureAction" class="btn btn-default">Activate</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*Deactivate Feature
+                <button type="button" id="btnDeactivateFeature" class="btn btn-default">Deactivate Feature</button>
+                @*--- Modal---
+                <div class="modal fade" id="modalDeactivateFeature" role="dialog">
+                    <div class="modal-dialog">
+                        @* ----- Modal Content ----
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close feature-close" data-dismiss="modal">&times;</button>
+                                <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span>Deactivate Feature</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="deactivate-feature-form">
+                                    <div class="form-group">
+                                        <div id="deactivate-feature-partial">
+                                            <div id="deactivate-feature-message" class="message"></div>
+                                            @Html.Partial("_Feature")
+                                        </div>
+                                        <button type="button" id="btnDeactivateFeatureAction" class="btn btn-default">Deactivate</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            @*Activate Product*@
+            <button type="button" id="btnActivateProduct" class="btn btn-default">Activate Product</button>
             @*--- Modal--- *@
-            <div class="modal fade" id="modalActivateFeature" role="dialog">
+            <div class="modal fade" id="modalActivateProduct" role="dialog">
                 <div class="modal-dialog">
                     @* ----- Modal Content ---- *@
-                    @Html.Partial("_Feature")
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close product-close" data-dismiss="modal">&times;</button>
+                            <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span>Activate Product</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="activate-product-form">
+                                <div class="form-group">
+                                    <div id="activate-product-partial">
+                                        <div id="activate-product-message" class="message"></div>
+                                        <div id="activate-product-message-success" class="successful"></div>
+                                        @Html.Partial("_Product", Model.ProductView)
+                                    </div>
+                                    <button type="button" id="btnActivateProductAction" class="btn btn-default">Activate</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/axp-revamp.js")"></script>
 </body>
 
 </html>

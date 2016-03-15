@@ -1,77 +1,78 @@
-﻿@model AxpCallerRewrite.Models.CompanyModel
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model AxpCallerRewrite.Models.CompanyViewModel
 
-<div class="modal-content">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 style="color: red;"><span class="glyphicon glyphicon-lock"></span> Create A Company</h4>
-    </div>
-    <div class="modal-body">
-        @using (Html.BeginForm("CreateCompany", "Home"))
-        {
-            <div class="form-group">
-                @Html.Label("EnvironmentLevel", "EnvironmentLevel")
-                <div>
-                    @Html.DropDownListFor(model => model.EnvironmentLevel, new SelectList(
-                                      new List<Object>{
-                                           new { value = "Dev" , text = "Dev"  },
-                                           new { value = "QA" , text = "QA" },
-                                           new { value = "Prod" , text = "Prod"}
-                                        },
-                                      "value",
-                                      "text",
-                                       2), new { @class = "form-control", required = "required" })
-                    @*<select id="EnvironmentLevel" class="form-control">
-                            <option>Dev</option>
-                            <option>QA</option>
-                            <option>Prod</option>
-                        </select>*@
-                </div>
+@{ SelectList environments = ViewBag.EnvironmentLevels;}
+@Html.Label("EnvironmentLevel", "Environment Level")
+@Html.DropDownListFor(m => m.Company.EnvironmentLevel, environments, new { @class = "form-control" })
 
-                @Html.Label("CompanyName", "Company Name")
-                @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", required = "required" })
+@Html.Label("CompanyName", "Company Name")
+<div>
+    @Html.ValidationMessageFor(m => m.Company.CompanyName)
+    @Html.TextBoxFor(m => m.Company.CompanyName, new { @class = "form-control", id = "CompanyName" })
+</div>
 
-                @Html.Label("Country", "Country")
-                <div>
-                    <select id="Country" class="form-control">
-                        <option>US</option>
-                        <option>Canada</option>
-                        <option>Mexico</option>
-                    </select>
-                </div>
+@Html.Label("Country", "Country")
+@Html.DropDownListFor(m => m.Company.Country, Model.Countries, new { @class = "form-control", onChange = "check()", id="Country" })
 
-                @Html.Label("companyState", "Company State")
-                <div>
-                    <select id="companyState" class="form-control">
-                        <option>LoadState 1</option>
-                        <option>Load State 2</option>
-                        <option>Load State 3</option>
-                    </select>
-                </div>
+@Html.Label("State", "State")
+@Html.DropDownListFor(m => m.Company.State, Model.States, new { @class = "form-control", id = "State" })
 
-                @Html.Label("Address", "Address")
-                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", required = "required" })
+@Html.Label("Address1", "Address Line 1")
+<div>
+    @Html.ValidationMessageFor(m => m.Company.Address1)
+    @Html.TextBoxFor(m => m.Company.Address1, new { @class = "form-control", id = "Address1" })
+</div>
 
-                @Html.Label("City", "City")
-                @Html.TextBoxFor(m => m.City, new { @class = "form-control", required = "required" })
+@Html.Label("Address2", "Address Line 2")
+@Html.TextBoxFor(m => m.Company.Address2, new { @class = "form-control", id = "Address2" })
 
-                @Html.Label("Zip", "Zip")
-                @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", required = "required" })
+@Html.Label("City", "City")
+<div>
+    @Html.ValidationMessageFor(m => m.Company.City)
+    @Html.TextBoxFor(m => m.Company.City, new { @class = "form-control", id = "City" })
+</div>
 
-                @Html.Label("Phone", "Phone")
-                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", required = "required" })
+@Html.Label("Zip", "Zip Code")
+<div>
+    @Html.ValidationMessageFor(m => m.Company.Zip)
+    @Html.TextBoxFor(m => m.Company.Zip, new { @class = "form-control", id = "Zip" })
+</div>
 
-                @Html.Label("Fax", "Fax")
-                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", required = "required" })
+@Html.Label("Email", "Email")
+<div>
+    @Html.ValidationMessageFor(m => m.Company.Email)
+    @Html.TextBoxFor(m => m.Company.Email, new { @class = "form-control", id = "Email" })
+</div>
 
-                @{ SelectList companyTypes = ViewBag.CompanyTypes;}
-                @Html.Label("CompanyType", "Company Type")
-                @Html.DropDownListFor(m => m.CompanyType, companyTypes, new { @class = "form-control" })
+@Html.Label("Phone", "Phone Number")
+<div>
+    @Html.ValidationMessageFor(m => m.Company.Phone)
+    @Html.TextBoxFor(m => m.Company.Phone, new { @class = "form-control", placeholder = "E.g. 1234567890", id = "Phone" })
+</div>
 
-                <button type="submit" id="btnCreateCompanyAction" class="btn btn-default">Create</button>
-            </div>
-                    }
+@Html.Label("Fax", "Fax Number")
+<div>
+    @Html.ValidationMessageFor(m => m.Company.Fax)
+    @Html.TextBoxFor(m => m.Company.Fax, new { @class = "form-control", placeholder = "E.g. 1234567890", id = "Fax" })
+</div>
+
+@Html.Label("CompanyType", "Company Types (Hold Ctrl to Select Multiple)")
+<div>
+    @Html.ValidationMessageFor(m => m.Company.CompanyTypes)
+    <div id="multi-select-boxes" style="height: 200px;">
+        <div id="demo">
+            @Html.CheckBoxFor(m => m.Company.Demo) @Html.Label("Demo", "Demo",new { id="Demo"})
+        </div>
+        <div class="multi-select-group">
+            @Html.DropDownList("CompanyType", Model.CompanyTypes, new { @class = "form-control multi-select", multiple = "multiple", id = "company-types-options" })
+        </div>
+
+        <div id="select-buttons">
+            <button type="button" id="select" onclick="Select()">&#9658;</button>
+            <button type="button" id="deselct" onclick="Deselect()">&#9668;</button>
+        </div>
+
+        <div class="multi-select-group">
+            @Html.DropDownListFor(m => m.Company.CompanyTypes, new SelectList(new List<SelectListItem>()), new { @class = "form-control multi-select", multiple = "multiple", id = "company-types-select" })
+        </div>
     </div>
 </div>
